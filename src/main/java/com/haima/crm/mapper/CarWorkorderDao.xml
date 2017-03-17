@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haima.crm.dao.CarWorkorderDao">
+
+	<select id="queryObject" resultType="com.haima.crm.entity.CarWorkorderEntity">
+		select * from t_car_workorder where vin = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.haima.crm.entity.CarWorkorderEntity">
+		select * from t_car_workorder 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_car_workorder 
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.CarWorkorderEntity">
+		insert into t_car_workorder
+		(
+			`vin`, 
+			`workorder_id`, 
+			`del_flg`, 
+			`creator`, 
+			`create_time`, 
+			`modifier`, 
+			`modify_time`
+		)
+		values
+		(
+			#{vin}, 
+			#{workorderId}, 
+			#{delFlg}, 
+			#{creator}, 
+			#{createTime}, 
+			#{modifier}, 
+			#{modifyTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.haima.crm.entity.CarWorkorderEntity">
+		update t_car_workorder 
+		<set>
+			<if test="workorderId != null">`workorder_id` = #{workorderId}, </if>
+			<if test="delFlg != null">`del_flg` = #{delFlg}, </if>
+			<if test="creator != null">`creator` = #{creator}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="modifier != null">`modifier` = #{modifier}, </if>
+			<if test="modifyTime != null">`modify_time` = #{modifyTime}</if>
+		</set>
+		where vin = #{vin}
+	</update>
+	
+	<delete id="delete">
+		delete from t_car_workorder where vin = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_car_workorder where vin in 
+		<foreach item="vin" collection="array" open="(" separator="," close=")">
+			#{vin}
+		</foreach>
+	</delete>
+
+</mapper>

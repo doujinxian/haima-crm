@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haima.crm.dao.ComplaintContentDao">
+
+	<select id="queryObject" resultType="com.haima.crm.entity.ComplaintContentEntity">
+		select * from t_complaint_content where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.haima.crm.entity.ComplaintContentEntity">
+		select * from t_complaint_content 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_complaint_content 
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.ComplaintContentEntity">
+		insert into t_complaint_content
+		(
+			`id`, 
+			`complain_code`, 
+			`complain_content`, 
+			`del_flag`, 
+			`create_by`, 
+			`create_time`, 
+			`update_by`, 
+			`update_time`
+		)
+		values
+		(
+			#{id}, 
+			#{complainCode}, 
+			#{complainContent}, 
+			#{delFlag}, 
+			#{createBy}, 
+			#{createTime}, 
+			#{updateBy}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.haima.crm.entity.ComplaintContentEntity">
+		update t_complaint_content 
+		<set>
+			<if test="complainCode != null">`complain_code` = #{complainCode}, </if>
+			<if test="complainContent != null">`complain_content` = #{complainContent}, </if>
+			<if test="delFlag != null">`del_flag` = #{delFlag}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from t_complaint_content where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_complaint_content where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

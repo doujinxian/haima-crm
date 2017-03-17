@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haima.crm.dao.ComplaintDao">
+
+	<select id="queryObject" resultType="com.haima.crm.entity.ComplaintEntity">
+		select * from t_complaint where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.haima.crm.entity.ComplaintEntity">
+		select * from t_complaint 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_complaint 
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.ComplaintEntity">
+		insert into t_complaint
+		(
+			`id`, 
+			`complain_code`, 
+			`customer_id`, 
+			`custormer_name`, 
+			`phone_no`, 
+			`vin`, 
+			`plate_no`, 
+			`vno`, 
+			`buy_date`, 
+			`complain_type`, 
+			`complain_level`, 
+			`complain_time`, 
+			`finish_time`, 
+			`close_time`, 
+			`city`, 
+			`complain_source`, 
+			`sales_services_service`, 
+			`complain_status`, 
+			`callback_status`, 
+			`callback_time`, 
+			`car_color`, 
+			`mileage`, 
+			`complain_base`, 
+			`area`, 
+			`call_times`, 
+			`file_no`, 
+			`complain_admin`, 
+			`received_by`, 
+			`trans_time`, 
+			`other_msg`, 
+			`car_name`, 
+			`trace_by`, 
+			`record_by`, 
+			`sales_services_store`, 
+			`estimate_finish_time`, 
+			`customer_level`, 
+			`del_flag`, 
+			`create_by`, 
+			`create_time`, 
+			`update_by`, 
+			`update_time`
+		)
+		values
+		(
+			#{id}, 
+			#{complainCode}, 
+			#{customerId}, 
+			#{custormerName}, 
+			#{phoneNo}, 
+			#{vin}, 
+			#{plateNo}, 
+			#{vno}, 
+			#{buyDate}, 
+			#{complainType}, 
+			#{complainLevel}, 
+			#{complainTime}, 
+			#{finishTime}, 
+			#{closeTime}, 
+			#{city}, 
+			#{complainSource}, 
+			#{salesServicesService}, 
+			#{complainStatus}, 
+			#{callbackStatus}, 
+			#{callbackTime}, 
+			#{carColor}, 
+			#{mileage}, 
+			#{complainBase}, 
+			#{area}, 
+			#{callTimes}, 
+			#{fileNo}, 
+			#{complainAdmin}, 
+			#{receivedBy}, 
+			#{transTime}, 
+			#{otherMsg}, 
+			#{carName}, 
+			#{traceBy}, 
+			#{recordBy}, 
+			#{salesServicesStore}, 
+			#{estimateFinishTime}, 
+			#{customerLevel}, 
+			#{delFlag}, 
+			#{createBy}, 
+			#{createTime}, 
+			#{updateBy}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.haima.crm.entity.ComplaintEntity">
+		update t_complaint 
+		<set>
+			<if test="complainCode != null">`complain_code` = #{complainCode}, </if>
+			<if test="customerId != null">`customer_id` = #{customerId}, </if>
+			<if test="custormerName != null">`custormer_name` = #{custormerName}, </if>
+			<if test="phoneNo != null">`phone_no` = #{phoneNo}, </if>
+			<if test="vin != null">`vin` = #{vin}, </if>
+			<if test="plateNo != null">`plate_no` = #{plateNo}, </if>
+			<if test="vno != null">`vno` = #{vno}, </if>
+			<if test="buyDate != null">`buy_date` = #{buyDate}, </if>
+			<if test="complainType != null">`complain_type` = #{complainType}, </if>
+			<if test="complainLevel != null">`complain_level` = #{complainLevel}, </if>
+			<if test="complainTime != null">`complain_time` = #{complainTime}, </if>
+			<if test="finishTime != null">`finish_time` = #{finishTime}, </if>
+			<if test="closeTime != null">`close_time` = #{closeTime}, </if>
+			<if test="city != null">`city` = #{city}, </if>
+			<if test="complainSource != null">`complain_source` = #{complainSource}, </if>
+			<if test="salesServicesService != null">`sales_services_service` = #{salesServicesService}, </if>
+			<if test="complainStatus != null">`complain_status` = #{complainStatus}, </if>
+			<if test="callbackStatus != null">`callback_status` = #{callbackStatus}, </if>
+			<if test="callbackTime != null">`callback_time` = #{callbackTime}, </if>
+			<if test="carColor != null">`car_color` = #{carColor}, </if>
+			<if test="mileage != null">`mileage` = #{mileage}, </if>
+			<if test="complainBase != null">`complain_base` = #{complainBase}, </if>
+			<if test="area != null">`area` = #{area}, </if>
+			<if test="callTimes != null">`call_times` = #{callTimes}, </if>
+			<if test="fileNo != null">`file_no` = #{fileNo}, </if>
+			<if test="complainAdmin != null">`complain_admin` = #{complainAdmin}, </if>
+			<if test="receivedBy != null">`received_by` = #{receivedBy}, </if>
+			<if test="transTime != null">`trans_time` = #{transTime}, </if>
+			<if test="otherMsg != null">`other_msg` = #{otherMsg}, </if>
+			<if test="carName != null">`car_name` = #{carName}, </if>
+			<if test="traceBy != null">`trace_by` = #{traceBy}, </if>
+			<if test="recordBy != null">`record_by` = #{recordBy}, </if>
+			<if test="salesServicesStore != null">`sales_services_store` = #{salesServicesStore}, </if>
+			<if test="estimateFinishTime != null">`estimate_finish_time` = #{estimateFinishTime}, </if>
+			<if test="customerLevel != null">`customer_level` = #{customerLevel}, </if>
+			<if test="delFlag != null">`del_flag` = #{delFlag}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from t_complaint where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_complaint where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

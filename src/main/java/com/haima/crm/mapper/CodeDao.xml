@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haima.crm.dao.CodeDao">
+
+	<select id="queryObject" resultType="com.haima.crm.entity.CodeEntity">
+		select * from m_code where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.haima.crm.entity.CodeEntity">
+		select * from m_code 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from m_code 
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.CodeEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into m_code
+		(
+			`type`, 
+			`code`, 
+			`name`, 
+			`remark`, 
+			`order`, 
+			`del_flg`, 
+			`creator`, 
+			`create_date`, 
+			`modifier`, 
+			`modify_date`
+		)
+		values
+		(
+			#{type}, 
+			#{code}, 
+			#{name}, 
+			#{remark}, 
+			#{order}, 
+			#{delFlg}, 
+			#{creator}, 
+			#{createDate}, 
+			#{modifier}, 
+			#{modifyDate}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.haima.crm.entity.CodeEntity">
+		update m_code 
+		<set>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="code != null">`code` = #{code}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="order != null">`order` = #{order}, </if>
+			<if test="delFlg != null">`del_flg` = #{delFlg}, </if>
+			<if test="creator != null">`creator` = #{creator}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}, </if>
+			<if test="modifier != null">`modifier` = #{modifier}, </if>
+			<if test="modifyDate != null">`modify_date` = #{modifyDate}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from m_code where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from m_code where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

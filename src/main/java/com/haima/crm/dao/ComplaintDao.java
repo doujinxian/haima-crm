@@ -1,0 +1,14 @@
+package com.haima.crm.dao;
+
+import com.haima.crm.entity.ComplaintEntity;
+
+/**
+ * 记录投诉信息
+ * 
+ * @author doujinxian
+ * @email doujinxian@126.com
+ * @date 2017-03-17 20:15:12
+ */
+public interface ComplaintDao extends BaseDao<ComplaintEntity> {
+	
+}

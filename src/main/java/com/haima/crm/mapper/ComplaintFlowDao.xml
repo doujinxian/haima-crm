@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haima.crm.dao.ComplaintFlowDao">
+
+	<select id="queryObject" resultType="com.haima.crm.entity.ComplaintFlowEntity">
+		select * from t_complaint_flow where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.haima.crm.entity.ComplaintFlowEntity">
+		select * from t_complaint_flow 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_complaint_flow 
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.ComplaintFlowEntity">
+		insert into t_complaint_flow
+		(
+			`id`, 
+			`complain_code`, 
+			`check_type`, 
+			`proposer`, 
+			`checker`, 
+			`porpos_date`, 
+			`check_info`, 
+			`check_status`, 
+			`check_date`, 
+			`create_by`, 
+			`create_time`, 
+			`update_by`, 
+			`update_time`
+		)
+		values
+		(
+			#{id}, 
+			#{complainCode}, 
+			#{checkType}, 
+			#{proposer}, 
+			#{checker}, 
+			#{porposDate}, 
+			#{checkInfo}, 
+			#{checkStatus}, 
+			#{checkDate}, 
+			#{createBy}, 
+			#{createTime}, 
+			#{updateBy}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.haima.crm.entity.ComplaintFlowEntity">
+		update t_complaint_flow 
+		<set>
+			<if test="complainCode != null">`complain_code` = #{complainCode}, </if>
+			<if test="checkType != null">`check_type` = #{checkType}, </if>
+			<if test="proposer != null">`proposer` = #{proposer}, </if>
+			<if test="checker != null">`checker` = #{checker}, </if>
+			<if test="porposDate != null">`porpos_date` = #{porposDate}, </if>
+			<if test="checkInfo != null">`check_info` = #{checkInfo}, </if>
+			<if test="checkStatus != null">`check_status` = #{checkStatus}, </if>
+			<if test="checkDate != null">`check_date` = #{checkDate}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from t_complaint_flow where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_complaint_flow where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
