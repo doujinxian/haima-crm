@@ -1,6 +1,6 @@
 package com.haima.crm.service;
 
-import com.haima.crm.entity.ComplaintForwardEntity;
+import com.haima.crm.entity.ComplaintForward;
 
 import java.util.List;
 import java.util.Map;
@@ -14,15 +14,15 @@ import java.util.Map;
  */
 public interface ComplaintForwardService {
 	
-	ComplaintForwardEntity queryObject(Integer id);
+	ComplaintForward queryObject(Integer id);
 	
-	List<ComplaintForwardEntity> queryList(Map<String, Object> map);
+	List<ComplaintForward> queryList(Map<String, Object> map);
 	
 	int queryTotal(Map<String, Object> map);
 	
-	void save(ComplaintForwardEntity complaintForward);
+	void save(ComplaintForward complaintForward);
 	
-	void update(ComplaintForwardEntity complaintForward);
+	void update(ComplaintForward complaintForward);
 	
 	void delete(Integer id);
 	

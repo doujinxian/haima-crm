@@ -1,6 +1,6 @@
 package com.haima.crm.dao;
 
-import com.haima.crm.entity.ComplaintFlowEntity;
+import com.haima.crm.entity.ComplaintFlow;
 
 /**
  * 记录投诉审核信息
@@ -9,6 +9,6 @@ import com.haima.crm.entity.ComplaintFlowEntity;
  * @email doujinxian@126.com
  * @date 2017-03-17 20:15:13
  */
-public interface ComplaintFlowDao extends BaseDao<ComplaintFlowEntity> {
+public interface ComplaintFlowDao extends BaseDao<ComplaintFlow> {
 	
 }

@@ -1,6 +1,6 @@
 package com.haima.crm.service;
 
-import com.haima.crm.entity.CodeEntity;
+import com.haima.crm.entity.Code;
 
 import java.util.List;
 import java.util.Map;
@@ -14,15 +14,15 @@ import java.util.Map;
  */
 public interface CodeService {
 	
-	CodeEntity queryObject(Long id);
+	Code queryObject(Long id);
 	
-	List<CodeEntity> queryList(Map<String, Object> map);
+	List<Code> queryList(Map<String, Object> map);
 	
 	int queryTotal(Map<String, Object> map);
 	
-	void save(CodeEntity code);
+	void save(Code code);
 	
-	void update(CodeEntity code);
+	void update(Code code);
 	
 	void delete(Long id);
 	

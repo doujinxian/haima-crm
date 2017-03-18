@@ -1,6 +1,6 @@
 package com.haima.crm.service;
 
-import com.haima.crm.entity.CarWorkorderEntity;
+import com.haima.crm.entity.CarWorkorder;
 
 import java.util.List;
 import java.util.Map;
@@ -14,15 +14,15 @@ import java.util.Map;
  */
 public interface CarWorkorderService {
 	
-	CarWorkorderEntity queryObject(String vin);
+	CarWorkorder queryObject(String vin);
 	
-	List<CarWorkorderEntity> queryList(Map<String, Object> map);
+	List<CarWorkorder> queryList(Map<String, Object> map);
 	
 	int queryTotal(Map<String, Object> map);
 	
-	void save(CarWorkorderEntity carWorkorder);
+	void save(CarWorkorder carWorkorder);
 	
-	void update(CarWorkorderEntity carWorkorder);
+	void update(CarWorkorder carWorkorder);
 	
 	void delete(String vin);
 	

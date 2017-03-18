@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
-import com.haima.crm.entity.CarWorkorderEntity;
+import com.haima.crm.entity.CarWorkorder;
 import com.haima.crm.service.CarWorkorderService;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
@@ -30,11 +30,6 @@ public class CarWorkorderController {
 	@Autowired
 	private CarWorkorderService carWorkorderService;
 	
-	@RequestMapping("/carworkorder.html")
-	public String list(){
-		return "carworkorder/carworkorder.html";
-	}
-	
 	/**
 	 * 列表
 	 */
@@ -46,7 +41,7 @@ public class CarWorkorderController {
 		map.put("limit", limit);
 		
 		//查询列表数据
-		List<CarWorkorderEntity> carWorkorderList = carWorkorderService.queryList(map);
+		List<CarWorkorder> carWorkorderList = carWorkorderService.queryList(map);
 		int total = carWorkorderService.queryTotal(map);
 		
 		PageUtils pageUtil = new PageUtils(carWorkorderList, total, limit, page);
@@ -61,7 +56,7 @@ public class CarWorkorderController {
 	@ResponseBody
 	@RequestMapping("/info/{vin}")
 	public Result info(@PathVariable("vin") String vin){
-		CarWorkorderEntity carWorkorder = carWorkorderService.queryObject(vin);
+		CarWorkorder carWorkorder = carWorkorderService.queryObject(vin);
 		
 		return Result.ok().put("carWorkorder", carWorkorder);
 	}
@@ -71,7 +66,7 @@ public class CarWorkorderController {
 	 */
 	@ResponseBody
 	@RequestMapping("/save")
-	public Result save(@RequestBody CarWorkorderEntity carWorkorder){
+	public Result save(@RequestBody CarWorkorder carWorkorder){
 		carWorkorderService.save(carWorkorder);
 		
 		return Result.ok();
@@ -82,7 +77,7 @@ public class CarWorkorderController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	public Result update(@RequestBody CarWorkorderEntity carWorkorder){
+	public Result update(@RequestBody CarWorkorder carWorkorder){
 		carWorkorderService.update(carWorkorder);
 		
 		return Result.ok();

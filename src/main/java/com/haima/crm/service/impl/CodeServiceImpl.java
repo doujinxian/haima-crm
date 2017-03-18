@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.haima.crm.dao.CodeDao;
-import com.haima.crm.entity.CodeEntity;
+import com.haima.crm.entity.Code;
 import com.haima.crm.service.CodeService;
 
 
@@ -18,12 +18,12 @@ public class CodeServiceImpl implements CodeService {
 	private CodeDao codeDao;
 	
 	@Override
-	public CodeEntity queryObject(Long id){
+	public Code queryObject(Long id){
 		return codeDao.queryObject(id);
 	}
 	
 	@Override
-	public List<CodeEntity> queryList(Map<String, Object> map){
+	public List<Code> queryList(Map<String, Object> map){
 		return codeDao.queryList(map);
 	}
 	
@@ -33,12 +33,12 @@ public class CodeServiceImpl implements CodeService {
 	}
 	
 	@Override
-	public void save(CodeEntity code){
+	public void save(Code code){
 		codeDao.save(code);
 	}
 	
 	@Override
-	public void update(CodeEntity code){
+	public void update(Code code){
 		codeDao.update(code);
 	}
 	

@@ -3,11 +3,11 @@
 
 <mapper namespace="com.haima.crm.dao.ComplaintDelayDao">
 
-	<select id="queryObject" resultType="com.haima.crm.entity.ComplaintDelayEntity">
+	<select id="queryObject" resultType="com.haima.crm.entity.ComplaintDelay">
 		select * from t_complaint_delay where id = #{value}
 	</select>
 
-	<select id="queryList" resultType="com.haima.crm.entity.ComplaintDelayEntity">
+	<select id="queryList" resultType="com.haima.crm.entity.ComplaintDelay">
 		select * from t_complaint_delay 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
@@ -18,7 +18,7 @@
 		select count(*) from t_complaint_delay 
 	</select>
 	 
-	<insert id="save" parameterType="com.haima.crm.entity.ComplaintDelayEntity">
+	<insert id="save" parameterType="com.haima.crm.entity.ComplaintDelay">
 		insert into t_complaint_delay
 		(
 			`id`, 
@@ -55,7 +55,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.haima.crm.entity.ComplaintDelayEntity">
+	<update id="update" parameterType="com.haima.crm.entity.ComplaintDelay">
 		update t_complaint_delay 
 		<set>
 			<if test="complainId != null">`complain_id` = #{complainId}, </if>

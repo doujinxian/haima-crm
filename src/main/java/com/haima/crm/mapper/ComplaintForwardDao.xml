@@ -3,11 +3,11 @@
 
 <mapper namespace="com.haima.crm.dao.ComplaintForwardDao">
 
-	<select id="queryObject" resultType="com.haima.crm.entity.ComplaintForwardEntity">
+	<select id="queryObject" resultType="com.haima.crm.entity.ComplaintForward">
 		select * from t_complaint_forward where id = #{value}
 	</select>
 
-	<select id="queryList" resultType="com.haima.crm.entity.ComplaintForwardEntity">
+	<select id="queryList" resultType="com.haima.crm.entity.ComplaintForward">
 		select * from t_complaint_forward 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
@@ -18,7 +18,7 @@
 		select count(*) from t_complaint_forward 
 	</select>
 	 
-	<insert id="save" parameterType="com.haima.crm.entity.ComplaintForwardEntity">
+	<insert id="save" parameterType="com.haima.crm.entity.ComplaintForward">
 		insert into t_complaint_forward
 		(
 			`id`, 
@@ -49,7 +49,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.haima.crm.entity.ComplaintForwardEntity">
+	<update id="update" parameterType="com.haima.crm.entity.ComplaintForward">
 		update t_complaint_forward 
 		<set>
 			<if test="complainCode != null">`complain_code` = #{complainCode}, </if>

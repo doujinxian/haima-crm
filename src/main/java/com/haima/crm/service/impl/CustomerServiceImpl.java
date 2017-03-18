@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.haima.crm.dao.CustomerDao;
-import com.haima.crm.entity.CustomerEntity;
+import com.haima.crm.entity.Customer;
 import com.haima.crm.service.CustomerService;
 
 
@@ -18,12 +18,12 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDao customerDao;
 	
 	@Override
-	public CustomerEntity queryObject(Long customerId){
+	public Customer queryObject(Long customerId){
 		return customerDao.queryObject(customerId);
 	}
 	
 	@Override
-	public List<CustomerEntity> queryList(Map<String, Object> map){
+	public List<Customer> queryList(Map<String, Object> map){
 		return customerDao.queryList(map);
 	}
 	
@@ -33,12 +33,12 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	
 	@Override
-	public void save(CustomerEntity customer){
+	public void save(Customer customer){
 		customerDao.save(customer);
 	}
 	
 	@Override
-	public void update(CustomerEntity customer){
+	public void update(Customer customer){
 		customerDao.update(customer);
 	}
 	

@@ -6,23 +6,29 @@ import java.util.Date;
 
 
 /**
- * 记录投诉内容信息
+ * 记录投诉转发信息
  * 
  * @author doujinxian
  * @email doujinxian@126.com
  * @date 2017-03-17 20:15:13
  */
-public class ComplaintContentEntity implements Serializable {
+public class ComplaintForward implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//序号
 	private Integer id;
 	//投诉单号
 	private String complainCode;
-	//投诉内容
-	private String complainContent;
-	//删除标识
-	private Integer delFlag;
+	//转发来自
+	private String forwardFrom;
+	//转发给
+	private String forwardTo;
+	//处理记录
+	private String handleMsg;
+	//处理状态
+	private Integer handleStatus;
+	//处理日期
+	private Date handleDate;
 	//创建人
 	private String createBy;
 	//创建时间
@@ -57,28 +63,64 @@ public class ComplaintContentEntity implements Serializable {
 		return complainCode;
 	}
 	/**
-	 * 设置：投诉内容
+	 * 设置：转发来自
 	 */
-	public void setComplainContent(String complainContent) {
-		this.complainContent = complainContent;
+	public void setForwardFrom(String forwardFrom) {
+		this.forwardFrom = forwardFrom;
 	}
 	/**
-	 * 获取：投诉内容
+	 * 获取：转发来自
 	 */
-	public String getComplainContent() {
-		return complainContent;
+	public String getForwardFrom() {
+		return forwardFrom;
 	}
 	/**
-	 * 设置：删除标识
+	 * 设置：转发给
 	 */
-	public void setDelFlag(Integer delFlag) {
-		this.delFlag = delFlag;
+	public void setForwardTo(String forwardTo) {
+		this.forwardTo = forwardTo;
 	}
 	/**
-	 * 获取：删除标识
+	 * 获取：转发给
 	 */
-	public Integer getDelFlag() {
-		return delFlag;
+	public String getForwardTo() {
+		return forwardTo;
+	}
+	/**
+	 * 设置：处理记录
+	 */
+	public void setHandleMsg(String handleMsg) {
+		this.handleMsg = handleMsg;
+	}
+	/**
+	 * 获取：处理记录
+	 */
+	public String getHandleMsg() {
+		return handleMsg;
+	}
+	/**
+	 * 设置：处理状态
+	 */
+	public void setHandleStatus(Integer handleStatus) {
+		this.handleStatus = handleStatus;
+	}
+	/**
+	 * 获取：处理状态
+	 */
+	public Integer getHandleStatus() {
+		return handleStatus;
+	}
+	/**
+	 * 设置：处理日期
+	 */
+	public void setHandleDate(Date handleDate) {
+		this.handleDate = handleDate;
+	}
+	/**
+	 * 获取：处理日期
+	 */
+	public Date getHandleDate() {
+		return handleDate;
 	}
 	/**
 	 * 设置：创建人

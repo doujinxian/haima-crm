@@ -3,11 +3,11 @@
 
 <mapper namespace="com.haima.crm.dao.CustomerCarDao">
 
-	<select id="queryObject" resultType="com.haima.crm.entity.CustomerCarEntity">
+	<select id="queryObject" resultType="com.haima.crm.entity.CustomerCar">
 		select * from t_customer_car where customer_id = #{value}
 	</select>
 
-	<select id="queryList" resultType="com.haima.crm.entity.CustomerCarEntity">
+	<select id="queryList" resultType="com.haima.crm.entity.CustomerCar">
 		select * from t_customer_car 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
@@ -18,7 +18,7 @@
 		select count(*) from t_customer_car 
 	</select>
 	 
-	<insert id="save" parameterType="com.haima.crm.entity.CustomerCarEntity">
+	<insert id="save" parameterType="com.haima.crm.entity.CustomerCar">
 		insert into t_customer_car
 		(
 			`customer_id`, 
@@ -43,7 +43,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.haima.crm.entity.CustomerCarEntity">
+	<update id="update" parameterType="com.haima.crm.entity.CustomerCar">
 		update t_customer_car 
 		<set>
 			<if test="vin != null">`vin` = #{vin}, </if>

@@ -1,6 +1,6 @@
 package com.haima.crm.service;
 
-import com.haima.crm.entity.ComplaintDelayEntity;
+import com.haima.crm.entity.ComplaintDelay;
 
 import java.util.List;
 import java.util.Map;
@@ -14,15 +14,15 @@ import java.util.Map;
  */
 public interface ComplaintDelayService {
 	
-	ComplaintDelayEntity queryObject(Integer id);
+	ComplaintDelay queryObject(Integer id);
 	
-	List<ComplaintDelayEntity> queryList(Map<String, Object> map);
+	List<ComplaintDelay> queryList(Map<String, Object> map);
 	
 	int queryTotal(Map<String, Object> map);
 	
-	void save(ComplaintDelayEntity complaintDelay);
+	void save(ComplaintDelay complaintDelay);
 	
-	void update(ComplaintDelayEntity complaintDelay);
+	void update(ComplaintDelay complaintDelay);
 	
 	void delete(Integer id);
 	

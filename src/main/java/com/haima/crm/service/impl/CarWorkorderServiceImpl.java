@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.haima.crm.dao.CarWorkorderDao;
-import com.haima.crm.entity.CarWorkorderEntity;
+import com.haima.crm.entity.CarWorkorder;
 import com.haima.crm.service.CarWorkorderService;
 
 
@@ -18,12 +18,12 @@ public class CarWorkorderServiceImpl implements CarWorkorderService {
 	private CarWorkorderDao carWorkorderDao;
 	
 	@Override
-	public CarWorkorderEntity queryObject(String vin){
+	public CarWorkorder queryObject(String vin){
 		return carWorkorderDao.queryObject(vin);
 	}
 	
 	@Override
-	public List<CarWorkorderEntity> queryList(Map<String, Object> map){
+	public List<CarWorkorder> queryList(Map<String, Object> map){
 		return carWorkorderDao.queryList(map);
 	}
 	
@@ -33,12 +33,12 @@ public class CarWorkorderServiceImpl implements CarWorkorderService {
 	}
 	
 	@Override
-	public void save(CarWorkorderEntity carWorkorder){
+	public void save(CarWorkorder carWorkorder){
 		carWorkorderDao.save(carWorkorder);
 	}
 	
 	@Override
-	public void update(CarWorkorderEntity carWorkorder){
+	public void update(CarWorkorder carWorkorder){
 		carWorkorderDao.update(carWorkorder);
 	}
 	

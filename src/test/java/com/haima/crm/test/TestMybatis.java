@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.haima.crm.entity.ComplaintEntity;
+import com.haima.crm.entity.Complaint;
 import com.haima.crm.service.ComplaintService;
 import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User;
 
@@ -26,9 +26,13 @@ public class TestMybatis {
 	}
 
 	@Test
-	public void test1(){		
-		ComplaintEntity co =  complaintService.queryObject(1L);
-		//System.out.println(co.getComplainCode());
+	public void test1(){
+		/*Complaint c = new Complaint();
+		c.setId(1L);
+		c.setComplainCode("1212");
+		complaintService.save(c);*/
+		Complaint co =  complaintService.queryObject(1L);
+		System.out.println(co.getComplainCode());
 	}
 
 }

@@ -3,11 +3,11 @@
 
 <mapper namespace="com.haima.crm.dao.ComplaintDao">
 
-	<select id="queryObject" resultType="com.haima.crm.entity.ComplaintEntity">
+	<select id="queryObject" resultType="com.haima.crm.entity.Complaint">
 		select * from t_complaint where id = #{value}
 	</select>
 
-	<select id="queryList" resultType="com.haima.crm.entity.ComplaintEntity">
+	<select id="queryList" resultType="com.haima.crm.entity.Complaint">
 		select * from t_complaint 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
@@ -18,7 +18,7 @@
 		select count(*) from t_complaint 
 	</select>
 	 
-	<insert id="save" parameterType="com.haima.crm.entity.ComplaintEntity">
+	<insert id="save" parameterType="com.haima.crm.entity.Complaint">
 		insert into t_complaint
 		(
 			`id`, 
@@ -109,7 +109,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.haima.crm.entity.ComplaintEntity">
+	<update id="update" parameterType="com.haima.crm.entity.Complaint">
 		update t_complaint 
 		<set>
 			<if test="complainCode != null">`complain_code` = #{complainCode}, </if>

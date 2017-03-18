@@ -1,6 +1,6 @@
 package com.haima.crm.dao;
 
-import com.haima.crm.entity.ComplaintDelayEntity;
+import com.haima.crm.entity.ComplaintDelay;
 
 /**
  * 投诉延迟申请表
@@ -9,6 +9,6 @@ import com.haima.crm.entity.ComplaintDelayEntity;
  * @email doujinxian@126.com
  * @date 2017-03-17 20:15:13
  */
-public interface ComplaintDelayDao extends BaseDao<ComplaintDelayEntity> {
+public interface ComplaintDelayDao extends BaseDao<ComplaintDelay> {
 	
 }

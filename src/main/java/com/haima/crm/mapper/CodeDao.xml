@@ -3,11 +3,11 @@
 
 <mapper namespace="com.haima.crm.dao.CodeDao">
 
-	<select id="queryObject" resultType="com.haima.crm.entity.CodeEntity">
+	<select id="queryObject" resultType="com.haima.crm.entity.Code">
 		select * from m_code where id = #{value}
 	</select>
 
-	<select id="queryList" resultType="com.haima.crm.entity.CodeEntity">
+	<select id="queryList" resultType="com.haima.crm.entity.Code">
 		select * from m_code 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
@@ -18,7 +18,7 @@
 		select count(*) from m_code 
 	</select>
 	 
-	<insert id="save" parameterType="com.haima.crm.entity.CodeEntity" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.haima.crm.entity.Code" useGeneratedKeys="true" keyProperty="id">
 		insert into m_code
 		(
 			`type`, 
@@ -47,7 +47,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.haima.crm.entity.CodeEntity">
+	<update id="update" parameterType="com.haima.crm.entity.Code">
 		update m_code 
 		<set>
 			<if test="type != null">`type` = #{type}, </if>

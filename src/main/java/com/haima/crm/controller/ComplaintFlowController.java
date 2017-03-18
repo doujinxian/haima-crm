@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
-import com.haima.crm.entity.ComplaintFlowEntity;
+import com.haima.crm.entity.ComplaintFlow;
 import com.haima.crm.service.ComplaintFlowService;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
@@ -30,11 +30,6 @@ public class ComplaintFlowController {
 	@Autowired
 	private ComplaintFlowService complaintFlowService;
 	
-	@RequestMapping("/complaintflow.html")
-	public String list(){
-		return "complaintflow/complaintflow.html";
-	}
-	
 	/**
 	 * 列表
 	 */
@@ -46,7 +41,7 @@ public class ComplaintFlowController {
 		map.put("limit", limit);
 		
 		//查询列表数据
-		List<ComplaintFlowEntity> complaintFlowList = complaintFlowService.queryList(map);
+		List<ComplaintFlow> complaintFlowList = complaintFlowService.queryList(map);
 		int total = complaintFlowService.queryTotal(map);
 		
 		PageUtils pageUtil = new PageUtils(complaintFlowList, total, limit, page);
@@ -61,7 +56,7 @@ public class ComplaintFlowController {
 	@ResponseBody
 	@RequestMapping("/info/{id}")
 	public Result info(@PathVariable("id") Integer id){
-		ComplaintFlowEntity complaintFlow = complaintFlowService.queryObject(id);
+		ComplaintFlow complaintFlow = complaintFlowService.queryObject(id);
 		
 		return Result.ok().put("complaintFlow", complaintFlow);
 	}
@@ -71,7 +66,7 @@ public class ComplaintFlowController {
 	 */
 	@ResponseBody
 	@RequestMapping("/save")
-	public Result save(@RequestBody ComplaintFlowEntity complaintFlow){
+	public Result save(@RequestBody ComplaintFlow complaintFlow){
 		complaintFlowService.save(complaintFlow);
 		
 		return Result.ok();
@@ -82,7 +77,7 @@ public class ComplaintFlowController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	public Result update(@RequestBody ComplaintFlowEntity complaintFlow){
+	public Result update(@RequestBody ComplaintFlow complaintFlow){
 		complaintFlowService.update(complaintFlow);
 		
 		return Result.ok();

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
-import com.haima.crm.entity.ComplaintForwardEntity;
+import com.haima.crm.entity.ComplaintForward;
 import com.haima.crm.service.ComplaintForwardService;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
@@ -30,11 +30,6 @@ public class ComplaintForwardController {
 	@Autowired
 	private ComplaintForwardService complaintForwardService;
 	
-	@RequestMapping("/complaintforward.html")
-	public String list(){
-		return "complaintforward/complaintforward.html";
-	}
-	
 	/**
 	 * 列表
 	 */
@@ -46,7 +41,7 @@ public class ComplaintForwardController {
 		map.put("limit", limit);
 		
 		//查询列表数据
-		List<ComplaintForwardEntity> complaintForwardList = complaintForwardService.queryList(map);
+		List<ComplaintForward> complaintForwardList = complaintForwardService.queryList(map);
 		int total = complaintForwardService.queryTotal(map);
 		
 		PageUtils pageUtil = new PageUtils(complaintForwardList, total, limit, page);
@@ -61,7 +56,7 @@ public class ComplaintForwardController {
 	@ResponseBody
 	@RequestMapping("/info/{id}")
 	public Result info(@PathVariable("id") Integer id){
-		ComplaintForwardEntity complaintForward = complaintForwardService.queryObject(id);
+		ComplaintForward complaintForward = complaintForwardService.queryObject(id);
 		
 		return Result.ok().put("complaintForward", complaintForward);
 	}
@@ -71,7 +66,7 @@ public class ComplaintForwardController {
 	 */
 	@ResponseBody
 	@RequestMapping("/save")
-	public Result save(@RequestBody ComplaintForwardEntity complaintForward){
+	public Result save(@RequestBody ComplaintForward complaintForward){
 		complaintForwardService.save(complaintForward);
 		
 		return Result.ok();
@@ -82,7 +77,7 @@ public class ComplaintForwardController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	public Result update(@RequestBody ComplaintForwardEntity complaintForward){
+	public Result update(@RequestBody ComplaintForward complaintForward){
 		complaintForwardService.update(complaintForward);
 		
 		return Result.ok();

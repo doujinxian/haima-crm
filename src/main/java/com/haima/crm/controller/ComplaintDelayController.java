@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
-import com.haima.crm.entity.ComplaintDelayEntity;
+import com.haima.crm.entity.ComplaintDelay;
 import com.haima.crm.service.ComplaintDelayService;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
@@ -30,11 +30,6 @@ public class ComplaintDelayController {
 	@Autowired
 	private ComplaintDelayService complaintDelayService;
 	
-	@RequestMapping("/complaintdelay.html")
-	public String list(){
-		return "complaintdelay/complaintdelay.html";
-	}
-	
 	/**
 	 * 列表
 	 */
@@ -46,7 +41,7 @@ public class ComplaintDelayController {
 		map.put("limit", limit);
 		
 		//查询列表数据
-		List<ComplaintDelayEntity> complaintDelayList = complaintDelayService.queryList(map);
+		List<ComplaintDelay> complaintDelayList = complaintDelayService.queryList(map);
 		int total = complaintDelayService.queryTotal(map);
 		
 		PageUtils pageUtil = new PageUtils(complaintDelayList, total, limit, page);
@@ -61,7 +56,7 @@ public class ComplaintDelayController {
 	@ResponseBody
 	@RequestMapping("/info/{id}")
 	public Result info(@PathVariable("id") Integer id){
-		ComplaintDelayEntity complaintDelay = complaintDelayService.queryObject(id);
+		ComplaintDelay complaintDelay = complaintDelayService.queryObject(id);
 		
 		return Result.ok().put("complaintDelay", complaintDelay);
 	}
@@ -71,7 +66,7 @@ public class ComplaintDelayController {
 	 */
 	@ResponseBody
 	@RequestMapping("/save")
-	public Result save(@RequestBody ComplaintDelayEntity complaintDelay){
+	public Result save(@RequestBody ComplaintDelay complaintDelay){
 		complaintDelayService.save(complaintDelay);
 		
 		return Result.ok();
@@ -82,7 +77,7 @@ public class ComplaintDelayController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	public Result update(@RequestBody ComplaintDelayEntity complaintDelay){
+	public Result update(@RequestBody ComplaintDelay complaintDelay){
 		complaintDelayService.update(complaintDelay);
 		
 		return Result.ok();

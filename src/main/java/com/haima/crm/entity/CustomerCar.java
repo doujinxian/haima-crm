@@ -10,15 +10,17 @@ import java.util.Date;
  * 
  * @author doujinxian
  * @email doujinxian@126.com
- * @date 2017-03-17 20:15:12
+ * @date 2017-03-17 20:15:13
  */
-public class CarWorkorderEntity implements Serializable {
+public class CustomerCar implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	//客户id
+	private Long customerId;
 	//vin码
 	private String vin;
-	//工单id
-	private Long workorderId;
+	//车牌号
+	private String plateNo;
 	//是否删除：0未1是
 	private String delFlg;
 	//创建者
@@ -30,6 +32,18 @@ public class CarWorkorderEntity implements Serializable {
 	//修改时间
 	private Date modifyTime;
 
+	/**
+	 * 设置：客户id
+	 */
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+	/**
+	 * 获取：客户id
+	 */
+	public Long getCustomerId() {
+		return customerId;
+	}
 	/**
 	 * 设置：vin码
 	 */
@@ -43,16 +57,16 @@ public class CarWorkorderEntity implements Serializable {
 		return vin;
 	}
 	/**
-	 * 设置：工单id
+	 * 设置：车牌号
 	 */
-	public void setWorkorderId(Long workorderId) {
-		this.workorderId = workorderId;
+	public void setPlateNo(String plateNo) {
+		this.plateNo = plateNo;
 	}
 	/**
-	 * 获取：工单id
+	 * 获取：车牌号
 	 */
-	public Long getWorkorderId() {
-		return workorderId;
+	public String getPlateNo() {
+		return plateNo;
 	}
 	/**
 	 * 设置：是否删除：0未1是

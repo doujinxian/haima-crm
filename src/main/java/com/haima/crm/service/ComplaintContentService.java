@@ -1,6 +1,6 @@
 package com.haima.crm.service;
 
-import com.haima.crm.entity.ComplaintContentEntity;
+import com.haima.crm.entity.ComplaintContent;
 
 import java.util.List;
 import java.util.Map;
@@ -14,15 +14,15 @@ import java.util.Map;
  */
 public interface ComplaintContentService {
 	
-	ComplaintContentEntity queryObject(Integer id);
+	ComplaintContent queryObject(Integer id);
 	
-	List<ComplaintContentEntity> queryList(Map<String, Object> map);
+	List<ComplaintContent> queryList(Map<String, Object> map);
 	
 	int queryTotal(Map<String, Object> map);
 	
-	void save(ComplaintContentEntity complaintContent);
+	void save(ComplaintContent complaintContent);
 	
-	void update(ComplaintContentEntity complaintContent);
+	void update(ComplaintContent complaintContent);
 	
 	void delete(Integer id);
 	

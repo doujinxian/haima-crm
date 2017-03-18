@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
-import com.haima.crm.entity.CustomerEntity;
+import com.haima.crm.entity.Customer;
 import com.haima.crm.service.CustomerService;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
@@ -30,11 +30,6 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 	
-	@RequestMapping("/customer.html")
-	public String list(){
-		return "customer/customer.html";
-	}
-	
 	/**
 	 * 列表
 	 */
@@ -46,7 +41,7 @@ public class CustomerController {
 		map.put("limit", limit);
 		
 		//查询列表数据
-		List<CustomerEntity> customerList = customerService.queryList(map);
+		List<Customer> customerList = customerService.queryList(map);
 		int total = customerService.queryTotal(map);
 		
 		PageUtils pageUtil = new PageUtils(customerList, total, limit, page);
@@ -61,7 +56,7 @@ public class CustomerController {
 	@ResponseBody
 	@RequestMapping("/info/{customerId}")
 	public Result info(@PathVariable("customerId") Long customerId){
-		CustomerEntity customer = customerService.queryObject(customerId);
+		Customer customer = customerService.queryObject(customerId);
 		
 		return Result.ok().put("customer", customer);
 	}
@@ -71,7 +66,7 @@ public class CustomerController {
 	 */
 	@ResponseBody
 	@RequestMapping("/save")
-	public Result save(@RequestBody CustomerEntity customer){
+	public Result save(@RequestBody Customer customer){
 		customerService.save(customer);
 		
 		return Result.ok();
@@ -82,7 +77,7 @@ public class CustomerController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	public Result update(@RequestBody CustomerEntity customer){
+	public Result update(@RequestBody Customer customer){
 		customerService.update(customer);
 		
 		return Result.ok();

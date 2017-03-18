@@ -6,29 +6,23 @@ import java.util.Date;
 
 
 /**
- * 记录投诉转发信息
+ * 记录投诉内容信息
  * 
  * @author doujinxian
  * @email doujinxian@126.com
  * @date 2017-03-17 20:15:13
  */
-public class ComplaintForwardEntity implements Serializable {
+public class ComplaintContent implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//序号
 	private Integer id;
 	//投诉单号
 	private String complainCode;
-	//转发来自
-	private String forwardFrom;
-	//转发给
-	private String forwardTo;
-	//处理记录
-	private String handleMsg;
-	//处理状态
-	private Integer handleStatus;
-	//处理日期
-	private Date handleDate;
+	//投诉内容
+	private String complainContent;
+	//删除标识
+	private Integer delFlag;
 	//创建人
 	private String createBy;
 	//创建时间
@@ -63,64 +57,28 @@ public class ComplaintForwardEntity implements Serializable {
 		return complainCode;
 	}
 	/**
-	 * 设置：转发来自
+	 * 设置：投诉内容
 	 */
-	public void setForwardFrom(String forwardFrom) {
-		this.forwardFrom = forwardFrom;
+	public void setComplainContent(String complainContent) {
+		this.complainContent = complainContent;
 	}
 	/**
-	 * 获取：转发来自
+	 * 获取：投诉内容
 	 */
-	public String getForwardFrom() {
-		return forwardFrom;
+	public String getComplainContent() {
+		return complainContent;
 	}
 	/**
-	 * 设置：转发给
+	 * 设置：删除标识
 	 */
-	public void setForwardTo(String forwardTo) {
-		this.forwardTo = forwardTo;
+	public void setDelFlag(Integer delFlag) {
+		this.delFlag = delFlag;
 	}
 	/**
-	 * 获取：转发给
+	 * 获取：删除标识
 	 */
-	public String getForwardTo() {
-		return forwardTo;
-	}
-	/**
-	 * 设置：处理记录
-	 */
-	public void setHandleMsg(String handleMsg) {
-		this.handleMsg = handleMsg;
-	}
-	/**
-	 * 获取：处理记录
-	 */
-	public String getHandleMsg() {
-		return handleMsg;
-	}
-	/**
-	 * 设置：处理状态
-	 */
-	public void setHandleStatus(Integer handleStatus) {
-		this.handleStatus = handleStatus;
-	}
-	/**
-	 * 获取：处理状态
-	 */
-	public Integer getHandleStatus() {
-		return handleStatus;
-	}
-	/**
-	 * 设置：处理日期
-	 */
-	public void setHandleDate(Date handleDate) {
-		this.handleDate = handleDate;
-	}
-	/**
-	 * 获取：处理日期
-	 */
-	public Date getHandleDate() {
-		return handleDate;
+	public Integer getDelFlag() {
+		return delFlag;
 	}
 	/**
 	 * 设置：创建人

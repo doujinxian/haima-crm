@@ -1,6 +1,6 @@
 package com.haima.crm.dao;
 
-import com.haima.crm.entity.CodeEntity;
+import com.haima.crm.entity.Code;
 
 /**
  * 
@@ -9,6 +9,6 @@ import com.haima.crm.entity.CodeEntity;
  * @email doujinxian@126.com
  * @date 2017-03-17 20:15:12
  */
-public interface CodeDao extends BaseDao<CodeEntity> {
+public interface CodeDao extends BaseDao<Code> {
 	
 }

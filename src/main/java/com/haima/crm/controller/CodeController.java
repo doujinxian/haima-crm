@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
-import com.haima.crm.entity.CodeEntity;
+import com.haima.crm.entity.Code;
 import com.haima.crm.service.CodeService;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
@@ -30,10 +30,6 @@ public class CodeController {
 	@Autowired
 	private CodeService codeService;
 	
-	@RequestMapping("/code.html")
-	public String list(){
-		return "code/code.html";
-	}
 	
 	/**
 	 * 列表
@@ -46,7 +42,7 @@ public class CodeController {
 		map.put("limit", limit);
 		
 		//查询列表数据
-		List<CodeEntity> codeList = codeService.queryList(map);
+		List<Code> codeList = codeService.queryList(map);
 		int total = codeService.queryTotal(map);
 		
 		PageUtils pageUtil = new PageUtils(codeList, total, limit, page);
@@ -61,7 +57,7 @@ public class CodeController {
 	@ResponseBody
 	@RequestMapping("/info/{id}")
 	public Result info(@PathVariable("id") Long id){
-		CodeEntity code = codeService.queryObject(id);
+		Code code = codeService.queryObject(id);
 		
 		return Result.ok().put("code", code);
 	}
@@ -71,7 +67,7 @@ public class CodeController {
 	 */
 	@ResponseBody
 	@RequestMapping("/save")
-	public Result save(@RequestBody CodeEntity code){
+	public Result save(@RequestBody Code code){
 		codeService.save(code);
 		
 		return Result.ok();
@@ -82,7 +78,7 @@ public class CodeController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	public Result update(@RequestBody CodeEntity code){
+	public Result update(@RequestBody Code code){
 		codeService.update(code);
 		
 		return Result.ok();

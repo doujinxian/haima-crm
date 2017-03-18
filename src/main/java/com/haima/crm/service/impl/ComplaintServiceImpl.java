@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.haima.crm.dao.ComplaintDao;
-import com.haima.crm.entity.ComplaintEntity;
+import com.haima.crm.entity.Complaint;
 import com.haima.crm.service.ComplaintService;
 
 
@@ -18,12 +18,12 @@ public class ComplaintServiceImpl implements ComplaintService {
 	private ComplaintDao complaintDao;
 	
 	@Override
-	public ComplaintEntity queryObject(Long id){
+	public Complaint queryObject(Long id){
 		return complaintDao.queryObject(id);
 	}
 	
 	@Override
-	public List<ComplaintEntity> queryList(Map<String, Object> map){
+	public List<Complaint> queryList(Map<String, Object> map){
 		return complaintDao.queryList(map);
 	}
 	
@@ -33,12 +33,12 @@ public class ComplaintServiceImpl implements ComplaintService {
 	}
 	
 	@Override
-	public void save(ComplaintEntity complaint){
+	public void save(Complaint complaint){
 		complaintDao.save(complaint);
 	}
 	
 	@Override
-	public void update(ComplaintEntity complaint){
+	public void update(Complaint complaint){
 		complaintDao.update(complaint);
 	}
 	

@@ -1,6 +1,6 @@
 package com.haima.crm.dao;
 
-import com.haima.crm.entity.ComplaintForwardEntity;
+import com.haima.crm.entity.ComplaintForward;
 
 /**
  * 记录投诉转发信息
@@ -9,6 +9,6 @@ import com.haima.crm.entity.ComplaintForwardEntity;
  * @email doujinxian@126.com
  * @date 2017-03-17 20:15:13
  */
-public interface ComplaintForwardDao extends BaseDao<ComplaintForwardEntity> {
+public interface ComplaintForwardDao extends BaseDao<ComplaintForward> {
 	
 }

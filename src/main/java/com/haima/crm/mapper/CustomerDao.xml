@@ -3,11 +3,11 @@
 
 <mapper namespace="com.haima.crm.dao.CustomerDao">
 
-	<select id="queryObject" resultType="com.haima.crm.entity.CustomerEntity">
+	<select id="queryObject" resultType="com.haima.crm.entity.Customer">
 		select * from t_customer where customer_id = #{value}
 	</select>
 
-	<select id="queryList" resultType="com.haima.crm.entity.CustomerEntity">
+	<select id="queryList" resultType="com.haima.crm.entity.Customer">
 		select * from t_customer 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
@@ -18,7 +18,7 @@
 		select count(*) from t_customer 
 	</select>
 	 
-	<insert id="save" parameterType="com.haima.crm.entity.CustomerEntity" useGeneratedKeys="true" keyProperty="customerId">
+	<insert id="save" parameterType="com.haima.crm.entity.Customer" useGeneratedKeys="true" keyProperty="customerId">
 		insert into t_customer
 		(
 			`customer_name`, 
@@ -95,7 +95,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.haima.crm.entity.CustomerEntity">
+	<update id="update" parameterType="com.haima.crm.entity.Customer">
 		update t_customer 
 		<set>
 			<if test="customerName != null">`customer_name` = #{customerName}, </if>

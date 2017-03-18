@@ -3,11 +3,11 @@
 
 <mapper namespace="com.haima.crm.dao.CarWorkorderDao">
 
-	<select id="queryObject" resultType="com.haima.crm.entity.CarWorkorderEntity">
+	<select id="queryObject" resultType="com.haima.crm.entity.CarWorkorder">
 		select * from t_car_workorder where vin = #{value}
 	</select>
 
-	<select id="queryList" resultType="com.haima.crm.entity.CarWorkorderEntity">
+	<select id="queryList" resultType="com.haima.crm.entity.CarWorkorder">
 		select * from t_car_workorder 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
@@ -18,7 +18,7 @@
 		select count(*) from t_car_workorder 
 	</select>
 	 
-	<insert id="save" parameterType="com.haima.crm.entity.CarWorkorderEntity">
+	<insert id="save" parameterType="com.haima.crm.entity.CarWorkorder">
 		insert into t_car_workorder
 		(
 			`vin`, 
@@ -41,7 +41,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.haima.crm.entity.CarWorkorderEntity">
+	<update id="update" parameterType="com.haima.crm.entity.CarWorkorder">
 		update t_car_workorder 
 		<set>
 			<if test="workorderId != null">`workorder_id` = #{workorderId}, </if>

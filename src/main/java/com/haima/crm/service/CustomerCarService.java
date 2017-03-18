@@ -1,6 +1,6 @@
 package com.haima.crm.service;
 
-import com.haima.crm.entity.CustomerCarEntity;
+import com.haima.crm.entity.CustomerCar;
 
 import java.util.List;
 import java.util.Map;
@@ -14,15 +14,15 @@ import java.util.Map;
  */
 public interface CustomerCarService {
 	
-	CustomerCarEntity queryObject(Long customerId);
+	CustomerCar queryObject(Long customerId);
 	
-	List<CustomerCarEntity> queryList(Map<String, Object> map);
+	List<CustomerCar> queryList(Map<String, Object> map);
 	
 	int queryTotal(Map<String, Object> map);
 	
-	void save(CustomerCarEntity customerCar);
+	void save(CustomerCar customerCar);
 	
-	void update(CustomerCarEntity customerCar);
+	void update(CustomerCar customerCar);
 	
 	void delete(Long customerId);
 	
