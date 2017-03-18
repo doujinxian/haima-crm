@@ -2,25 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.haima.crm.dao.CodeDao">
-
-	<select id="queryObject" resultType="com.haima.crm.entity.Code">
-		select * from m_code where id = #{value}
-	</select>
-
-	<select id="queryList" resultType="com.haima.crm.entity.Code">
-		select * from m_code 
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
 	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from m_code 
-	</select>
-	 
-	<insert id="save" parameterType="com.haima.crm.entity.Code" useGeneratedKeys="true" keyProperty="id">
-		insert into m_code
-		(
+	<resultMap id="RM_Code" type="com.haima.crm.entity.Code">
+			<result property="id" column="id"/>
+			<result property="type" column="type"/>
+			<result property="code" column="code"/>
+			<result property="name" column="name"/>
+			<result property="remark" column="remark"/>
+			<result property="order" column="order"/>
+			<result property="delFlg" column="del_flg"/>
+			<result property="creator" column="creator"/>
+			<result property="createDate" column="create_date"/>
+			<result property="modifier" column="modifier"/>
+			<result property="modifyDate" column="modify_date"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Code_columns">
+	    <![CDATA[
 			`type`, 
 			`code`, 
 			`name`, 
@@ -31,19 +30,82 @@
 			`create_date`, 
 			`modifier`, 
 			`modify_date`
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="Code_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="code != null">`code` = #{code}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="order != null">`order` = #{order}, </if>
+			<if test="delFlg != null">`del_flg` = #{delFlg}, </if>
+			<if test="creator != null">`creator` = #{creator}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}, </if>
+			<if test="modifier != null">`modifier` = #{modifier}, </if>
+			<if test="modifyDate != null">`modify_date` = #{modifyDate}</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_Code">
+		select 
+		<include refid="Code_columns" />
+		from m_code 
+		where
+		id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_Code">
+		select 
+		<include refid="Code_columns" />
+		from m_code
+		<include refid="Code_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from m_code 
+		<include refid="Code_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.Code" useGeneratedKeys="true" keyProperty="id">
+		insert into m_code
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="type!=null">type, </if>
+			<if test="code!=null">code, </if>
+			<if test="name!=null">name, </if>
+			<if test="remark!=null">remark, </if>
+			<if test="order!=null">order, </if>
+			<if test="delFlg!=null">del_flg, </if>
+			<if test="creator!=null">creator, </if>
+			<if test="createDate!=null">create_date, </if>
+			<if test="modifier!=null">modifier, </if>
+			<if test="modifyDate!=null">modify_date</if>
+	     </trim>
 		)
 		values
 		(
-			#{type}, 
-			#{code}, 
-			#{name}, 
-			#{remark}, 
-			#{order}, 
-			#{delFlg}, 
-			#{creator}, 
-			#{createDate}, 
-			#{modifier}, 
-			#{modifyDate}
+		<trim suffix="" suffixOverrides=",">
+			<if test="type!=null">#{type}, </if>
+			<if test="code!=null">#{code}, </if>
+			<if test="name!=null">#{name}, </if>
+			<if test="remark!=null">#{remark}, </if>
+			<if test="order!=null">#{order}, </if>
+			<if test="delFlg!=null">#{delFlg}, </if>
+			<if test="creator!=null">#{creator}, </if>
+			<if test="createDate!=null">#{createDate}, </if>
+			<if test="modifier!=null">#{modifier}, </if>
+			<if test="modifyDate!=null">#{modifyDate}</if>
+	     </trim>
 		)
 	</insert>
 	 

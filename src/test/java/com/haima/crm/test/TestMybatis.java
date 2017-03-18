@@ -1,5 +1,10 @@
 package com.haima.crm.test;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.haima.crm.entity.Complaint;
 import com.haima.crm.service.ComplaintService;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:spring.xml","classpath:spring-mybatis.xml"})
@@ -26,13 +30,33 @@ public class TestMybatis {
 	}
 
 	@Test
-	public void test1(){
-		/*Complaint c = new Complaint();
-		c.setId(1L);
-		c.setComplainCode("1212");
-		complaintService.save(c);*/
+	public void save(){
+		Complaint c = new Complaint();
+		c.setComplainCode("wefwef");
+		c.setBuyDate(new Date());
+		complaintService.save(c);
+	}
+	
+	@Test
+	public void queryObject(){
 		Complaint co =  complaintService.queryObject(1L);
 		System.out.println(co.getComplainCode());
 	}
-
+	
+	
+	@Test
+	public void queryList(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", 1L);
+		List<Complaint> co =  complaintService.queryList(map);
+		System.out.println(co.get(0).getComplainCode());
+	}
+	
+	@Test
+	public void queryTotal(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", 1L);
+		int count = complaintService.queryTotal(map);
+		System.out.println(count);
+	}
 }

@@ -2,26 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.haima.crm.dao.ComplaintForwardDao">
-
-	<select id="queryObject" resultType="com.haima.crm.entity.ComplaintForward">
-		select * from t_complaint_forward where id = #{value}
-	</select>
-
-	<select id="queryList" resultType="com.haima.crm.entity.ComplaintForward">
-		select * from t_complaint_forward 
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
 	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from t_complaint_forward 
-	</select>
-	 
-	<insert id="save" parameterType="com.haima.crm.entity.ComplaintForward">
-		insert into t_complaint_forward
-		(
-			`id`, 
+	<resultMap id="RM_ComplaintForward" type="com.haima.crm.entity.ComplaintForward">
+			<result property="id" column="id"/>
+			<result property="complainCode" column="complain_code"/>
+			<result property="forwardFrom" column="forward_from"/>
+			<result property="forwardTo" column="forward_to"/>
+			<result property="handleMsg" column="handle_msg"/>
+			<result property="handleStatus" column="handle_status"/>
+			<result property="handleDate" column="handle_date"/>
+			<result property="createBy" column="create_by"/>
+			<result property="createTime" column="create_time"/>
+			<result property="updateBy" column="update_by"/>
+			<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="ComplaintForward_columns">
+	    <![CDATA[
 			`complain_code`, 
 			`forward_from`, 
 			`forward_to`, 
@@ -32,20 +30,82 @@
 			`create_time`, 
 			`update_by`, 
 			`update_time`
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="ComplaintForward_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="complainCode != null">`complain_code` = #{complainCode}, </if>
+			<if test="forwardFrom != null">`forward_from` = #{forwardFrom}, </if>
+			<if test="forwardTo != null">`forward_to` = #{forwardTo}, </if>
+			<if test="handleMsg != null">`handle_msg` = #{handleMsg}, </if>
+			<if test="handleStatus != null">`handle_status` = #{handleStatus}, </if>
+			<if test="handleDate != null">`handle_date` = #{handleDate}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_ComplaintForward">
+		select 
+		<include refid="ComplaintForward_columns" />
+		from t_complaint_forward 
+		where 
+		id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_ComplaintForward">
+		select 
+		<include refid="ComplaintForward_columns" />
+		from t_complaint_forward
+		<include refid="ComplaintForward_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from t_complaint_forward 
+		<include refid="ComplaintForward_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.ComplaintForward" useGeneratedKeys="true" keyProperty="id">
+		insert into t_complaint_forward
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="complainCode!=null">complain_code, </if>
+			<if test="forwardFrom!=null">forward_from, </if>
+			<if test="forwardTo!=null">forward_to, </if>
+			<if test="handleMsg!=null">handle_msg, </if>
+			<if test="handleStatus!=null">handle_status, </if>
+			<if test="handleDate!=null">handle_date, </if>
+			<if test="createBy!=null">create_by, </if>
+			<if test="createTime!=null">create_time, </if>
+			<if test="updateBy!=null">update_by, </if>
+			<if test="updateTime!=null">update_time</if>
+	     </trim>
 		)
 		values
 		(
-			#{id}, 
-			#{complainCode}, 
-			#{forwardFrom}, 
-			#{forwardTo}, 
-			#{handleMsg}, 
-			#{handleStatus}, 
-			#{handleDate}, 
-			#{createBy}, 
-			#{createTime}, 
-			#{updateBy}, 
-			#{updateTime}
+		<trim suffix="" suffixOverrides=",">
+			<if test="complainCode!=null">#{complainCode}, </if>
+			<if test="forwardFrom!=null">#{forwardFrom}, </if>
+			<if test="forwardTo!=null">#{forwardTo}, </if>
+			<if test="handleMsg!=null">#{handleMsg}, </if>
+			<if test="handleStatus!=null">#{handleStatus}, </if>
+			<if test="handleDate!=null">#{handleDate}, </if>
+			<if test="createBy!=null">#{createBy}, </if>
+			<if test="createTime!=null">#{createTime}, </if>
+			<if test="updateBy!=null">#{updateBy}, </if>
+			<if test="updateTime!=null">#{updateTime}</if>
+	     </trim>
 		)
 	</insert>
 	 

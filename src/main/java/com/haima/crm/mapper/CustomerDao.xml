@@ -2,25 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.haima.crm.dao.CustomerDao">
-
-	<select id="queryObject" resultType="com.haima.crm.entity.Customer">
-		select * from t_customer where customer_id = #{value}
-	</select>
-
-	<select id="queryList" resultType="com.haima.crm.entity.Customer">
-		select * from t_customer 
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
 	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from t_customer 
-	</select>
-	 
-	<insert id="save" parameterType="com.haima.crm.entity.Customer" useGeneratedKeys="true" keyProperty="customerId">
-		insert into t_customer
-		(
+	<resultMap id="RM_Customer" type="com.haima.crm.entity.Customer">
+			<result property="customerId" column="customer_id"/>
+			<result property="customerName" column="customer_name"/>
+			<result property="sex" column="sex"/>
+			<result property="maritalStatus" column="marital_status"/>
+			<result property="idType" column="id_type"/>
+			<result property="idNo" column="id_no"/>
+			<result property="birthday" column="birthday"/>
+			<result property="phone" column="phone"/>
+			<result property="companyPhone" column="company_phone"/>
+			<result property="familyPhone" column="family_phone"/>
+			<result property="address" column="address"/>
+			<result property="zipcode" column="zipcode"/>
+			<result property="province" column="province"/>
+			<result property="city" column="city"/>
+			<result property="district" column="district"/>
+			<result property="contact" column="contact"/>
+			<result property="contactAddress" column="contact_address"/>
+			<result property="customerType1" column="customer_type1"/>
+			<result property="customerType2" column="customer_type2"/>
+			<result property="occupation" column="occupation"/>
+			<result property="company" column="company"/>
+			<result property="position" column="position"/>
+			<result property="country" column="country"/>
+			<result property="profitRevisitTime" column="profit_revisit_time"/>
+			<result property="photograph" column="photograph"/>
+			<result property="email" column="email"/>
+			<result property="qq" column="qq"/>
+			<result property="wechat" column="wechat"/>
+			<result property="weibo" column="weibo"/>
+			<result property="remark" column="remark"/>
+			<result property="delFlg" column="del_flg"/>
+			<result property="creator" column="creator"/>
+			<result property="createTime" column="create_time"/>
+			<result property="modifier" column="modifier"/>
+			<result property="modifyTime" column="modify_time"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Customer_columns">
+	    <![CDATA[
 			`customer_name`, 
 			`sex`, 
 			`marital_status`, 
@@ -55,43 +78,154 @@
 			`create_time`, 
 			`modifier`, 
 			`modify_time`
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="Customer_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="customerName != null">`customer_name` = #{customerName}, </if>
+			<if test="sex != null">`sex` = #{sex}, </if>
+			<if test="maritalStatus != null">`marital_status` = #{maritalStatus}, </if>
+			<if test="idType != null">`id_type` = #{idType}, </if>
+			<if test="idNo != null">`id_no` = #{idNo}, </if>
+			<if test="birthday != null">`birthday` = #{birthday}, </if>
+			<if test="phone != null">`phone` = #{phone}, </if>
+			<if test="companyPhone != null">`company_phone` = #{companyPhone}, </if>
+			<if test="familyPhone != null">`family_phone` = #{familyPhone}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="zipcode != null">`zipcode` = #{zipcode}, </if>
+			<if test="province != null">`province` = #{province}, </if>
+			<if test="city != null">`city` = #{city}, </if>
+			<if test="district != null">`district` = #{district}, </if>
+			<if test="contact != null">`contact` = #{contact}, </if>
+			<if test="contactAddress != null">`contact_address` = #{contactAddress}, </if>
+			<if test="customerType1 != null">`customer_type1` = #{customerType1}, </if>
+			<if test="customerType2 != null">`customer_type2` = #{customerType2}, </if>
+			<if test="occupation != null">`occupation` = #{occupation}, </if>
+			<if test="company != null">`company` = #{company}, </if>
+			<if test="position != null">`position` = #{position}, </if>
+			<if test="country != null">`country` = #{country}, </if>
+			<if test="profitRevisitTime != null">`profit_revisit_time` = #{profitRevisitTime}, </if>
+			<if test="photograph != null">`photograph` = #{photograph}, </if>
+			<if test="email != null">`email` = #{email}, </if>
+			<if test="qq != null">`qq` = #{qq}, </if>
+			<if test="wechat != null">`wechat` = #{wechat}, </if>
+			<if test="weibo != null">`weibo` = #{weibo}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="delFlg != null">`del_flg` = #{delFlg}, </if>
+			<if test="creator != null">`creator` = #{creator}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="modifier != null">`modifier` = #{modifier}, </if>
+			<if test="modifyTime != null">`modify_time` = #{modifyTime}</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_Customer">
+		select 
+		<include refid="Customer_columns" />
+		from t_customer 
+		where
+		customer_id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_Customer">
+		select 
+		<include refid="Customer_columns" />
+		from t_customer
+		<include refid="Customer_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from t_customer 
+		<include refid="Customer_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.Customer" useGeneratedKeys="true" keyProperty="customerId">
+		insert into t_customer
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="customerName!=null">customer_name, </if>
+			<if test="sex!=null">sex, </if>
+			<if test="maritalStatus!=null">marital_status, </if>
+			<if test="idType!=null">id_type, </if>
+			<if test="idNo!=null">id_no, </if>
+			<if test="birthday!=null">birthday, </if>
+			<if test="phone!=null">phone, </if>
+			<if test="companyPhone!=null">company_phone, </if>
+			<if test="familyPhone!=null">family_phone, </if>
+			<if test="address!=null">address, </if>
+			<if test="zipcode!=null">zipcode, </if>
+			<if test="province!=null">province, </if>
+			<if test="city!=null">city, </if>
+			<if test="district!=null">district, </if>
+			<if test="contact!=null">contact, </if>
+			<if test="contactAddress!=null">contact_address, </if>
+			<if test="customerType1!=null">customer_type1, </if>
+			<if test="customerType2!=null">customer_type2, </if>
+			<if test="occupation!=null">occupation, </if>
+			<if test="company!=null">company, </if>
+			<if test="position!=null">position, </if>
+			<if test="country!=null">country, </if>
+			<if test="profitRevisitTime!=null">profit_revisit_time, </if>
+			<if test="photograph!=null">photograph, </if>
+			<if test="email!=null">email, </if>
+			<if test="qq!=null">qq, </if>
+			<if test="wechat!=null">wechat, </if>
+			<if test="weibo!=null">weibo, </if>
+			<if test="remark!=null">remark, </if>
+			<if test="delFlg!=null">del_flg, </if>
+			<if test="creator!=null">creator, </if>
+			<if test="createTime!=null">create_time, </if>
+			<if test="modifier!=null">modifier, </if>
+			<if test="modifyTime!=null">modify_time</if>
+	     </trim>
 		)
 		values
 		(
-			#{customerName}, 
-			#{sex}, 
-			#{maritalStatus}, 
-			#{idType}, 
-			#{idNo}, 
-			#{birthday}, 
-			#{phone}, 
-			#{companyPhone}, 
-			#{familyPhone}, 
-			#{address}, 
-			#{zipcode}, 
-			#{province}, 
-			#{city}, 
-			#{district}, 
-			#{contact}, 
-			#{contactAddress}, 
-			#{customerType1}, 
-			#{customerType2}, 
-			#{occupation}, 
-			#{company}, 
-			#{position}, 
-			#{country}, 
-			#{profitRevisitTime}, 
-			#{photograph}, 
-			#{email}, 
-			#{qq}, 
-			#{wechat}, 
-			#{weibo}, 
-			#{remark}, 
-			#{delFlg}, 
-			#{creator}, 
-			#{createTime}, 
-			#{modifier}, 
-			#{modifyTime}
+		<trim suffix="" suffixOverrides=",">
+			<if test="customerName!=null">#{customerName}, </if>
+			<if test="sex!=null">#{sex}, </if>
+			<if test="maritalStatus!=null">#{maritalStatus}, </if>
+			<if test="idType!=null">#{idType}, </if>
+			<if test="idNo!=null">#{idNo}, </if>
+			<if test="birthday!=null">#{birthday}, </if>
+			<if test="phone!=null">#{phone}, </if>
+			<if test="companyPhone!=null">#{companyPhone}, </if>
+			<if test="familyPhone!=null">#{familyPhone}, </if>
+			<if test="address!=null">#{address}, </if>
+			<if test="zipcode!=null">#{zipcode}, </if>
+			<if test="province!=null">#{province}, </if>
+			<if test="city!=null">#{city}, </if>
+			<if test="district!=null">#{district}, </if>
+			<if test="contact!=null">#{contact}, </if>
+			<if test="contactAddress!=null">#{contactAddress}, </if>
+			<if test="customerType1!=null">#{customerType1}, </if>
+			<if test="customerType2!=null">#{customerType2}, </if>
+			<if test="occupation!=null">#{occupation}, </if>
+			<if test="company!=null">#{company}, </if>
+			<if test="position!=null">#{position}, </if>
+			<if test="country!=null">#{country}, </if>
+			<if test="profitRevisitTime!=null">#{profitRevisitTime}, </if>
+			<if test="photograph!=null">#{photograph}, </if>
+			<if test="email!=null">#{email}, </if>
+			<if test="qq!=null">#{qq}, </if>
+			<if test="wechat!=null">#{wechat}, </if>
+			<if test="weibo!=null">#{weibo}, </if>
+			<if test="remark!=null">#{remark}, </if>
+			<if test="delFlg!=null">#{delFlg}, </if>
+			<if test="creator!=null">#{creator}, </if>
+			<if test="createTime!=null">#{createTime}, </if>
+			<if test="modifier!=null">#{modifier}, </if>
+			<if test="modifyTime!=null">#{modifyTime}</if>
+	     </trim>
 		)
 	</insert>
 	 

@@ -2,26 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.haima.crm.dao.ComplaintDelayDao">
-
-	<select id="queryObject" resultType="com.haima.crm.entity.ComplaintDelay">
-		select * from t_complaint_delay where id = #{value}
-	</select>
-
-	<select id="queryList" resultType="com.haima.crm.entity.ComplaintDelay">
-		select * from t_complaint_delay 
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
 	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from t_complaint_delay 
-	</select>
-	 
-	<insert id="save" parameterType="com.haima.crm.entity.ComplaintDelay">
-		insert into t_complaint_delay
-		(
-			`id`, 
+	<resultMap id="RM_ComplaintDelay" type="com.haima.crm.entity.ComplaintDelay">
+			<result property="id" column="id"/>
+			<result property="complainId" column="complain_id"/>
+			<result property="complainCode" column="complain_code"/>
+			<result property="porposDate" column="porpos_date"/>
+			<result property="delayReason" column="delay_reason"/>
+			<result property="estimateFinishTime" column="estimate_finish_time"/>
+			<result property="checker" column="checker"/>
+			<result property="checkInfo" column="check_info"/>
+			<result property="checkDate" column="check_date"/>
+			<result property="delFlag" column="del_flag"/>
+			<result property="createBy" column="create_by"/>
+			<result property="createTime" column="create_time"/>
+			<result property="updateBy" column="update_by"/>
+			<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="ComplaintDelay_columns">
+	    <![CDATA[
 			`complain_id`, 
 			`complain_code`, 
 			`porpos_date`, 
@@ -35,23 +36,91 @@
 			`create_time`, 
 			`update_by`, 
 			`update_time`
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="ComplaintDelay_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="complainId != null">`complain_id` = #{complainId}, </if>
+			<if test="complainCode != null">`complain_code` = #{complainCode}, </if>
+			<if test="porposDate != null">`porpos_date` = #{porposDate}, </if>
+			<if test="delayReason != null">`delay_reason` = #{delayReason}, </if>
+			<if test="estimateFinishTime != null">`estimate_finish_time` = #{estimateFinishTime}, </if>
+			<if test="checker != null">`checker` = #{checker}, </if>
+			<if test="checkInfo != null">`check_info` = #{checkInfo}, </if>
+			<if test="checkDate != null">`check_date` = #{checkDate}, </if>
+			<if test="delFlag != null">`del_flag` = #{delFlag}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_ComplaintDelay">
+		select 
+		<include refid="ComplaintDelay_columns" />
+		from t_complaint_delay 
+		where 
+		id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_ComplaintDelay">
+		select 
+		<include refid="ComplaintDelay_columns" />
+		from t_complaint_delay
+		<include refid="ComplaintDelay_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from t_complaint_delay 
+		<include refid="ComplaintDelay_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.ComplaintDelay" useGeneratedKeys="true" keyProperty="id">
+		insert into t_complaint_delay
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="complainId!=null">complain_id, </if>
+			<if test="complainCode!=null">complain_code, </if>
+			<if test="porposDate!=null">porpos_date, </if>
+			<if test="delayReason!=null">delay_reason, </if>
+			<if test="estimateFinishTime!=null">estimate_finish_time, </if>
+			<if test="checker!=null">checker, </if>
+			<if test="checkInfo!=null">check_info, </if>
+			<if test="checkDate!=null">check_date, </if>
+			<if test="delFlag!=null">del_flag, </if>
+			<if test="createBy!=null">create_by, </if>
+			<if test="createTime!=null">create_time, </if>
+			<if test="updateBy!=null">update_by, </if>
+			<if test="updateTime!=null">update_time</if>
+	     </trim>
 		)
 		values
 		(
-			#{id}, 
-			#{complainId}, 
-			#{complainCode}, 
-			#{porposDate}, 
-			#{delayReason}, 
-			#{estimateFinishTime}, 
-			#{checker}, 
-			#{checkInfo}, 
-			#{checkDate}, 
-			#{delFlag}, 
-			#{createBy}, 
-			#{createTime}, 
-			#{updateBy}, 
-			#{updateTime}
+		<trim suffix="" suffixOverrides=",">
+			<if test="complainId!=null">#{complainId}, </if>
+			<if test="complainCode!=null">#{complainCode}, </if>
+			<if test="porposDate!=null">#{porposDate}, </if>
+			<if test="delayReason!=null">#{delayReason}, </if>
+			<if test="estimateFinishTime!=null">#{estimateFinishTime}, </if>
+			<if test="checker!=null">#{checker}, </if>
+			<if test="checkInfo!=null">#{checkInfo}, </if>
+			<if test="checkDate!=null">#{checkDate}, </if>
+			<if test="delFlag!=null">#{delFlag}, </if>
+			<if test="createBy!=null">#{createBy}, </if>
+			<if test="createTime!=null">#{createTime}, </if>
+			<if test="updateBy!=null">#{updateBy}, </if>
+			<if test="updateTime!=null">#{updateTime}</if>
+	     </trim>
 		)
 	</insert>
 	 

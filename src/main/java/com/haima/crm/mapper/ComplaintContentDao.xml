@@ -2,26 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.haima.crm.dao.ComplaintContentDao">
-
-	<select id="queryObject" resultType="com.haima.crm.entity.ComplaintContent">
-		select * from t_complaint_content where id = #{value}
-	</select>
-
-	<select id="queryList" resultType="com.haima.crm.entity.ComplaintContent">
-		select * from t_complaint_content 
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
 	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from t_complaint_content 
-	</select>
-	 
-	<insert id="save" parameterType="com.haima.crm.entity.ComplaintContent">
-		insert into t_complaint_content
-		(
-			`id`, 
+	<resultMap id="RM_ComplaintContent" type="com.haima.crm.entity.ComplaintContent">
+			<result property="id" column="id"/>
+			<result property="complainCode" column="complain_code"/>
+			<result property="complainContent" column="complain_content"/>
+			<result property="delFlag" column="del_flag"/>
+			<result property="createBy" column="create_by"/>
+			<result property="createTime" column="create_time"/>
+			<result property="updateBy" column="update_by"/>
+			<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="ComplaintContent_columns">
+	    <![CDATA[
 			`complain_code`, 
 			`complain_content`, 
 			`del_flag`, 
@@ -29,17 +24,73 @@
 			`create_time`, 
 			`update_by`, 
 			`update_time`
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="ComplaintContent_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="complainCode != null">`complain_code` = #{complainCode}, </if>
+			<if test="complainContent != null">`complain_content` = #{complainContent}, </if>
+			<if test="delFlag != null">`del_flag` = #{delFlag}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_ComplaintContent">
+		select 
+		<include refid="ComplaintContent_columns" />
+		from t_complaint_content 
+		where 
+		id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_ComplaintContent">
+		select 
+		<include refid="ComplaintContent_columns" />
+		from t_complaint_content
+		<include refid="ComplaintContent_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from t_complaint_content 
+		<include refid="ComplaintContent_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.ComplaintContent" useGeneratedKeys="true" keyProperty="id">
+		insert into t_complaint_content
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="complainCode!=null">complain_code, </if>
+			<if test="complainContent!=null">complain_content, </if>
+			<if test="delFlag!=null">del_flag, </if>
+			<if test="createBy!=null">create_by, </if>
+			<if test="createTime!=null">create_time, </if>
+			<if test="updateBy!=null">update_by, </if>
+			<if test="updateTime!=null">update_time</if>
+	     </trim>
 		)
 		values
 		(
-			#{id}, 
-			#{complainCode}, 
-			#{complainContent}, 
-			#{delFlag}, 
-			#{createBy}, 
-			#{createTime}, 
-			#{updateBy}, 
-			#{updateTime}
+		<trim suffix="" suffixOverrides=",">
+			<if test="complainCode!=null">#{complainCode}, </if>
+			<if test="complainContent!=null">#{complainContent}, </if>
+			<if test="delFlag!=null">#{delFlag}, </if>
+			<if test="createBy!=null">#{createBy}, </if>
+			<if test="createTime!=null">#{createTime}, </if>
+			<if test="updateBy!=null">#{updateBy}, </if>
+			<if test="updateTime!=null">#{updateTime}</if>
+	     </trim>
 		)
 	</insert>
 	 

@@ -2,26 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.haima.crm.dao.ComplaintFlowDao">
-
-	<select id="queryObject" resultType="com.haima.crm.entity.ComplaintFlow">
-		select * from t_complaint_flow where id = #{value}
-	</select>
-
-	<select id="queryList" resultType="com.haima.crm.entity.ComplaintFlow">
-		select * from t_complaint_flow 
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
 	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from t_complaint_flow 
-	</select>
-	 
-	<insert id="save" parameterType="com.haima.crm.entity.ComplaintFlow">
-		insert into t_complaint_flow
-		(
-			`id`, 
+	<resultMap id="RM_ComplaintFlow" type="com.haima.crm.entity.ComplaintFlow">
+			<result property="id" column="id"/>
+			<result property="complainCode" column="complain_code"/>
+			<result property="checkType" column="check_type"/>
+			<result property="proposer" column="proposer"/>
+			<result property="checker" column="checker"/>
+			<result property="porposDate" column="porpos_date"/>
+			<result property="checkInfo" column="check_info"/>
+			<result property="checkStatus" column="check_status"/>
+			<result property="checkDate" column="check_date"/>
+			<result property="createBy" column="create_by"/>
+			<result property="createTime" column="create_time"/>
+			<result property="updateBy" column="update_by"/>
+			<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="ComplaintFlow_columns">
+	    <![CDATA[
 			`complain_code`, 
 			`check_type`, 
 			`proposer`, 
@@ -34,22 +34,88 @@
 			`create_time`, 
 			`update_by`, 
 			`update_time`
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="ComplaintFlow_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="complainCode != null">`complain_code` = #{complainCode}, </if>
+			<if test="checkType != null">`check_type` = #{checkType}, </if>
+			<if test="proposer != null">`proposer` = #{proposer}, </if>
+			<if test="checker != null">`checker` = #{checker}, </if>
+			<if test="porposDate != null">`porpos_date` = #{porposDate}, </if>
+			<if test="checkInfo != null">`check_info` = #{checkInfo}, </if>
+			<if test="checkStatus != null">`check_status` = #{checkStatus}, </if>
+			<if test="checkDate != null">`check_date` = #{checkDate}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_ComplaintFlow">
+		select 
+		<include refid="ComplaintFlow_columns" />
+		from t_complaint_flow 
+		where 
+		id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_ComplaintFlow">
+		select 
+		<include refid="ComplaintFlow_columns" />
+		from t_complaint_flow
+		<include refid="ComplaintFlow_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from t_complaint_flow 
+		<include refid="ComplaintFlow_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.ComplaintFlow" useGeneratedKeys="true" keyProperty="id">
+		insert into t_complaint_flow
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="complainCode!=null">complain_code, </if>
+			<if test="checkType!=null">check_type, </if>
+			<if test="proposer!=null">proposer, </if>
+			<if test="checker!=null">checker, </if>
+			<if test="porposDate!=null">porpos_date, </if>
+			<if test="checkInfo!=null">check_info, </if>
+			<if test="checkStatus!=null">check_status, </if>
+			<if test="checkDate!=null">check_date, </if>
+			<if test="createBy!=null">create_by, </if>
+			<if test="createTime!=null">create_time, </if>
+			<if test="updateBy!=null">update_by, </if>
+			<if test="updateTime!=null">update_time</if>
+	     </trim>
 		)
 		values
 		(
-			#{id}, 
-			#{complainCode}, 
-			#{checkType}, 
-			#{proposer}, 
-			#{checker}, 
-			#{porposDate}, 
-			#{checkInfo}, 
-			#{checkStatus}, 
-			#{checkDate}, 
-			#{createBy}, 
-			#{createTime}, 
-			#{updateBy}, 
-			#{updateTime}
+		<trim suffix="" suffixOverrides=",">
+			<if test="complainCode!=null">#{complainCode}, </if>
+			<if test="checkType!=null">#{checkType}, </if>
+			<if test="proposer!=null">#{proposer}, </if>
+			<if test="checker!=null">#{checker}, </if>
+			<if test="porposDate!=null">#{porposDate}, </if>
+			<if test="checkInfo!=null">#{checkInfo}, </if>
+			<if test="checkStatus!=null">#{checkStatus}, </if>
+			<if test="checkDate!=null">#{checkDate}, </if>
+			<if test="createBy!=null">#{createBy}, </if>
+			<if test="createTime!=null">#{createTime}, </if>
+			<if test="updateBy!=null">#{updateBy}, </if>
+			<if test="updateTime!=null">#{updateTime}</if>
+	     </trim>
 		)
 	</insert>
 	 
