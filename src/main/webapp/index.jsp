@@ -3,7 +3,7 @@
 <body>
 <h2>Hello World!</h2>
 
-<a href="api/complaint/list?page=1&limit=10">投诉列表接口</a><br/>
-<a href="api/complaint/info/1?page=1&limit=10">投诉详情接口</a>
+<a href="pcms/complaint/list?page=1&limit=10">投诉列表接口</a><br/>
+<a href="pcms/complaint/info?id=1">投诉详情接口</a>
 </body>
 </html>

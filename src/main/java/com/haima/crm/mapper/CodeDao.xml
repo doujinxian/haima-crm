@@ -20,16 +20,17 @@
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="Code_columns">
 	    <![CDATA[
-			`type`, 
-			`code`, 
-			`name`, 
-			`remark`, 
-			`order`, 
-			`del_flg`, 
-			`creator`, 
-			`create_date`, 
-			`modifier`, 
-			`modify_date`
+			`id`, 			
+			`type`, 			
+			`code`, 			
+			`name`, 			
+			`remark`, 			
+			`order`, 			
+			`del_flg`, 			
+			`creator`, 			
+			`create_date`, 			
+			`modifier`, 			
+			`modify_date`			
 	    ]]>
 	</sql>
 	
@@ -37,16 +38,36 @@
 	<sql id="Code_condition">
 		<where>
         <trim suffix="" suffixOverrides="and">
-			<if test="type != null">`type` = #{type}, </if>
-			<if test="code != null">`code` = #{code}, </if>
-			<if test="name != null">`name` = #{name}, </if>
-			<if test="remark != null">`remark` = #{remark}, </if>
-			<if test="order != null">`order` = #{order}, </if>
-			<if test="delFlg != null">`del_flg` = #{delFlg}, </if>
-			<if test="creator != null">`creator` = #{creator}, </if>
-			<if test="createDate != null">`create_date` = #{createDate}, </if>
-			<if test="modifier != null">`modifier` = #{modifier}, </if>
-			<if test="modifyDate != null">`modify_date` = #{modifyDate}</if>
+			<if test="type != null and type != ''">
+				`type` = #{type} and 			
+			</if>
+			<if test="code != null and code != ''">
+				`code` = #{code} and 			
+			</if>
+			<if test="name != null and name != ''">
+				`name` = #{name} and 			
+			</if>
+			<if test="remark != null and remark != ''">
+				`remark` = #{remark} and 			
+			</if>
+			<if test="order != null and order != ''">
+				`order` = #{order} and 			
+			</if>
+			<if test="delFlg != null and delFlg != ''">
+				`del_flg` = #{delFlg} and 			
+			</if>
+			<if test="creator != null and creator != ''">
+				`creator` = #{creator} and 			
+			</if>
+			<if test="createDate != null and createDate != ''">
+				`create_date` = #{createDate} and 			
+			</if>
+			<if test="modifier != null and modifier != ''">
+				`modifier` = #{modifier} and 			
+			</if>
+			<if test="modifyDate != null and modifyDate != ''">
+				`modify_date` = #{modifyDate}			
+			</if>
         </trim>
 		</where>
 	</sql>
@@ -80,31 +101,71 @@
 		insert into m_code
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="type!=null">type, </if>
-			<if test="code!=null">code, </if>
-			<if test="name!=null">name, </if>
-			<if test="remark!=null">remark, </if>
-			<if test="order!=null">order, </if>
-			<if test="delFlg!=null">del_flg, </if>
-			<if test="creator!=null">creator, </if>
-			<if test="createDate!=null">create_date, </if>
-			<if test="modifier!=null">modifier, </if>
-			<if test="modifyDate!=null">modify_date</if>
+			<if test="type!=null and type!=''">
+				type, 			
+			</if>
+			<if test="code!=null and code!=''">
+				code, 			
+			</if>
+			<if test="name!=null and name!=''">
+				name, 			
+			</if>
+			<if test="remark!=null and remark!=''">
+				remark, 			
+			</if>
+			<if test="order!=null and order!=''">
+				order, 			
+			</if>
+			<if test="delFlg!=null and delFlg!=''">
+				del_flg, 			
+			</if>
+			<if test="creator!=null and creator!=''">
+				creator, 			
+			</if>
+			<if test="createDate!=null and createDate!=''">
+				create_date, 			
+			</if>
+			<if test="modifier!=null and modifier!=''">
+				modifier, 			
+			</if>
+			<if test="modifyDate!=null and modifyDate!=''">
+				modify_date			
+			</if>
 	     </trim>
 		)
 		values
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="type!=null">#{type}, </if>
-			<if test="code!=null">#{code}, </if>
-			<if test="name!=null">#{name}, </if>
-			<if test="remark!=null">#{remark}, </if>
-			<if test="order!=null">#{order}, </if>
-			<if test="delFlg!=null">#{delFlg}, </if>
-			<if test="creator!=null">#{creator}, </if>
-			<if test="createDate!=null">#{createDate}, </if>
-			<if test="modifier!=null">#{modifier}, </if>
-			<if test="modifyDate!=null">#{modifyDate}</if>
+			<if test="type!=null and type!=''">
+				#{type}, 			
+			</if>
+			<if test="code!=null and code!=''">
+				#{code}, 			
+			</if>
+			<if test="name!=null and name!=''">
+				#{name}, 			
+			</if>
+			<if test="remark!=null and remark!=''">
+				#{remark}, 			
+			</if>
+			<if test="order!=null and order!=''">
+				#{order}, 			
+			</if>
+			<if test="delFlg!=null and delFlg!=''">
+				#{delFlg}, 			
+			</if>
+			<if test="creator!=null and creator!=''">
+				#{creator}, 			
+			</if>
+			<if test="createDate!=null and createDate!=''">
+				#{createDate}, 			
+			</if>
+			<if test="modifier!=null and modifier!=''">
+				#{modifier}, 			
+			</if>
+			<if test="modifyDate!=null and modifyDate!=''">
+				#{modifyDate}			
+			</if>
 	     </trim>
 		)
 	</insert>
@@ -112,16 +173,36 @@
 	<update id="update" parameterType="com.haima.crm.entity.Code">
 		update m_code 
 		<set>
-			<if test="type != null">`type` = #{type}, </if>
-			<if test="code != null">`code` = #{code}, </if>
-			<if test="name != null">`name` = #{name}, </if>
-			<if test="remark != null">`remark` = #{remark}, </if>
-			<if test="order != null">`order` = #{order}, </if>
-			<if test="delFlg != null">`del_flg` = #{delFlg}, </if>
-			<if test="creator != null">`creator` = #{creator}, </if>
-			<if test="createDate != null">`create_date` = #{createDate}, </if>
-			<if test="modifier != null">`modifier` = #{modifier}, </if>
-			<if test="modifyDate != null">`modify_date` = #{modifyDate}</if>
+			<if test="type != null and type!=''">
+				`type` = #{type}, 			
+			</if>
+			<if test="code != null and code!=''">
+				`code` = #{code}, 			
+			</if>
+			<if test="name != null and name!=''">
+				`name` = #{name}, 			
+			</if>
+			<if test="remark != null and remark!=''">
+				`remark` = #{remark}, 			
+			</if>
+			<if test="order != null and order!=''">
+				`order` = #{order}, 			
+			</if>
+			<if test="delFlg != null and delFlg!=''">
+				`del_flg` = #{delFlg}, 			
+			</if>
+			<if test="creator != null and creator!=''">
+				`creator` = #{creator}, 			
+			</if>
+			<if test="createDate != null and createDate!=''">
+				`create_date` = #{createDate}, 			
+			</if>
+			<if test="modifier != null and modifier!=''">
+				`modifier` = #{modifier}, 			
+			</if>
+			<if test="modifyDate != null and modifyDate!=''">
+				`modify_date` = #{modifyDate}			
+			</if>
 		</set>
 		where id = #{id}
 	</update>

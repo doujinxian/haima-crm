@@ -86,7 +86,9 @@ public class Complaint implements Serializable {
 	//预计完成时间
 	private Date estimateFinishTime;
 	//客户级别
-	private Integer customerLevel;
+	private String customerLevel;
+	//满意度
+	private String satisfactionDegree;
 	//删除标识
 	private Integer delFlag;
 	//创建人
@@ -521,13 +523,13 @@ public class Complaint implements Serializable {
 	/**
 	 * 设置：客户级别
 	 */
-	public void setCustomerLevel(Integer customerLevel) {
+	public void setCustomerLevel(String customerLevel) {
 		this.customerLevel = customerLevel;
 	}
 	/**
 	 * 获取：客户级别
 	 */
-	public Integer getCustomerLevel() {
+	public String getCustomerLevel() {
 		return customerLevel;
 	}
 	/**
@@ -590,4 +592,12 @@ public class Complaint implements Serializable {
 	public Date getUpdateTime() {
 		return updateTime;
 	}
+	
+	public String getSatisfactionDegree() {
+		return satisfactionDegree;
+	}
+	public void setSatisfactionDegree(String satisfactionDegree) {
+		this.satisfactionDegree = satisfactionDegree;
+	}
+	
 }

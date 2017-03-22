@@ -20,16 +20,17 @@
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="ComplaintForward_columns">
 	    <![CDATA[
-			`complain_code`, 
-			`forward_from`, 
-			`forward_to`, 
-			`handle_msg`, 
-			`handle_status`, 
-			`handle_date`, 
-			`create_by`, 
-			`create_time`, 
-			`update_by`, 
-			`update_time`
+			`id`, 			
+			`complain_code`, 			
+			`forward_from`, 			
+			`forward_to`, 			
+			`handle_msg`, 			
+			`handle_status`, 			
+			`handle_date`, 			
+			`create_by`, 			
+			`create_time`, 			
+			`update_by`, 			
+			`update_time`			
 	    ]]>
 	</sql>
 	
@@ -37,16 +38,36 @@
 	<sql id="ComplaintForward_condition">
 		<where>
         <trim suffix="" suffixOverrides="and">
-			<if test="complainCode != null">`complain_code` = #{complainCode}, </if>
-			<if test="forwardFrom != null">`forward_from` = #{forwardFrom}, </if>
-			<if test="forwardTo != null">`forward_to` = #{forwardTo}, </if>
-			<if test="handleMsg != null">`handle_msg` = #{handleMsg}, </if>
-			<if test="handleStatus != null">`handle_status` = #{handleStatus}, </if>
-			<if test="handleDate != null">`handle_date` = #{handleDate}, </if>
-			<if test="createBy != null">`create_by` = #{createBy}, </if>
-			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+			<if test="complainCode != null and complainCode != ''">
+				`complain_code` = #{complainCode} and 			
+			</if>
+			<if test="forwardFrom != null and forwardFrom != ''">
+				`forward_from` = #{forwardFrom} and 			
+			</if>
+			<if test="forwardTo != null and forwardTo != ''">
+				`forward_to` = #{forwardTo} and 			
+			</if>
+			<if test="handleMsg != null and handleMsg != ''">
+				`handle_msg` = #{handleMsg} and 			
+			</if>
+			<if test="handleStatus != null and handleStatus != ''">
+				`handle_status` = #{handleStatus} and 			
+			</if>
+			<if test="handleDate != null and handleDate != ''">
+				`handle_date` = #{handleDate} and 			
+			</if>
+			<if test="createBy != null and createBy != ''">
+				`create_by` = #{createBy} and 			
+			</if>
+			<if test="createTime != null and createTime != ''">
+				`create_time` = #{createTime} and 			
+			</if>
+			<if test="updateBy != null and updateBy != ''">
+				`update_by` = #{updateBy} and 			
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				`update_time` = #{updateTime}			
+			</if>
         </trim>
 		</where>
 	</sql>
@@ -55,7 +76,7 @@
 		select 
 		<include refid="ComplaintForward_columns" />
 		from t_complaint_forward 
-		where 
+		where
 		id = #{value}
 	</select>
 
@@ -80,31 +101,71 @@
 		insert into t_complaint_forward
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="complainCode!=null">complain_code, </if>
-			<if test="forwardFrom!=null">forward_from, </if>
-			<if test="forwardTo!=null">forward_to, </if>
-			<if test="handleMsg!=null">handle_msg, </if>
-			<if test="handleStatus!=null">handle_status, </if>
-			<if test="handleDate!=null">handle_date, </if>
-			<if test="createBy!=null">create_by, </if>
-			<if test="createTime!=null">create_time, </if>
-			<if test="updateBy!=null">update_by, </if>
-			<if test="updateTime!=null">update_time</if>
+			<if test="complainCode!=null and complainCode!=''">
+				complain_code, 			
+			</if>
+			<if test="forwardFrom!=null and forwardFrom!=''">
+				forward_from, 			
+			</if>
+			<if test="forwardTo!=null and forwardTo!=''">
+				forward_to, 			
+			</if>
+			<if test="handleMsg!=null and handleMsg!=''">
+				handle_msg, 			
+			</if>
+			<if test="handleStatus!=null and handleStatus!=''">
+				handle_status, 			
+			</if>
+			<if test="handleDate!=null and handleDate!=''">
+				handle_date, 			
+			</if>
+			<if test="createBy!=null and createBy!=''">
+				create_by, 			
+			</if>
+			<if test="createTime!=null and createTime!=''">
+				create_time, 			
+			</if>
+			<if test="updateBy!=null and updateBy!=''">
+				update_by, 			
+			</if>
+			<if test="updateTime!=null and updateTime!=''">
+				update_time			
+			</if>
 	     </trim>
 		)
 		values
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="complainCode!=null">#{complainCode}, </if>
-			<if test="forwardFrom!=null">#{forwardFrom}, </if>
-			<if test="forwardTo!=null">#{forwardTo}, </if>
-			<if test="handleMsg!=null">#{handleMsg}, </if>
-			<if test="handleStatus!=null">#{handleStatus}, </if>
-			<if test="handleDate!=null">#{handleDate}, </if>
-			<if test="createBy!=null">#{createBy}, </if>
-			<if test="createTime!=null">#{createTime}, </if>
-			<if test="updateBy!=null">#{updateBy}, </if>
-			<if test="updateTime!=null">#{updateTime}</if>
+			<if test="complainCode!=null and complainCode!=''">
+				#{complainCode}, 			
+			</if>
+			<if test="forwardFrom!=null and forwardFrom!=''">
+				#{forwardFrom}, 			
+			</if>
+			<if test="forwardTo!=null and forwardTo!=''">
+				#{forwardTo}, 			
+			</if>
+			<if test="handleMsg!=null and handleMsg!=''">
+				#{handleMsg}, 			
+			</if>
+			<if test="handleStatus!=null and handleStatus!=''">
+				#{handleStatus}, 			
+			</if>
+			<if test="handleDate!=null and handleDate!=''">
+				#{handleDate}, 			
+			</if>
+			<if test="createBy!=null and createBy!=''">
+				#{createBy}, 			
+			</if>
+			<if test="createTime!=null and createTime!=''">
+				#{createTime}, 			
+			</if>
+			<if test="updateBy!=null and updateBy!=''">
+				#{updateBy}, 			
+			</if>
+			<if test="updateTime!=null and updateTime!=''">
+				#{updateTime}			
+			</if>
 	     </trim>
 		)
 	</insert>
@@ -112,16 +173,36 @@
 	<update id="update" parameterType="com.haima.crm.entity.ComplaintForward">
 		update t_complaint_forward 
 		<set>
-			<if test="complainCode != null">`complain_code` = #{complainCode}, </if>
-			<if test="forwardFrom != null">`forward_from` = #{forwardFrom}, </if>
-			<if test="forwardTo != null">`forward_to` = #{forwardTo}, </if>
-			<if test="handleMsg != null">`handle_msg` = #{handleMsg}, </if>
-			<if test="handleStatus != null">`handle_status` = #{handleStatus}, </if>
-			<if test="handleDate != null">`handle_date` = #{handleDate}, </if>
-			<if test="createBy != null">`create_by` = #{createBy}, </if>
-			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+			<if test="complainCode != null and complainCode!=''">
+				`complain_code` = #{complainCode}, 			
+			</if>
+			<if test="forwardFrom != null and forwardFrom!=''">
+				`forward_from` = #{forwardFrom}, 			
+			</if>
+			<if test="forwardTo != null and forwardTo!=''">
+				`forward_to` = #{forwardTo}, 			
+			</if>
+			<if test="handleMsg != null and handleMsg!=''">
+				`handle_msg` = #{handleMsg}, 			
+			</if>
+			<if test="handleStatus != null and handleStatus!=''">
+				`handle_status` = #{handleStatus}, 			
+			</if>
+			<if test="handleDate != null and handleDate!=''">
+				`handle_date` = #{handleDate}, 			
+			</if>
+			<if test="createBy != null and createBy!=''">
+				`create_by` = #{createBy}, 			
+			</if>
+			<if test="createTime != null and createTime!=''">
+				`create_time` = #{createTime}, 			
+			</if>
+			<if test="updateBy != null and updateBy!=''">
+				`update_by` = #{updateBy}, 			
+			</if>
+			<if test="updateTime != null and updateTime!=''">
+				`update_time` = #{updateTime}			
+			</if>
 		</set>
 		where id = #{id}
 	</update>

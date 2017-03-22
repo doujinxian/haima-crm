@@ -23,19 +23,20 @@
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="ComplaintDelay_columns">
 	    <![CDATA[
-			`complain_id`, 
-			`complain_code`, 
-			`porpos_date`, 
-			`delay_reason`, 
-			`estimate_finish_time`, 
-			`checker`, 
-			`check_info`, 
-			`check_date`, 
-			`del_flag`, 
-			`create_by`, 
-			`create_time`, 
-			`update_by`, 
-			`update_time`
+			`id`, 			
+			`complain_id`, 			
+			`complain_code`, 			
+			`porpos_date`, 			
+			`delay_reason`, 			
+			`estimate_finish_time`, 			
+			`checker`, 			
+			`check_info`, 			
+			`check_date`, 			
+			`del_flag`, 			
+			`create_by`, 			
+			`create_time`, 			
+			`update_by`, 			
+			`update_time`			
 	    ]]>
 	</sql>
 	
@@ -43,19 +44,45 @@
 	<sql id="ComplaintDelay_condition">
 		<where>
         <trim suffix="" suffixOverrides="and">
-			<if test="complainId != null">`complain_id` = #{complainId}, </if>
-			<if test="complainCode != null">`complain_code` = #{complainCode}, </if>
-			<if test="porposDate != null">`porpos_date` = #{porposDate}, </if>
-			<if test="delayReason != null">`delay_reason` = #{delayReason}, </if>
-			<if test="estimateFinishTime != null">`estimate_finish_time` = #{estimateFinishTime}, </if>
-			<if test="checker != null">`checker` = #{checker}, </if>
-			<if test="checkInfo != null">`check_info` = #{checkInfo}, </if>
-			<if test="checkDate != null">`check_date` = #{checkDate}, </if>
-			<if test="delFlag != null">`del_flag` = #{delFlag}, </if>
-			<if test="createBy != null">`create_by` = #{createBy}, </if>
-			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+			<if test="complainId != null and complainId != ''">
+				`complain_id` = #{complainId} and 			
+			</if>
+			<if test="complainCode != null and complainCode != ''">
+				`complain_code` = #{complainCode} and 			
+			</if>
+			<if test="porposDate != null and porposDate != ''">
+				`porpos_date` = #{porposDate} and 			
+			</if>
+			<if test="delayReason != null and delayReason != ''">
+				`delay_reason` = #{delayReason} and 			
+			</if>
+			<if test="estimateFinishTime != null and estimateFinishTime != ''">
+				`estimate_finish_time` = #{estimateFinishTime} and 			
+			</if>
+			<if test="checker != null and checker != ''">
+				`checker` = #{checker} and 			
+			</if>
+			<if test="checkInfo != null and checkInfo != ''">
+				`check_info` = #{checkInfo} and 			
+			</if>
+			<if test="checkDate != null and checkDate != ''">
+				`check_date` = #{checkDate} and 			
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				`del_flag` = #{delFlag} and 			
+			</if>
+			<if test="createBy != null and createBy != ''">
+				`create_by` = #{createBy} and 			
+			</if>
+			<if test="createTime != null and createTime != ''">
+				`create_time` = #{createTime} and 			
+			</if>
+			<if test="updateBy != null and updateBy != ''">
+				`update_by` = #{updateBy} and 			
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				`update_time` = #{updateTime}			
+			</if>
         </trim>
 		</where>
 	</sql>
@@ -64,7 +91,7 @@
 		select 
 		<include refid="ComplaintDelay_columns" />
 		from t_complaint_delay 
-		where 
+		where
 		id = #{value}
 	</select>
 
@@ -89,37 +116,89 @@
 		insert into t_complaint_delay
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="complainId!=null">complain_id, </if>
-			<if test="complainCode!=null">complain_code, </if>
-			<if test="porposDate!=null">porpos_date, </if>
-			<if test="delayReason!=null">delay_reason, </if>
-			<if test="estimateFinishTime!=null">estimate_finish_time, </if>
-			<if test="checker!=null">checker, </if>
-			<if test="checkInfo!=null">check_info, </if>
-			<if test="checkDate!=null">check_date, </if>
-			<if test="delFlag!=null">del_flag, </if>
-			<if test="createBy!=null">create_by, </if>
-			<if test="createTime!=null">create_time, </if>
-			<if test="updateBy!=null">update_by, </if>
-			<if test="updateTime!=null">update_time</if>
+			<if test="complainId!=null and complainId!=''">
+				complain_id, 			
+			</if>
+			<if test="complainCode!=null and complainCode!=''">
+				complain_code, 			
+			</if>
+			<if test="porposDate!=null and porposDate!=''">
+				porpos_date, 			
+			</if>
+			<if test="delayReason!=null and delayReason!=''">
+				delay_reason, 			
+			</if>
+			<if test="estimateFinishTime!=null and estimateFinishTime!=''">
+				estimate_finish_time, 			
+			</if>
+			<if test="checker!=null and checker!=''">
+				checker, 			
+			</if>
+			<if test="checkInfo!=null and checkInfo!=''">
+				check_info, 			
+			</if>
+			<if test="checkDate!=null and checkDate!=''">
+				check_date, 			
+			</if>
+			<if test="delFlag!=null and delFlag!=''">
+				del_flag, 			
+			</if>
+			<if test="createBy!=null and createBy!=''">
+				create_by, 			
+			</if>
+			<if test="createTime!=null and createTime!=''">
+				create_time, 			
+			</if>
+			<if test="updateBy!=null and updateBy!=''">
+				update_by, 			
+			</if>
+			<if test="updateTime!=null and updateTime!=''">
+				update_time			
+			</if>
 	     </trim>
 		)
 		values
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="complainId!=null">#{complainId}, </if>
-			<if test="complainCode!=null">#{complainCode}, </if>
-			<if test="porposDate!=null">#{porposDate}, </if>
-			<if test="delayReason!=null">#{delayReason}, </if>
-			<if test="estimateFinishTime!=null">#{estimateFinishTime}, </if>
-			<if test="checker!=null">#{checker}, </if>
-			<if test="checkInfo!=null">#{checkInfo}, </if>
-			<if test="checkDate!=null">#{checkDate}, </if>
-			<if test="delFlag!=null">#{delFlag}, </if>
-			<if test="createBy!=null">#{createBy}, </if>
-			<if test="createTime!=null">#{createTime}, </if>
-			<if test="updateBy!=null">#{updateBy}, </if>
-			<if test="updateTime!=null">#{updateTime}</if>
+			<if test="complainId!=null and complainId!=''">
+				#{complainId}, 			
+			</if>
+			<if test="complainCode!=null and complainCode!=''">
+				#{complainCode}, 			
+			</if>
+			<if test="porposDate!=null and porposDate!=''">
+				#{porposDate}, 			
+			</if>
+			<if test="delayReason!=null and delayReason!=''">
+				#{delayReason}, 			
+			</if>
+			<if test="estimateFinishTime!=null and estimateFinishTime!=''">
+				#{estimateFinishTime}, 			
+			</if>
+			<if test="checker!=null and checker!=''">
+				#{checker}, 			
+			</if>
+			<if test="checkInfo!=null and checkInfo!=''">
+				#{checkInfo}, 			
+			</if>
+			<if test="checkDate!=null and checkDate!=''">
+				#{checkDate}, 			
+			</if>
+			<if test="delFlag!=null and delFlag!=''">
+				#{delFlag}, 			
+			</if>
+			<if test="createBy!=null and createBy!=''">
+				#{createBy}, 			
+			</if>
+			<if test="createTime!=null and createTime!=''">
+				#{createTime}, 			
+			</if>
+			<if test="updateBy!=null and updateBy!=''">
+				#{updateBy}, 			
+			</if>
+			<if test="updateTime!=null and updateTime!=''">
+				#{updateTime}			
+			</if>
 	     </trim>
 		)
 	</insert>
@@ -127,19 +206,45 @@
 	<update id="update" parameterType="com.haima.crm.entity.ComplaintDelay">
 		update t_complaint_delay 
 		<set>
-			<if test="complainId != null">`complain_id` = #{complainId}, </if>
-			<if test="complainCode != null">`complain_code` = #{complainCode}, </if>
-			<if test="porposDate != null">`porpos_date` = #{porposDate}, </if>
-			<if test="delayReason != null">`delay_reason` = #{delayReason}, </if>
-			<if test="estimateFinishTime != null">`estimate_finish_time` = #{estimateFinishTime}, </if>
-			<if test="checker != null">`checker` = #{checker}, </if>
-			<if test="checkInfo != null">`check_info` = #{checkInfo}, </if>
-			<if test="checkDate != null">`check_date` = #{checkDate}, </if>
-			<if test="delFlag != null">`del_flag` = #{delFlag}, </if>
-			<if test="createBy != null">`create_by` = #{createBy}, </if>
-			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+			<if test="complainId != null and complainId!=''">
+				`complain_id` = #{complainId}, 			
+			</if>
+			<if test="complainCode != null and complainCode!=''">
+				`complain_code` = #{complainCode}, 			
+			</if>
+			<if test="porposDate != null and porposDate!=''">
+				`porpos_date` = #{porposDate}, 			
+			</if>
+			<if test="delayReason != null and delayReason!=''">
+				`delay_reason` = #{delayReason}, 			
+			</if>
+			<if test="estimateFinishTime != null and estimateFinishTime!=''">
+				`estimate_finish_time` = #{estimateFinishTime}, 			
+			</if>
+			<if test="checker != null and checker!=''">
+				`checker` = #{checker}, 			
+			</if>
+			<if test="checkInfo != null and checkInfo!=''">
+				`check_info` = #{checkInfo}, 			
+			</if>
+			<if test="checkDate != null and checkDate!=''">
+				`check_date` = #{checkDate}, 			
+			</if>
+			<if test="delFlag != null and delFlag!=''">
+				`del_flag` = #{delFlag}, 			
+			</if>
+			<if test="createBy != null and createBy!=''">
+				`create_by` = #{createBy}, 			
+			</if>
+			<if test="createTime != null and createTime!=''">
+				`create_time` = #{createTime}, 			
+			</if>
+			<if test="updateBy != null and updateBy!=''">
+				`update_by` = #{updateBy}, 			
+			</if>
+			<if test="updateTime != null and updateTime!=''">
+				`update_time` = #{updateTime}			
+			</if>
 		</set>
 		where id = #{id}
 	</update>

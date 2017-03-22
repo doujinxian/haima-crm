@@ -27,4 +27,6 @@ public interface ComplaintService {
 	void delete(Long id);
 	
 	void deleteBatch(Long[] ids);
+
+
 }

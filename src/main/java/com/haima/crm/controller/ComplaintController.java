@@ -1,15 +1,15 @@
 package com.haima.crm.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.stereotype.Controller;
 
 import com.haima.crm.entity.Complaint;
 import com.haima.crm.service.ComplaintService;
@@ -35,8 +35,13 @@ public class ComplaintController {
 	 */
 	@ResponseBody
 	@RequestMapping("/list")
-	public Result list(Integer page, Integer limit){
-		Map<String, Object> map = new HashMap<>();
+	public Result list(@RequestParam Map<String, Object> map, Integer page, Integer limit){
+		if(page==null || page <1){
+			page = 1;
+		}
+		if(limit == null){
+			limit = 10;
+		}
 		map.put("offset", (page - 1) * limit);
 		map.put("limit", limit);
 		
