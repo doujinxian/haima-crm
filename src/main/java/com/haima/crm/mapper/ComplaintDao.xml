@@ -21,6 +21,7 @@
 			<result property="city" column="city"/>
 			<result property="complainSource" column="complain_source"/>
 			<result property="salesServicesService" column="sales_services_service"/>
+			<result property="salesServicesCode" column="sales_services_code"/>
 			<result property="complainStatus" column="complain_status"/>
 			<result property="callbackStatus" column="callback_status"/>
 			<result property="callbackTime" column="callback_time"/>
@@ -37,9 +38,9 @@
 			<result property="carName" column="car_name"/>
 			<result property="traceBy" column="trace_by"/>
 			<result property="recordBy" column="record_by"/>
-			<result property="satisfactionDegree" column="satisfaction_degree"/>
 			<result property="salesServicesStore" column="sales_services_store"/>
 			<result property="estimateFinishTime" column="estimate_finish_time"/>
+			<result property="satisfactionDegree" column="satisfaction_degree"/>
 			<result property="customerLevel" column="customer_level"/>
 			<result property="delFlag" column="del_flag"/>
 			<result property="createBy" column="create_by"/>
@@ -67,7 +68,8 @@
 			`close_time`, 			
 			`city`, 			
 			`complain_source`, 			
-			`sales_services_service`, 			
+			`sales_services_service`, 	
+			`sales_services_code`,	
 			`complain_status`, 			
 			`callback_status`, 			
 			`callback_time`, 			
@@ -84,9 +86,9 @@
 			`car_name`, 			
 			`trace_by`, 			
 			`record_by`, 			
-			`satisfaction_degree`, 			
 			`sales_services_store`, 			
 			`estimate_finish_time`, 			
+			`satisfaction_degree`, 			
 			`customer_level`, 			
 			`del_flag`, 			
 			`create_by`, 			
@@ -100,12 +102,10 @@
 	<sql id="Complaint_condition">
 		<where>
         <trim suffix="" suffixOverrides="and">
-        	del_flag != 1 and 
-        	
 			<if test="complainCode != null and complainCode != ''">
 				`complain_code` = #{complainCode} and 			
 			</if>
-			<if test="customerId != null and customerId != ''">
+			<if test="customerId != null and customerId != 0 ">
 				`customer_id` = #{customerId} and 			
 			</if>
 			<if test="custormerName != null and custormerName != ''">
@@ -123,7 +123,7 @@
 			<if test="vno != null and vno != ''">
 				`vno` = #{vno} and 			
 			</if>
-			<if test="buyDate != null and buyDate != ''">
+			<if test="buyDate != null">
 				`buy_date` = #{buyDate} and 			
 			</if>
 			<if test="complainType != null and complainType != ''">
@@ -132,19 +132,19 @@
 			<if test="complainLevel != null and complainLevel != ''">
 				`complain_level` = #{complainLevel} and 			
 			</if>
-			<if test="complainTime != null and complainTime != ''">
+			<if test="complainTime != null">
 				`complain_time` = #{complainTime} and 			
 			</if>
-			<if test="complainTimeStart != null and complainTimeStart != ''">
-				`complain_time` &gt; #{complainTimeStart} and 			
+			<if test="complainTimeStart != null">
+				`complain_time` &gt;= #{complainTimeStart} and 			
 			</if>
-			<if test="complainTimeEnd != null and complainTimeEnd != ''">
+			<if test="complainTimeEnd != null">
 				`complain_time` &lt; #{complainTimeEnd} and 			
 			</if>
-			<if test="finishTime != null and finishTime != ''">
+			<if test="finishTime != null">
 				`finish_time` = #{finishTime} and 			
 			</if>
-			<if test="closeTime != null and closeTime != ''">
+			<if test="closeTime != null">
 				`close_time` = #{closeTime} and 			
 			</if>
 			<if test="city != null and city != ''">
@@ -156,19 +156,22 @@
 			<if test="salesServicesService != null and salesServicesService != ''">
 				`sales_services_service` = #{salesServicesService} and 			
 			</if>
+			<if test="salesServicesCode != null and salesServicesCode != ''">
+				`sales_services_code` = #{salesServicesCode} and 			
+			</if>
 			<if test="complainStatus != null and complainStatus != ''">
 				`complain_status` = #{complainStatus} and 			
 			</if>
 			<if test="callbackStatus != null and callbackStatus != ''">
 				`callback_status` = #{callbackStatus} and 			
 			</if>
-			<if test="callbackTime != null and callbackTime != ''">
+			<if test="callbackTime != null">
 				`callback_time` = #{callbackTime} and 			
 			</if>
 			<if test="carColor != null and carColor != ''">
 				`car_color` = #{carColor} and 			
 			</if>
-			<if test="mileage != null and mileage != ''">
+			<if test="mileage != null and mileage != 0 ">
 				`mileage` = #{mileage} and 			
 			</if>
 			<if test="complainBase != null and complainBase != ''">
@@ -177,7 +180,7 @@
 			<if test="area != null and area != ''">
 				`area` = #{area} and 			
 			</if>
-			<if test="callTimes != null and callTimes != ''">
+			<if test="callTimes != null and callTimes != 0 ">
 				`call_times` = #{callTimes} and 			
 			</if>
 			<if test="fileNo != null and fileNo != ''">
@@ -189,7 +192,7 @@
 			<if test="receivedBy != null and receivedBy != ''">
 				`received_by` = #{receivedBy} and 			
 			</if>
-			<if test="transTime != null and transTime != ''">
+			<if test="transTime != null">
 				`trans_time` = #{transTime} and 			
 			</if>
 			<if test="otherMsg != null and otherMsg != ''">
@@ -204,31 +207,31 @@
 			<if test="recordBy != null and recordBy != ''">
 				`record_by` = #{recordBy} and 			
 			</if>
-			<if test="satisfactionDegree != null and satisfactionDegree != ''">
-				`satisfaction_degree` = #{satisfactionDegree} and 			
-			</if>
 			<if test="salesServicesStore != null and salesServicesStore != ''">
 				`sales_services_store` = #{salesServicesStore} and 			
 			</if>
-			<if test="estimateFinishTime != null and estimateFinishTime != ''">
+			<if test="estimateFinishTime != null">
 				`estimate_finish_time` = #{estimateFinishTime} and 			
+			</if>
+			<if test="satisfactionDegree != null and satisfactionDegree != ''">
+				`satisfaction_degree` = #{satisfactionDegree} and 			
 			</if>
 			<if test="customerLevel != null and customerLevel != ''">
 				`customer_level` = #{customerLevel} and 			
 			</if>
-			<if test="delFlag != null and delFlag != ''">
+			<if test="delFlag != null and delFlag != 0 ">
 				`del_flag` = #{delFlag} and 			
 			</if>
 			<if test="createBy != null and createBy != ''">
 				`create_by` = #{createBy} and 			
 			</if>
-			<if test="createTime != null and createTime != ''">
+			<if test="createTime != null">
 				`create_time` = #{createTime} and 			
 			</if>
 			<if test="updateBy != null and updateBy != ''">
 				`update_by` = #{updateBy} and 			
 			</if>
-			<if test="updateTime != null and updateTime != ''">
+			<if test="updateTime != null">
 				`update_time` = #{updateTime}			
 			</if>
         </trim>
@@ -240,7 +243,7 @@
 		<include refid="Complaint_columns" />
 		from t_complaint 
 		where
-		id = #{value} and del_flag != 1
+		id = #{value}
 	</select>
 
 	<select id="queryList" resultMap="RM_Complaint">
@@ -264,127 +267,130 @@
 		insert into t_complaint
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="complainCode!=null and complainCode!=''">
+			<if test="complainCode!=null and complainCode != ''">
 				complain_code, 			
 			</if>
-			<if test="customerId!=null and customerId!=''">
+			<if test="customerId!=null and customerId != 0 ">
 				customer_id, 			
 			</if>
-			<if test="custormerName!=null and custormerName!=''">
+			<if test="custormerName!=null and custormerName != ''">
 				custormer_name, 			
 			</if>
-			<if test="phoneNo!=null and phoneNo!=''">
+			<if test="phoneNo!=null and phoneNo != ''">
 				phone_no, 			
 			</if>
-			<if test="vin!=null and vin!=''">
+			<if test="vin!=null and vin != ''">
 				vin, 			
 			</if>
-			<if test="plateNo!=null and plateNo!=''">
+			<if test="plateNo!=null and plateNo != ''">
 				plate_no, 			
 			</if>
-			<if test="vno!=null and vno!=''">
+			<if test="vno!=null and vno != ''">
 				vno, 			
 			</if>
-			<if test="buyDate!=null and buyDate!=''">
+			<if test="buyDate!=null">
 				buy_date, 			
 			</if>
-			<if test="complainType!=null and complainType!=''">
+			<if test="complainType!=null and complainType != ''">
 				complain_type, 			
 			</if>
-			<if test="complainLevel!=null and complainLevel!=''">
+			<if test="complainLevel!=null and complainLevel != ''">
 				complain_level, 			
 			</if>
-			<if test="complainTime!=null and complainTime!=''">
+			<if test="complainTime!=null">
 				complain_time, 			
 			</if>
-			<if test="finishTime!=null and finishTime!=''">
+			<if test="finishTime!=null">
 				finish_time, 			
 			</if>
-			<if test="closeTime!=null and closeTime!=''">
+			<if test="closeTime!=null">
 				close_time, 			
 			</if>
-			<if test="city!=null and city!=''">
+			<if test="city!=null and city != ''">
 				city, 			
 			</if>
-			<if test="complainSource!=null and complainSource!=''">
+			<if test="complainSource!=null and complainSource != ''">
 				complain_source, 			
 			</if>
-			<if test="salesServicesService!=null and salesServicesService!=''">
+			<if test="salesServicesService!=null and salesServicesService != ''">
 				sales_services_service, 			
 			</if>
-			<if test="complainStatus!=null and complainStatus!=''">
+			<if test="salesServicesCode!=null and salesServicesCode != ''">
+				sales_services_code, 			
+			</if>
+			<if test="complainStatus!=null and complainStatus != ''">
 				complain_status, 			
 			</if>
-			<if test="callbackStatus!=null and callbackStatus!=''">
+			<if test="callbackStatus!=null and callbackStatus != ''">
 				callback_status, 			
 			</if>
-			<if test="callbackTime!=null and callbackTime!=''">
+			<if test="callbackTime!=null">
 				callback_time, 			
 			</if>
-			<if test="carColor!=null and carColor!=''">
+			<if test="carColor!=null and carColor != ''">
 				car_color, 			
 			</if>
-			<if test="mileage!=null and mileage!=''">
+			<if test="mileage!=null and mileage != 0 ">
 				mileage, 			
 			</if>
-			<if test="complainBase!=null and complainBase!=''">
+			<if test="complainBase!=null and complainBase != ''">
 				complain_base, 			
 			</if>
-			<if test="area!=null and area!=''">
+			<if test="area!=null and area != ''">
 				area, 			
 			</if>
-			<if test="callTimes!=null and callTimes!=''">
+			<if test="callTimes!=null and callTimes != 0 ">
 				call_times, 			
 			</if>
-			<if test="fileNo!=null and fileNo!=''">
+			<if test="fileNo!=null and fileNo != ''">
 				file_no, 			
 			</if>
-			<if test="complainAdmin!=null and complainAdmin!=''">
+			<if test="complainAdmin!=null and complainAdmin != ''">
 				complain_admin, 			
 			</if>
-			<if test="receivedBy!=null and receivedBy!=''">
+			<if test="receivedBy!=null and receivedBy != ''">
 				received_by, 			
 			</if>
-			<if test="transTime!=null and transTime!=''">
+			<if test="transTime!=null">
 				trans_time, 			
 			</if>
-			<if test="otherMsg!=null and otherMsg!=''">
+			<if test="otherMsg!=null and otherMsg != ''">
 				other_msg, 			
 			</if>
-			<if test="carName!=null and carName!=''">
+			<if test="carName!=null and carName != ''">
 				car_name, 			
 			</if>
-			<if test="traceBy!=null and traceBy!=''">
+			<if test="traceBy!=null and traceBy != ''">
 				trace_by, 			
 			</if>
-			<if test="recordBy!=null and recordBy!=''">
+			<if test="recordBy!=null and recordBy != ''">
 				record_by, 			
 			</if>
-			<if test="satisfactionDegree!=null and satisfactionDegree!=''">
-				satisfaction_degree, 			
-			</if>
-			<if test="salesServicesStore!=null and salesServicesStore!=''">
+			<if test="salesServicesStore!=null and salesServicesStore != ''">
 				sales_services_store, 			
 			</if>
-			<if test="estimateFinishTime!=null and estimateFinishTime!=''">
+			<if test="estimateFinishTime!=null">
 				estimate_finish_time, 			
 			</if>
-			<if test="customerLevel!=null and customerLevel!=''">
+			<if test="satisfactionDegree!=null and satisfactionDegree != ''">
+				satisfaction_degree, 			
+			</if>
+			<if test="customerLevel!=null and customerLevel != ''">
 				customer_level, 			
 			</if>
-			<if test="delFlag!=null and delFlag!=''">
+			<if test="delFlag!=null and delFlag != 0 ">
 				del_flag, 			
 			</if>
-			<if test="createBy!=null and createBy!=''">
+			<if test="createBy!=null and createBy != ''">
 				create_by, 			
 			</if>
-			<if test="createTime!=null and createTime!=''">
+			<if test="createTime!=null">
 				create_time, 			
 			</if>
-			<if test="updateBy!=null and updateBy!=''">
+			<if test="updateBy!=null and updateBy != ''">
 				update_by, 			
 			</if>
-			<if test="updateTime!=null and updateTime!=''">
+			<if test="updateTime!=null">
 				update_time			
 			</if>
 	     </trim>
@@ -392,127 +398,130 @@
 		values
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="complainCode!=null and complainCode!=''">
+			<if test="complainCode!=null and complainCode != ''">
 				#{complainCode}, 			
 			</if>
-			<if test="customerId!=null and customerId!=''">
+			<if test="customerId!=null and customerId != 0 ">
 				#{customerId}, 			
 			</if>
-			<if test="custormerName!=null and custormerName!=''">
+			<if test="custormerName!=null and custormerName != ''">
 				#{custormerName}, 			
 			</if>
-			<if test="phoneNo!=null and phoneNo!=''">
+			<if test="phoneNo!=null and phoneNo != ''">
 				#{phoneNo}, 			
 			</if>
-			<if test="vin!=null and vin!=''">
+			<if test="vin!=null and vin != ''">
 				#{vin}, 			
 			</if>
-			<if test="plateNo!=null and plateNo!=''">
+			<if test="plateNo!=null and plateNo != ''">
 				#{plateNo}, 			
 			</if>
-			<if test="vno!=null and vno!=''">
+			<if test="vno!=null and vno != ''">
 				#{vno}, 			
 			</if>
-			<if test="buyDate!=null and buyDate!=''">
+			<if test="buyDate!=null">
 				#{buyDate}, 			
 			</if>
-			<if test="complainType!=null and complainType!=''">
+			<if test="complainType!=null and complainType != ''">
 				#{complainType}, 			
 			</if>
-			<if test="complainLevel!=null and complainLevel!=''">
+			<if test="complainLevel!=null and complainLevel != ''">
 				#{complainLevel}, 			
 			</if>
-			<if test="complainTime!=null and complainTime!=''">
+			<if test="complainTime!=null">
 				#{complainTime}, 			
 			</if>
-			<if test="finishTime!=null and finishTime!=''">
+			<if test="finishTime!=null">
 				#{finishTime}, 			
 			</if>
-			<if test="closeTime!=null and closeTime!=''">
+			<if test="closeTime!=null">
 				#{closeTime}, 			
 			</if>
-			<if test="city!=null and city!=''">
+			<if test="city!=null and city != ''">
 				#{city}, 			
 			</if>
-			<if test="complainSource!=null and complainSource!=''">
+			<if test="complainSource!=null and complainSource != ''">
 				#{complainSource}, 			
 			</if>
-			<if test="salesServicesService!=null and salesServicesService!=''">
+			<if test="salesServicesService!=null and salesServicesService != ''">
 				#{salesServicesService}, 			
 			</if>
-			<if test="complainStatus!=null and complainStatus!=''">
+			<if test="salesServicesCode!=null and salesServicesCode != ''">
+				#{salesServicesCode}, 			
+			</if>
+			<if test="complainStatus!=null and complainStatus != ''">
 				#{complainStatus}, 			
 			</if>
-			<if test="callbackStatus!=null and callbackStatus!=''">
+			<if test="callbackStatus!=null and callbackStatus != ''">
 				#{callbackStatus}, 			
 			</if>
-			<if test="callbackTime!=null and callbackTime!=''">
+			<if test="callbackTime!=null">
 				#{callbackTime}, 			
 			</if>
-			<if test="carColor!=null and carColor!=''">
+			<if test="carColor!=null and carColor != ''">
 				#{carColor}, 			
 			</if>
-			<if test="mileage!=null and mileage!=''">
+			<if test="mileage!=null and mileage != 0 ">
 				#{mileage}, 			
 			</if>
-			<if test="complainBase!=null and complainBase!=''">
+			<if test="complainBase!=null and complainBase != ''">
 				#{complainBase}, 			
 			</if>
-			<if test="area!=null and area!=''">
+			<if test="area!=null and area != ''">
 				#{area}, 			
 			</if>
-			<if test="callTimes!=null and callTimes!=''">
+			<if test="callTimes!=null and callTimes != 0 ">
 				#{callTimes}, 			
 			</if>
-			<if test="fileNo!=null and fileNo!=''">
+			<if test="fileNo!=null and fileNo != ''">
 				#{fileNo}, 			
 			</if>
-			<if test="complainAdmin!=null and complainAdmin!=''">
+			<if test="complainAdmin!=null and complainAdmin != ''">
 				#{complainAdmin}, 			
 			</if>
-			<if test="receivedBy!=null and receivedBy!=''">
+			<if test="receivedBy!=null and receivedBy != ''">
 				#{receivedBy}, 			
 			</if>
-			<if test="transTime!=null and transTime!=''">
+			<if test="transTime!=null">
 				#{transTime}, 			
 			</if>
-			<if test="otherMsg!=null and otherMsg!=''">
+			<if test="otherMsg!=null and otherMsg != ''">
 				#{otherMsg}, 			
 			</if>
-			<if test="carName!=null and carName!=''">
+			<if test="carName!=null and carName != ''">
 				#{carName}, 			
 			</if>
-			<if test="traceBy!=null and traceBy!=''">
+			<if test="traceBy!=null and traceBy != ''">
 				#{traceBy}, 			
 			</if>
-			<if test="recordBy!=null and recordBy!=''">
+			<if test="recordBy!=null and recordBy != ''">
 				#{recordBy}, 			
 			</if>
-			<if test="satisfactionDegree!=null and satisfactionDegree!=''">
-				#{satisfactionDegree}, 			
-			</if>
-			<if test="salesServicesStore!=null and salesServicesStore!=''">
+			<if test="salesServicesStore!=null and salesServicesStore != ''">
 				#{salesServicesStore}, 			
 			</if>
-			<if test="estimateFinishTime!=null and estimateFinishTime!=''">
+			<if test="estimateFinishTime!=null">
 				#{estimateFinishTime}, 			
 			</if>
-			<if test="customerLevel!=null and customerLevel!=''">
+			<if test="satisfactionDegree!=null and satisfactionDegree != ''">
+				#{satisfactionDegree}, 			
+			</if>
+			<if test="customerLevel!=null and customerLevel != ''">
 				#{customerLevel}, 			
 			</if>
-			<if test="delFlag!=null and delFlag!=''">
+			<if test="delFlag!=null and delFlag != 0 ">
 				#{delFlag}, 			
 			</if>
-			<if test="createBy!=null and createBy!=''">
+			<if test="createBy!=null and createBy != ''">
 				#{createBy}, 			
 			</if>
-			<if test="createTime!=null and createTime!=''">
+			<if test="createTime!=null">
 				#{createTime}, 			
 			</if>
-			<if test="updateBy!=null and updateBy!=''">
+			<if test="updateBy!=null and updateBy != ''">
 				#{updateBy}, 			
 			</if>
-			<if test="updateTime!=null and updateTime!=''">
+			<if test="updateTime!=null">
 				#{updateTime}			
 			</if>
 	     </trim>
@@ -522,127 +531,130 @@
 	<update id="update" parameterType="com.haima.crm.entity.Complaint">
 		update t_complaint 
 		<set>
-			<if test="complainCode != null and complainCode!=''">
+			<if test="complainCode != null and complainCode != ''">
 				`complain_code` = #{complainCode}, 			
 			</if>
-			<if test="customerId != null and customerId!=''">
+			<if test="customerId != null and customerId != 0 ">
 				`customer_id` = #{customerId}, 			
 			</if>
-			<if test="custormerName != null and custormerName!=''">
+			<if test="custormerName != null and custormerName != ''">
 				`custormer_name` = #{custormerName}, 			
 			</if>
-			<if test="phoneNo != null and phoneNo!=''">
+			<if test="phoneNo != null and phoneNo != ''">
 				`phone_no` = #{phoneNo}, 			
 			</if>
-			<if test="vin != null and vin!=''">
+			<if test="vin != null and vin != ''">
 				`vin` = #{vin}, 			
 			</if>
-			<if test="plateNo != null and plateNo!=''">
+			<if test="plateNo != null and plateNo != ''">
 				`plate_no` = #{plateNo}, 			
 			</if>
-			<if test="vno != null and vno!=''">
+			<if test="vno != null and vno != ''">
 				`vno` = #{vno}, 			
 			</if>
-			<if test="buyDate != null and buyDate!=''">
+			<if test="buyDate != null">
 				`buy_date` = #{buyDate}, 			
 			</if>
-			<if test="complainType != null and complainType!=''">
+			<if test="complainType != null and complainType != ''">
 				`complain_type` = #{complainType}, 			
 			</if>
-			<if test="complainLevel != null and complainLevel!=''">
+			<if test="complainLevel != null and complainLevel != ''">
 				`complain_level` = #{complainLevel}, 			
 			</if>
-			<if test="complainTime != null and complainTime!=''">
+			<if test="complainTime != null">
 				`complain_time` = #{complainTime}, 			
 			</if>
-			<if test="finishTime != null and finishTime!=''">
+			<if test="finishTime != null">
 				`finish_time` = #{finishTime}, 			
 			</if>
-			<if test="closeTime != null and closeTime!=''">
+			<if test="closeTime != null">
 				`close_time` = #{closeTime}, 			
 			</if>
-			<if test="city != null and city!=''">
+			<if test="city != null and city != ''">
 				`city` = #{city}, 			
 			</if>
-			<if test="complainSource != null and complainSource!=''">
+			<if test="complainSource != null and complainSource != ''">
 				`complain_source` = #{complainSource}, 			
 			</if>
-			<if test="salesServicesService != null and salesServicesService!=''">
+			<if test="salesServicesService != null and salesServicesService != ''">
 				`sales_services_service` = #{salesServicesService}, 			
 			</if>
-			<if test="complainStatus != null and complainStatus!=''">
+			<if test="salesServicesCode != null and salesServicesCode != ''">
+				`sales_services_code` = #{salesServicesCode}, 			
+			</if>
+			<if test="complainStatus != null and complainStatus != ''">
 				`complain_status` = #{complainStatus}, 			
 			</if>
-			<if test="callbackStatus != null and callbackStatus!=''">
+			<if test="callbackStatus != null and callbackStatus != ''">
 				`callback_status` = #{callbackStatus}, 			
 			</if>
-			<if test="callbackTime != null and callbackTime!=''">
+			<if test="callbackTime != null">
 				`callback_time` = #{callbackTime}, 			
 			</if>
-			<if test="carColor != null and carColor!=''">
+			<if test="carColor != null and carColor != ''">
 				`car_color` = #{carColor}, 			
 			</if>
-			<if test="mileage != null and mileage!=''">
+			<if test="mileage != null and mileage != 0 ">
 				`mileage` = #{mileage}, 			
 			</if>
-			<if test="complainBase != null and complainBase!=''">
+			<if test="complainBase != null and complainBase != ''">
 				`complain_base` = #{complainBase}, 			
 			</if>
-			<if test="area != null and area!=''">
+			<if test="area != null and area != ''">
 				`area` = #{area}, 			
 			</if>
-			<if test="callTimes != null and callTimes!=''">
+			<if test="callTimes != null and callTimes != 0 ">
 				`call_times` = #{callTimes}, 			
 			</if>
-			<if test="fileNo != null and fileNo!=''">
+			<if test="fileNo != null and fileNo != ''">
 				`file_no` = #{fileNo}, 			
 			</if>
-			<if test="complainAdmin != null and complainAdmin!=''">
+			<if test="complainAdmin != null and complainAdmin != ''">
 				`complain_admin` = #{complainAdmin}, 			
 			</if>
-			<if test="receivedBy != null and receivedBy!=''">
+			<if test="receivedBy != null and receivedBy != ''">
 				`received_by` = #{receivedBy}, 			
 			</if>
-			<if test="transTime != null and transTime!=''">
+			<if test="transTime != null">
 				`trans_time` = #{transTime}, 			
 			</if>
-			<if test="otherMsg != null and otherMsg!=''">
+			<if test="otherMsg != null and otherMsg != ''">
 				`other_msg` = #{otherMsg}, 			
 			</if>
-			<if test="carName != null and carName!=''">
+			<if test="carName != null and carName != ''">
 				`car_name` = #{carName}, 			
 			</if>
-			<if test="traceBy != null and traceBy!=''">
+			<if test="traceBy != null and traceBy != ''">
 				`trace_by` = #{traceBy}, 			
 			</if>
-			<if test="recordBy != null and recordBy!=''">
+			<if test="recordBy != null and recordBy != ''">
 				`record_by` = #{recordBy}, 			
 			</if>
-			<if test="satisfactionDegree != null and satisfactionDegree!=''">
-				`satisfaction_degree` = #{satisfactionDegree}, 			
-			</if>
-			<if test="salesServicesStore != null and salesServicesStore!=''">
+			<if test="salesServicesStore != null and salesServicesStore != ''">
 				`sales_services_store` = #{salesServicesStore}, 			
 			</if>
-			<if test="estimateFinishTime != null and estimateFinishTime!=''">
+			<if test="estimateFinishTime != null">
 				`estimate_finish_time` = #{estimateFinishTime}, 			
 			</if>
-			<if test="customerLevel != null and customerLevel!=''">
+			<if test="satisfactionDegree != null and satisfactionDegree != ''">
+				`satisfaction_degree` = #{satisfactionDegree}, 			
+			</if>
+			<if test="customerLevel != null and customerLevel != ''">
 				`customer_level` = #{customerLevel}, 			
 			</if>
-			<if test="delFlag != null and delFlag!=''">
+			<if test="delFlag != null and delFlag != 0 ">
 				`del_flag` = #{delFlag}, 			
 			</if>
-			<if test="createBy != null and createBy!=''">
+			<if test="createBy != null and createBy != ''">
 				`create_by` = #{createBy}, 			
 			</if>
-			<if test="createTime != null and createTime!=''">
+			<if test="createTime != null">
 				`create_time` = #{createTime}, 			
 			</if>
-			<if test="updateBy != null and updateBy!=''">
+			<if test="updateBy != null and updateBy != ''">
 				`update_by` = #{updateBy}, 			
 			</if>
-			<if test="updateTime != null and updateTime!=''">
+			<if test="updateTime != null">
 				`update_time` = #{updateTime}			
 			</if>
 		</set>

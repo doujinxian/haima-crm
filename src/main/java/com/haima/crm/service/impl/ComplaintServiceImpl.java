@@ -28,8 +28,18 @@ public class ComplaintServiceImpl implements ComplaintService {
 	}
 	
 	@Override
+	public List<Complaint> queryList(Complaint complaint) {
+		return complaintDao.queryList(complaint);
+	}
+	
+	@Override
 	public int queryTotal(Map<String, Object> map){
 		return complaintDao.queryTotal(map);
+	}
+	
+	@Override
+	public int queryTotal(Complaint complaint) {
+		return complaintDao.queryTotal(complaint);
 	}
 	
 	@Override

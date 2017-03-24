@@ -3,6 +3,8 @@ package com.haima.crm.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 
 
 /**
@@ -12,6 +14,7 @@ import java.util.Date;
  * @email doujinxian@126.com
  * @date 2017-03-17 20:15:12
  */
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class CarWorkorder implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

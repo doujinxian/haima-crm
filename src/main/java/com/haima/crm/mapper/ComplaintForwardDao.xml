@@ -50,22 +50,22 @@
 			<if test="handleMsg != null and handleMsg != ''">
 				`handle_msg` = #{handleMsg} and 			
 			</if>
-			<if test="handleStatus != null and handleStatus != ''">
+			<if test="handleStatus != null and handleStatus != 0 ">
 				`handle_status` = #{handleStatus} and 			
 			</if>
-			<if test="handleDate != null and handleDate != ''">
+			<if test="handleDate != null">
 				`handle_date` = #{handleDate} and 			
 			</if>
 			<if test="createBy != null and createBy != ''">
 				`create_by` = #{createBy} and 			
 			</if>
-			<if test="createTime != null and createTime != ''">
+			<if test="createTime != null">
 				`create_time` = #{createTime} and 			
 			</if>
 			<if test="updateBy != null and updateBy != ''">
 				`update_by` = #{updateBy} and 			
 			</if>
-			<if test="updateTime != null and updateTime != ''">
+			<if test="updateTime != null">
 				`update_time` = #{updateTime}			
 			</if>
         </trim>
@@ -101,34 +101,34 @@
 		insert into t_complaint_forward
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="complainCode!=null and complainCode!=''">
+			<if test="complainCode!=null and complainCode != ''">
 				complain_code, 			
 			</if>
-			<if test="forwardFrom!=null and forwardFrom!=''">
+			<if test="forwardFrom!=null and forwardFrom != ''">
 				forward_from, 			
 			</if>
-			<if test="forwardTo!=null and forwardTo!=''">
+			<if test="forwardTo!=null and forwardTo != ''">
 				forward_to, 			
 			</if>
-			<if test="handleMsg!=null and handleMsg!=''">
+			<if test="handleMsg!=null and handleMsg != ''">
 				handle_msg, 			
 			</if>
-			<if test="handleStatus!=null and handleStatus!=''">
+			<if test="handleStatus!=null and handleStatus != 0 ">
 				handle_status, 			
 			</if>
-			<if test="handleDate!=null and handleDate!=''">
+			<if test="handleDate!=null">
 				handle_date, 			
 			</if>
-			<if test="createBy!=null and createBy!=''">
+			<if test="createBy!=null and createBy != ''">
 				create_by, 			
 			</if>
-			<if test="createTime!=null and createTime!=''">
+			<if test="createTime!=null">
 				create_time, 			
 			</if>
-			<if test="updateBy!=null and updateBy!=''">
+			<if test="updateBy!=null and updateBy != ''">
 				update_by, 			
 			</if>
-			<if test="updateTime!=null and updateTime!=''">
+			<if test="updateTime!=null">
 				update_time			
 			</if>
 	     </trim>
@@ -136,34 +136,34 @@
 		values
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="complainCode!=null and complainCode!=''">
+			<if test="complainCode!=null and complainCode != ''">
 				#{complainCode}, 			
 			</if>
-			<if test="forwardFrom!=null and forwardFrom!=''">
+			<if test="forwardFrom!=null and forwardFrom != ''">
 				#{forwardFrom}, 			
 			</if>
-			<if test="forwardTo!=null and forwardTo!=''">
+			<if test="forwardTo!=null and forwardTo != ''">
 				#{forwardTo}, 			
 			</if>
-			<if test="handleMsg!=null and handleMsg!=''">
+			<if test="handleMsg!=null and handleMsg != ''">
 				#{handleMsg}, 			
 			</if>
-			<if test="handleStatus!=null and handleStatus!=''">
+			<if test="handleStatus!=null and handleStatus != 0 ">
 				#{handleStatus}, 			
 			</if>
-			<if test="handleDate!=null and handleDate!=''">
+			<if test="handleDate!=null">
 				#{handleDate}, 			
 			</if>
-			<if test="createBy!=null and createBy!=''">
+			<if test="createBy!=null and createBy != ''">
 				#{createBy}, 			
 			</if>
-			<if test="createTime!=null and createTime!=''">
+			<if test="createTime!=null">
 				#{createTime}, 			
 			</if>
-			<if test="updateBy!=null and updateBy!=''">
+			<if test="updateBy!=null and updateBy != ''">
 				#{updateBy}, 			
 			</if>
-			<if test="updateTime!=null and updateTime!=''">
+			<if test="updateTime!=null">
 				#{updateTime}			
 			</if>
 	     </trim>
@@ -173,34 +173,34 @@
 	<update id="update" parameterType="com.haima.crm.entity.ComplaintForward">
 		update t_complaint_forward 
 		<set>
-			<if test="complainCode != null and complainCode!=''">
+			<if test="complainCode != null and complainCode != ''">
 				`complain_code` = #{complainCode}, 			
 			</if>
-			<if test="forwardFrom != null and forwardFrom!=''">
+			<if test="forwardFrom != null and forwardFrom != ''">
 				`forward_from` = #{forwardFrom}, 			
 			</if>
-			<if test="forwardTo != null and forwardTo!=''">
+			<if test="forwardTo != null and forwardTo != ''">
 				`forward_to` = #{forwardTo}, 			
 			</if>
-			<if test="handleMsg != null and handleMsg!=''">
+			<if test="handleMsg != null and handleMsg != ''">
 				`handle_msg` = #{handleMsg}, 			
 			</if>
-			<if test="handleStatus != null and handleStatus!=''">
+			<if test="handleStatus != null and handleStatus != 0 ">
 				`handle_status` = #{handleStatus}, 			
 			</if>
-			<if test="handleDate != null and handleDate!=''">
+			<if test="handleDate != null">
 				`handle_date` = #{handleDate}, 			
 			</if>
-			<if test="createBy != null and createBy!=''">
+			<if test="createBy != null and createBy != ''">
 				`create_by` = #{createBy}, 			
 			</if>
-			<if test="createTime != null and createTime!=''">
+			<if test="createTime != null">
 				`create_time` = #{createTime}, 			
 			</if>
-			<if test="updateBy != null and updateBy!=''">
+			<if test="updateBy != null and updateBy != ''">
 				`update_by` = #{updateBy}, 			
 			</if>
-			<if test="updateTime != null and updateTime!=''">
+			<if test="updateTime != null">
 				`update_time` = #{updateTime}			
 			</if>
 		</set>

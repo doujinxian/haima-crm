@@ -10,7 +10,7 @@ import java.util.Map;
  * 
  * @author doujinxian
  * @email doujinxian@126.com
- * @date 2017-03-17 20:15:12
+ * @date 2017-03-23 19:55:46
  */
 public interface ComplaintService {
 	
@@ -18,7 +18,11 @@ public interface ComplaintService {
 	
 	List<Complaint> queryList(Map<String, Object> map);
 	
+	List<Complaint> queryList(Complaint complaint);
+	
 	int queryTotal(Map<String, Object> map);
+	
+	int queryTotal(Complaint complaint);
 	
 	void save(Complaint complaint);
 	
@@ -27,6 +31,5 @@ public interface ComplaintService {
 	void delete(Long id);
 	
 	void deleteBatch(Long[] ids);
-
 
 }

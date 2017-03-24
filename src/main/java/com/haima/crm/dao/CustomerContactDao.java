@@ -1,6 +1,6 @@
 package com.haima.crm.dao;
 
-import com.haima.crm.entity.CustomerCar;
+import com.haima.crm.entity.CustomerContact;
 
 /**
  * 
@@ -9,6 +9,6 @@ import com.haima.crm.entity.CustomerCar;
  * @email doujinxian@126.com
  * @date 2017-03-23 19:55:47
  */
-public interface CustomerCarDao extends BaseDao<CustomerCar> {
+public interface CustomerContactDao extends BaseDao<CustomerContact> {
 	
 }

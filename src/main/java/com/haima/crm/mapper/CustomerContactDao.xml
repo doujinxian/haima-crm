@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.haima.crm.dao.CustomerCarDao">
+<mapper namespace="com.haima.crm.dao.CustomerContactDao">
 	
-	<resultMap id="RM_CustomerCar" type="com.haima.crm.entity.CustomerCar">
+	<resultMap id="RM_CustomerContact" type="com.haima.crm.entity.CustomerContact">
+			<result property="contactId" column="contact_id"/>
 			<result property="customerId" column="customer_id"/>
-			<result property="vin" column="vin"/>
-			<result property="plateNo" column="plate_no"/>
-			<result property="carId" column="car_id"/>
-			<result property="carColorId" column="car_color_id"/>
+			<result property="contactNm" column="contact_nm"/>
+			<result property="contactPhone" column="contact_phone"/>
+			<result property="contactAddress" column="contact_address"/>
 			<result property="delFlg" column="del_flg"/>
 			<result property="creator" column="creator"/>
 			<result property="createTime" column="create_time"/>
@@ -17,13 +17,13 @@
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="CustomerCar_columns">
+	<sql id="CustomerContact_columns">
 	    <![CDATA[
+			`contact_id`, 			
 			`customer_id`, 			
-			`vin`, 			
-			`plate_no`, 			
-			`car_id`, 			
-			`car_color_id`, 			
+			`contact_nm`, 			
+			`contact_phone`, 			
+			`contact_address`, 			
 			`del_flg`, 			
 			`creator`, 			
 			`create_time`, 			
@@ -33,20 +33,20 @@
 	</sql>
 	
 	<!-- 用于where查询公用抽取的列 -->
-	<sql id="CustomerCar_condition">
+	<sql id="CustomerContact_condition">
 		<where>
         <trim suffix="" suffixOverrides="and">
-			<if test="vin != null and vin != ''">
-				`vin` = #{vin} and 			
+			<if test="customerId != null and customerId != 0 ">
+				`customer_id` = #{customerId} and 			
 			</if>
-			<if test="plateNo != null and plateNo != ''">
-				`plate_no` = #{plateNo} and 			
+			<if test="contactNm != null and contactNm != ''">
+				`contact_nm` = #{contactNm} and 			
 			</if>
-			<if test="carId != null and carId != 0 ">
-				`car_id` = #{carId} and 			
+			<if test="contactPhone != null and contactPhone != ''">
+				`contact_phone` = #{contactPhone} and 			
 			</if>
-			<if test="carColorId != null and carColorId != 0 ">
-				`car_color_id` = #{carColorId} and 			
+			<if test="contactAddress != null and contactAddress != ''">
+				`contact_address` = #{contactAddress} and 			
 			</if>
 			<if test="delFlg != null and delFlg != ''">
 				`del_flg` = #{delFlg} and 			
@@ -67,19 +67,19 @@
 		</where>
 	</sql>
 	
-	<select id="queryObject" resultMap="RM_CustomerCar">
+	<select id="queryObject" resultMap="RM_CustomerContact">
 		select 
-		<include refid="CustomerCar_columns" />
-		from t_customer_car 
+		<include refid="CustomerContact_columns" />
+		from t_customer_contact 
 		where
-		customer_id = #{value}
+		contact_id = #{value}
 	</select>
 
-	<select id="queryList" resultMap="RM_CustomerCar">
+	<select id="queryList" resultMap="RM_CustomerContact">
 		select 
-		<include refid="CustomerCar_columns" />
-		from t_customer_car
-		<include refid="CustomerCar_condition"/> 
+		<include refid="CustomerContact_columns" />
+		from t_customer_contact
+		<include refid="CustomerContact_condition"/> 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
@@ -88,28 +88,25 @@
  	<select id="queryTotal" resultType="java.lang.Integer">
 		select 
 		count(1) 
-		from t_customer_car 
-		<include refid="CustomerCar_condition"/>
+		from t_customer_contact 
+		<include refid="CustomerContact_condition"/>
 	</select>
 	 
-	<insert id="save" parameterType="com.haima.crm.entity.CustomerCar">
-		insert into t_customer_car
+	<insert id="save" parameterType="com.haima.crm.entity.CustomerContact" useGeneratedKeys="true" keyProperty="contactId">
+		insert into t_customer_contact
 		(
 		<trim suffix="" suffixOverrides=",">
 			<if test="customerId!=null and customerId != 0 ">
 				customer_id, 			
 			</if>
-			<if test="vin!=null and vin != ''">
-				vin, 			
+			<if test="contactNm!=null and contactNm != ''">
+				contact_nm, 			
 			</if>
-			<if test="plateNo!=null and plateNo != ''">
-				plate_no, 			
+			<if test="contactPhone!=null and contactPhone != ''">
+				contact_phone, 			
 			</if>
-			<if test="carId!=null and carId != 0 ">
-				car_id, 			
-			</if>
-			<if test="carColorId!=null and carColorId != 0 ">
-				car_color_id, 			
+			<if test="contactAddress!=null and contactAddress != ''">
+				contact_address, 			
 			</if>
 			<if test="delFlg!=null and delFlg != ''">
 				del_flg, 			
@@ -134,17 +131,14 @@
 			<if test="customerId!=null and customerId != 0 ">
 				#{customerId}, 			
 			</if>
-			<if test="vin!=null and vin != ''">
-				#{vin}, 			
+			<if test="contactNm!=null and contactNm != ''">
+				#{contactNm}, 			
 			</if>
-			<if test="plateNo!=null and plateNo != ''">
-				#{plateNo}, 			
+			<if test="contactPhone!=null and contactPhone != ''">
+				#{contactPhone}, 			
 			</if>
-			<if test="carId!=null and carId != 0 ">
-				#{carId}, 			
-			</if>
-			<if test="carColorId!=null and carColorId != 0 ">
-				#{carColorId}, 			
+			<if test="contactAddress!=null and contactAddress != ''">
+				#{contactAddress}, 			
 			</if>
 			<if test="delFlg!=null and delFlg != ''">
 				#{delFlg}, 			
@@ -165,20 +159,20 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.haima.crm.entity.CustomerCar">
-		update t_customer_car 
+	<update id="update" parameterType="com.haima.crm.entity.CustomerContact">
+		update t_customer_contact 
 		<set>
-			<if test="vin != null and vin != ''">
-				`vin` = #{vin}, 			
+			<if test="customerId != null and customerId != 0 ">
+				`customer_id` = #{customerId}, 			
 			</if>
-			<if test="plateNo != null and plateNo != ''">
-				`plate_no` = #{plateNo}, 			
+			<if test="contactNm != null and contactNm != ''">
+				`contact_nm` = #{contactNm}, 			
 			</if>
-			<if test="carId != null and carId != 0 ">
-				`car_id` = #{carId}, 			
+			<if test="contactPhone != null and contactPhone != ''">
+				`contact_phone` = #{contactPhone}, 			
 			</if>
-			<if test="carColorId != null and carColorId != 0 ">
-				`car_color_id` = #{carColorId}, 			
+			<if test="contactAddress != null and contactAddress != ''">
+				`contact_address` = #{contactAddress}, 			
 			</if>
 			<if test="delFlg != null and delFlg != ''">
 				`del_flg` = #{delFlg}, 			
@@ -196,17 +190,17 @@
 				`modify_time` = #{modifyTime}			
 			</if>
 		</set>
-		where customer_id = #{customerId}
+		where contact_id = #{contactId}
 	</update>
 	
 	<delete id="delete">
-		delete from t_customer_car where customer_id = #{value}
+		delete from t_customer_contact where contact_id = #{value}
 	</delete>
 	
 	<delete id="deleteBatch">
-		delete from t_customer_car where customer_id in 
-		<foreach item="customerId" collection="array" open="(" separator="," close=")">
-			#{customerId}
+		delete from t_customer_contact where contact_id in 
+		<foreach item="contactId" collection="array" open="(" separator="," close=")">
+			#{contactId}
 		</foreach>
 	</delete>
 

@@ -39,7 +39,7 @@ public class TestMybatis {
 	
 	@Test
 	public void queryObject(){
-		Complaint co =  complaintService.queryObject(1L);
+		Complaint co =  complaintService.queryObject(1100L);
 		System.out.println(co.getComplainCode());
 	}
 	
@@ -58,5 +58,14 @@ public class TestMybatis {
 		map.put("id", 1L);
 		int count = complaintService.queryTotal(map);
 		System.out.println(count);
+	}
+	
+	@Test
+	public void update(){
+		Complaint c = new Complaint();
+		c.setId(1100L);
+		c.setComplainCode("wefwef");
+		c.setBuyDate(new Date());
+		complaintService.update(c);
 	}
 }

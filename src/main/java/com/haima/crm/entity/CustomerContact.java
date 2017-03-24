@@ -15,19 +15,19 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @date 2017-03-23 19:55:47
  */
 @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
-public class CustomerCar implements Serializable {
+public class CustomerContact implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	//联系人id
+	private Long contactId;
 	//客户id
 	private Long customerId;
-	//vin码
-	private String vin;
-	//车牌号
-	private String plateNo;
-	//车型id
-	private Integer carId;
-	//车颜色id
-	private Integer carColorId;
+	//联系人姓名
+	private String contactNm;
+	//联系电话
+	private String contactPhone;
+	//联系地址
+	private String contactAddress;
 	//是否删除：0未1是
 	private String delFlg;
 	//创建者
@@ -39,6 +39,18 @@ public class CustomerCar implements Serializable {
 	//修改时间
 	private Date modifyTime;
 
+	/**
+	 * 设置：联系人id
+	 */
+	public void setContactId(Long contactId) {
+		this.contactId = contactId;
+	}
+	/**
+	 * 获取：联系人id
+	 */
+	public Long getContactId() {
+		return contactId;
+	}
 	/**
 	 * 设置：客户id
 	 */
@@ -52,52 +64,40 @@ public class CustomerCar implements Serializable {
 		return customerId;
 	}
 	/**
-	 * 设置：vin码
+	 * 设置：联系人姓名
 	 */
-	public void setVin(String vin) {
-		this.vin = vin;
+	public void setContactNm(String contactNm) {
+		this.contactNm = contactNm;
 	}
 	/**
-	 * 获取：vin码
+	 * 获取：联系人姓名
 	 */
-	public String getVin() {
-		return vin;
+	public String getContactNm() {
+		return contactNm;
 	}
 	/**
-	 * 设置：车牌号
+	 * 设置：联系电话
 	 */
-	public void setPlateNo(String plateNo) {
-		this.plateNo = plateNo;
+	public void setContactPhone(String contactPhone) {
+		this.contactPhone = contactPhone;
 	}
 	/**
-	 * 获取：车牌号
+	 * 获取：联系电话
 	 */
-	public String getPlateNo() {
-		return plateNo;
+	public String getContactPhone() {
+		return contactPhone;
 	}
 	/**
-	 * 设置：车型id
+	 * 设置：联系地址
 	 */
-	public void setCarId(Integer carId) {
-		this.carId = carId;
+	public void setContactAddress(String contactAddress) {
+		this.contactAddress = contactAddress;
 	}
 	/**
-	 * 获取：车型id
+	 * 获取：联系地址
 	 */
-	public Integer getCarId() {
-		return carId;
-	}
-	/**
-	 * 设置：车颜色id
-	 */
-	public void setCarColorId(Integer carColorId) {
-		this.carColorId = carColorId;
-	}
-	/**
-	 * 获取：车颜色id
-	 */
-	public Integer getCarColorId() {
-		return carColorId;
+	public String getContactAddress() {
+		return contactAddress;
 	}
 	/**
 	 * 设置：是否删除：0未1是

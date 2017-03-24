@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
-import com.haima.crm.entity.Code;
-import com.haima.crm.service.CodeService;
+import com.haima.crm.entity.CustomerContact;
+import com.haima.crm.service.CustomerContactService;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
 
@@ -22,14 +22,18 @@ import com.haima.crm.utils.Result;
  * 
  * @author doujinxian
  * @email doujinxian@126.com
- * @date 2017-03-17 20:15:12
+ * @date 2017-03-23 19:55:47
  */
 @Controller
-@RequestMapping("code")
-public class CodeController {
+@RequestMapping("customercontact")
+public class CustomerContactController {
 	@Autowired
-	private CodeService codeService;
+	private CustomerContactService customerContactService;
 	
+	@RequestMapping("/customercontact.html")
+	public String list(){
+		return "customercontact/customercontact.html";
+	}
 	
 	/**
 	 * 列表
@@ -42,10 +46,10 @@ public class CodeController {
 		map.put("limit", limit);
 		
 		//查询列表数据
-		List<Code> codeList = codeService.queryList(map);
-		int total = codeService.queryTotal(map);
+		List<CustomerContact> customerContactList = customerContactService.queryList(map);
+		int total = customerContactService.queryTotal(map);
 		
-		PageUtils pageUtil = new PageUtils(codeList, total, limit, page);
+		PageUtils pageUtil = new PageUtils(customerContactList, total, limit, page);
 		
 		return Result.ok().put("page", pageUtil);
 	}
@@ -55,11 +59,11 @@ public class CodeController {
 	 * 信息
 	 */
 	@ResponseBody
-	@RequestMapping("/info/{id}")
-	public Result info(@PathVariable("id") Long id){
-		Code code = codeService.queryObject(id);
+	@RequestMapping("/info/{contactId}")
+	public Result info(@PathVariable("contactId") Long contactId){
+		CustomerContact customerContact = customerContactService.queryObject(contactId);
 		
-		return Result.ok().put("code", code);
+		return Result.ok().put("customerContact", customerContact);
 	}
 	
 	/**
@@ -67,8 +71,8 @@ public class CodeController {
 	 */
 	@ResponseBody
 	@RequestMapping("/save")
-	public Result save(@RequestBody Code code){
-		codeService.save(code);
+	public Result save(@RequestBody CustomerContact customerContact){
+		customerContactService.save(customerContact);
 		
 		return Result.ok();
 	}
@@ -78,8 +82,8 @@ public class CodeController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	public Result update(@RequestBody Code code){
-		codeService.update(code);
+	public Result update(@RequestBody CustomerContact customerContact){
+		customerContactService.update(customerContact);
 		
 		return Result.ok();
 	}
@@ -89,8 +93,8 @@ public class CodeController {
 	 */
 	@ResponseBody
 	@RequestMapping("/delete")
-	public Result delete(@RequestBody Long[] ids){
-		codeService.deleteBatch(ids);
+	public Result delete(@RequestBody Long[] contactIds){
+		customerContactService.deleteBatch(contactIds);
 		
 		return Result.ok();
 	}

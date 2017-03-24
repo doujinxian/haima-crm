@@ -7,7 +7,7 @@ import com.haima.crm.entity.ComplaintForward;
  * 
  * @author doujinxian
  * @email doujinxian@126.com
- * @date 2017-03-17 20:15:13
+ * @date 2017-03-23 19:55:47
  */
 public interface ComplaintForwardDao extends BaseDao<ComplaintForward> {
 	

@@ -3,6 +3,8 @@ package com.haima.crm.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 
 
 /**
@@ -10,8 +12,9 @@ import java.util.Date;
  * 
  * @author doujinxian
  * @email doujinxian@126.com
- * @date 2017-03-17 20:15:13
+ * @date 2017-03-23 19:55:47
  */
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

@@ -22,13 +22,18 @@ import com.haima.crm.utils.Result;
  * 
  * @author doujinxian
  * @email doujinxian@126.com
- * @date 2017-03-17 20:15:13
+ * @date 2017-03-23 19:55:47
  */
 @Controller
 @RequestMapping("complaintcontent")
 public class ComplaintContentController {
 	@Autowired
 	private ComplaintContentService complaintContentService;
+	
+	@RequestMapping("/complaintcontent.html")
+	public String list(){
+		return "complaintcontent/complaintcontent.html";
+	}
 	
 	/**
 	 * 列表

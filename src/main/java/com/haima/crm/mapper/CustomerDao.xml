@@ -119,13 +119,13 @@
 			<if test="zipcode != null and zipcode != ''">
 				`zipcode` = #{zipcode} and 			
 			</if>
-			<if test="province != null and province != ''">
+			<if test="province != null and province != 0 ">
 				`province` = #{province} and 			
 			</if>
-			<if test="city != null and city != ''">
+			<if test="city != null and city != 0 ">
 				`city` = #{city} and 			
 			</if>
-			<if test="district != null and district != ''">
+			<if test="district != null and district != 0 ">
 				`district` = #{district} and 			
 			</if>
 			<if test="contact != null and contact != ''">
@@ -179,13 +179,13 @@
 			<if test="creator != null and creator != ''">
 				`creator` = #{creator} and 			
 			</if>
-			<if test="createTime != null and createTime != ''">
+			<if test="createTime != null">
 				`create_time` = #{createTime} and 			
 			</if>
 			<if test="modifier != null and modifier != ''">
 				`modifier` = #{modifier} and 			
 			</if>
-			<if test="modifyTime != null and modifyTime != ''">
+			<if test="modifyTime != null">
 				`modify_time` = #{modifyTime}			
 			</if>
         </trim>
@@ -221,106 +221,106 @@
 		insert into t_customer
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="customerName!=null and customerName!=''">
+			<if test="customerName!=null and customerName != ''">
 				customer_name, 			
 			</if>
-			<if test="sex!=null and sex!=''">
+			<if test="sex!=null and sex != ''">
 				sex, 			
 			</if>
-			<if test="maritalStatus!=null and maritalStatus!=''">
+			<if test="maritalStatus!=null and maritalStatus != ''">
 				marital_status, 			
 			</if>
-			<if test="idType!=null and idType!=''">
+			<if test="idType!=null and idType != ''">
 				id_type, 			
 			</if>
-			<if test="idNo!=null and idNo!=''">
+			<if test="idNo!=null and idNo != ''">
 				id_no, 			
 			</if>
-			<if test="birthday!=null and birthday!=''">
+			<if test="birthday!=null and birthday != ''">
 				birthday, 			
 			</if>
-			<if test="phone!=null and phone!=''">
+			<if test="phone!=null and phone != ''">
 				phone, 			
 			</if>
-			<if test="companyPhone!=null and companyPhone!=''">
+			<if test="companyPhone!=null and companyPhone != ''">
 				company_phone, 			
 			</if>
-			<if test="familyPhone!=null and familyPhone!=''">
+			<if test="familyPhone!=null and familyPhone != ''">
 				family_phone, 			
 			</if>
-			<if test="address!=null and address!=''">
+			<if test="address!=null and address != ''">
 				address, 			
 			</if>
-			<if test="zipcode!=null and zipcode!=''">
+			<if test="zipcode!=null and zipcode != ''">
 				zipcode, 			
 			</if>
-			<if test="province!=null and province!=''">
+			<if test="province!=null and province != 0 ">
 				province, 			
 			</if>
-			<if test="city!=null and city!=''">
+			<if test="city!=null and city != 0 ">
 				city, 			
 			</if>
-			<if test="district!=null and district!=''">
+			<if test="district!=null and district != 0 ">
 				district, 			
 			</if>
-			<if test="contact!=null and contact!=''">
+			<if test="contact!=null and contact != ''">
 				contact, 			
 			</if>
-			<if test="contactAddress!=null and contactAddress!=''">
+			<if test="contactAddress!=null and contactAddress != ''">
 				contact_address, 			
 			</if>
-			<if test="customerType1!=null and customerType1!=''">
+			<if test="customerType1!=null and customerType1 != ''">
 				customer_type1, 			
 			</if>
-			<if test="customerType2!=null and customerType2!=''">
+			<if test="customerType2!=null and customerType2 != ''">
 				customer_type2, 			
 			</if>
-			<if test="occupation!=null and occupation!=''">
+			<if test="occupation!=null and occupation != ''">
 				occupation, 			
 			</if>
-			<if test="company!=null and company!=''">
+			<if test="company!=null and company != ''">
 				company, 			
 			</if>
-			<if test="position!=null and position!=''">
+			<if test="position!=null and position != ''">
 				position, 			
 			</if>
-			<if test="country!=null and country!=''">
+			<if test="country!=null and country != ''">
 				country, 			
 			</if>
-			<if test="profitRevisitTime!=null and profitRevisitTime!=''">
+			<if test="profitRevisitTime!=null and profitRevisitTime != ''">
 				profit_revisit_time, 			
 			</if>
-			<if test="photograph!=null and photograph!=''">
+			<if test="photograph!=null and photograph != ''">
 				photograph, 			
 			</if>
-			<if test="email!=null and email!=''">
+			<if test="email!=null and email != ''">
 				email, 			
 			</if>
-			<if test="qq!=null and qq!=''">
+			<if test="qq!=null and qq != ''">
 				qq, 			
 			</if>
-			<if test="wechat!=null and wechat!=''">
+			<if test="wechat!=null and wechat != ''">
 				wechat, 			
 			</if>
-			<if test="weibo!=null and weibo!=''">
+			<if test="weibo!=null and weibo != ''">
 				weibo, 			
 			</if>
-			<if test="remark!=null and remark!=''">
+			<if test="remark!=null and remark != ''">
 				remark, 			
 			</if>
-			<if test="delFlg!=null and delFlg!=''">
+			<if test="delFlg!=null and delFlg != ''">
 				del_flg, 			
 			</if>
-			<if test="creator!=null and creator!=''">
+			<if test="creator!=null and creator != ''">
 				creator, 			
 			</if>
-			<if test="createTime!=null and createTime!=''">
+			<if test="createTime!=null">
 				create_time, 			
 			</if>
-			<if test="modifier!=null and modifier!=''">
+			<if test="modifier!=null and modifier != ''">
 				modifier, 			
 			</if>
-			<if test="modifyTime!=null and modifyTime!=''">
+			<if test="modifyTime!=null">
 				modify_time			
 			</if>
 	     </trim>
@@ -328,106 +328,106 @@
 		values
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="customerName!=null and customerName!=''">
+			<if test="customerName!=null and customerName != ''">
 				#{customerName}, 			
 			</if>
-			<if test="sex!=null and sex!=''">
+			<if test="sex!=null and sex != ''">
 				#{sex}, 			
 			</if>
-			<if test="maritalStatus!=null and maritalStatus!=''">
+			<if test="maritalStatus!=null and maritalStatus != ''">
 				#{maritalStatus}, 			
 			</if>
-			<if test="idType!=null and idType!=''">
+			<if test="idType!=null and idType != ''">
 				#{idType}, 			
 			</if>
-			<if test="idNo!=null and idNo!=''">
+			<if test="idNo!=null and idNo != ''">
 				#{idNo}, 			
 			</if>
-			<if test="birthday!=null and birthday!=''">
+			<if test="birthday!=null and birthday != ''">
 				#{birthday}, 			
 			</if>
-			<if test="phone!=null and phone!=''">
+			<if test="phone!=null and phone != ''">
 				#{phone}, 			
 			</if>
-			<if test="companyPhone!=null and companyPhone!=''">
+			<if test="companyPhone!=null and companyPhone != ''">
 				#{companyPhone}, 			
 			</if>
-			<if test="familyPhone!=null and familyPhone!=''">
+			<if test="familyPhone!=null and familyPhone != ''">
 				#{familyPhone}, 			
 			</if>
-			<if test="address!=null and address!=''">
+			<if test="address!=null and address != ''">
 				#{address}, 			
 			</if>
-			<if test="zipcode!=null and zipcode!=''">
+			<if test="zipcode!=null and zipcode != ''">
 				#{zipcode}, 			
 			</if>
-			<if test="province!=null and province!=''">
+			<if test="province!=null and province != 0 ">
 				#{province}, 			
 			</if>
-			<if test="city!=null and city!=''">
+			<if test="city!=null and city != 0 ">
 				#{city}, 			
 			</if>
-			<if test="district!=null and district!=''">
+			<if test="district!=null and district != 0 ">
 				#{district}, 			
 			</if>
-			<if test="contact!=null and contact!=''">
+			<if test="contact!=null and contact != ''">
 				#{contact}, 			
 			</if>
-			<if test="contactAddress!=null and contactAddress!=''">
+			<if test="contactAddress!=null and contactAddress != ''">
 				#{contactAddress}, 			
 			</if>
-			<if test="customerType1!=null and customerType1!=''">
+			<if test="customerType1!=null and customerType1 != ''">
 				#{customerType1}, 			
 			</if>
-			<if test="customerType2!=null and customerType2!=''">
+			<if test="customerType2!=null and customerType2 != ''">
 				#{customerType2}, 			
 			</if>
-			<if test="occupation!=null and occupation!=''">
+			<if test="occupation!=null and occupation != ''">
 				#{occupation}, 			
 			</if>
-			<if test="company!=null and company!=''">
+			<if test="company!=null and company != ''">
 				#{company}, 			
 			</if>
-			<if test="position!=null and position!=''">
+			<if test="position!=null and position != ''">
 				#{position}, 			
 			</if>
-			<if test="country!=null and country!=''">
+			<if test="country!=null and country != ''">
 				#{country}, 			
 			</if>
-			<if test="profitRevisitTime!=null and profitRevisitTime!=''">
+			<if test="profitRevisitTime!=null and profitRevisitTime != ''">
 				#{profitRevisitTime}, 			
 			</if>
-			<if test="photograph!=null and photograph!=''">
+			<if test="photograph!=null and photograph != ''">
 				#{photograph}, 			
 			</if>
-			<if test="email!=null and email!=''">
+			<if test="email!=null and email != ''">
 				#{email}, 			
 			</if>
-			<if test="qq!=null and qq!=''">
+			<if test="qq!=null and qq != ''">
 				#{qq}, 			
 			</if>
-			<if test="wechat!=null and wechat!=''">
+			<if test="wechat!=null and wechat != ''">
 				#{wechat}, 			
 			</if>
-			<if test="weibo!=null and weibo!=''">
+			<if test="weibo!=null and weibo != ''">
 				#{weibo}, 			
 			</if>
-			<if test="remark!=null and remark!=''">
+			<if test="remark!=null and remark != ''">
 				#{remark}, 			
 			</if>
-			<if test="delFlg!=null and delFlg!=''">
+			<if test="delFlg!=null and delFlg != ''">
 				#{delFlg}, 			
 			</if>
-			<if test="creator!=null and creator!=''">
+			<if test="creator!=null and creator != ''">
 				#{creator}, 			
 			</if>
-			<if test="createTime!=null and createTime!=''">
+			<if test="createTime!=null">
 				#{createTime}, 			
 			</if>
-			<if test="modifier!=null and modifier!=''">
+			<if test="modifier!=null and modifier != ''">
 				#{modifier}, 			
 			</if>
-			<if test="modifyTime!=null and modifyTime!=''">
+			<if test="modifyTime!=null">
 				#{modifyTime}			
 			</if>
 	     </trim>
@@ -437,106 +437,106 @@
 	<update id="update" parameterType="com.haima.crm.entity.Customer">
 		update t_customer 
 		<set>
-			<if test="customerName != null and customerName!=''">
+			<if test="customerName != null and customerName != ''">
 				`customer_name` = #{customerName}, 			
 			</if>
-			<if test="sex != null and sex!=''">
+			<if test="sex != null and sex != ''">
 				`sex` = #{sex}, 			
 			</if>
-			<if test="maritalStatus != null and maritalStatus!=''">
+			<if test="maritalStatus != null and maritalStatus != ''">
 				`marital_status` = #{maritalStatus}, 			
 			</if>
-			<if test="idType != null and idType!=''">
+			<if test="idType != null and idType != ''">
 				`id_type` = #{idType}, 			
 			</if>
-			<if test="idNo != null and idNo!=''">
+			<if test="idNo != null and idNo != ''">
 				`id_no` = #{idNo}, 			
 			</if>
-			<if test="birthday != null and birthday!=''">
+			<if test="birthday != null and birthday != ''">
 				`birthday` = #{birthday}, 			
 			</if>
-			<if test="phone != null and phone!=''">
+			<if test="phone != null and phone != ''">
 				`phone` = #{phone}, 			
 			</if>
-			<if test="companyPhone != null and companyPhone!=''">
+			<if test="companyPhone != null and companyPhone != ''">
 				`company_phone` = #{companyPhone}, 			
 			</if>
-			<if test="familyPhone != null and familyPhone!=''">
+			<if test="familyPhone != null and familyPhone != ''">
 				`family_phone` = #{familyPhone}, 			
 			</if>
-			<if test="address != null and address!=''">
+			<if test="address != null and address != ''">
 				`address` = #{address}, 			
 			</if>
-			<if test="zipcode != null and zipcode!=''">
+			<if test="zipcode != null and zipcode != ''">
 				`zipcode` = #{zipcode}, 			
 			</if>
-			<if test="province != null and province!=''">
+			<if test="province != null and province != 0 ">
 				`province` = #{province}, 			
 			</if>
-			<if test="city != null and city!=''">
+			<if test="city != null and city != 0 ">
 				`city` = #{city}, 			
 			</if>
-			<if test="district != null and district!=''">
+			<if test="district != null and district != 0 ">
 				`district` = #{district}, 			
 			</if>
-			<if test="contact != null and contact!=''">
+			<if test="contact != null and contact != ''">
 				`contact` = #{contact}, 			
 			</if>
-			<if test="contactAddress != null and contactAddress!=''">
+			<if test="contactAddress != null and contactAddress != ''">
 				`contact_address` = #{contactAddress}, 			
 			</if>
-			<if test="customerType1 != null and customerType1!=''">
+			<if test="customerType1 != null and customerType1 != ''">
 				`customer_type1` = #{customerType1}, 			
 			</if>
-			<if test="customerType2 != null and customerType2!=''">
+			<if test="customerType2 != null and customerType2 != ''">
 				`customer_type2` = #{customerType2}, 			
 			</if>
-			<if test="occupation != null and occupation!=''">
+			<if test="occupation != null and occupation != ''">
 				`occupation` = #{occupation}, 			
 			</if>
-			<if test="company != null and company!=''">
+			<if test="company != null and company != ''">
 				`company` = #{company}, 			
 			</if>
-			<if test="position != null and position!=''">
+			<if test="position != null and position != ''">
 				`position` = #{position}, 			
 			</if>
-			<if test="country != null and country!=''">
+			<if test="country != null and country != ''">
 				`country` = #{country}, 			
 			</if>
-			<if test="profitRevisitTime != null and profitRevisitTime!=''">
+			<if test="profitRevisitTime != null and profitRevisitTime != ''">
 				`profit_revisit_time` = #{profitRevisitTime}, 			
 			</if>
-			<if test="photograph != null and photograph!=''">
+			<if test="photograph != null and photograph != ''">
 				`photograph` = #{photograph}, 			
 			</if>
-			<if test="email != null and email!=''">
+			<if test="email != null and email != ''">
 				`email` = #{email}, 			
 			</if>
-			<if test="qq != null and qq!=''">
+			<if test="qq != null and qq != ''">
 				`qq` = #{qq}, 			
 			</if>
-			<if test="wechat != null and wechat!=''">
+			<if test="wechat != null and wechat != ''">
 				`wechat` = #{wechat}, 			
 			</if>
-			<if test="weibo != null and weibo!=''">
+			<if test="weibo != null and weibo != ''">
 				`weibo` = #{weibo}, 			
 			</if>
-			<if test="remark != null and remark!=''">
+			<if test="remark != null and remark != ''">
 				`remark` = #{remark}, 			
 			</if>
-			<if test="delFlg != null and delFlg!=''">
+			<if test="delFlg != null and delFlg != ''">
 				`del_flg` = #{delFlg}, 			
 			</if>
-			<if test="creator != null and creator!=''">
+			<if test="creator != null and creator != ''">
 				`creator` = #{creator}, 			
 			</if>
-			<if test="createTime != null and createTime!=''">
+			<if test="createTime != null">
 				`create_time` = #{createTime}, 			
 			</if>
-			<if test="modifier != null and modifier!=''">
+			<if test="modifier != null and modifier != ''">
 				`modifier` = #{modifier}, 			
 			</if>
-			<if test="modifyTime != null and modifyTime!=''">
+			<if test="modifyTime != null">
 				`modify_time` = #{modifyTime}			
 			</if>
 		</set>
