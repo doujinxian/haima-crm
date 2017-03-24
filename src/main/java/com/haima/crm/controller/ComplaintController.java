@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.haima.crm.constants.CommonConstants;
 import com.haima.crm.entity.Complaint;
+import com.haima.crm.entity.ComplaintContent;
+import com.haima.crm.entity.CustomerContact;
+import com.haima.crm.service.ComplaintContentService;
 import com.haima.crm.service.ComplaintService;
+import com.haima.crm.service.CustomerContactService;
 import com.haima.crm.utils.DateConvertUtils;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
@@ -34,13 +39,15 @@ import com.haima.crm.utils.Result;
 public class ComplaintController {
 	@Autowired
 	private ComplaintService complaintService;
+	@Autowired
+	private ComplaintContentService complaintContentService;
 
-	@InitBinder
+	/*@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(DateConvertUtils.FORMAT_DATE_19);
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-	}
+	}*/
 
 	/**
 	 * 列表
@@ -64,7 +71,11 @@ public class ComplaintController {
 	@RequestMapping("/info/{id}")
 	public Result info(@PathVariable(value = "id") Long id) {
 		Complaint complaint = complaintService.queryObject(id);
-
+		if(complaint!=null){
+			ComplaintContent cc = new ComplaintContent();
+			cc.setComplainCode(complaint.getComplainCode());
+			complaint.setComplaintContents(complaintContentService.queryList(cc));
+		}
 		return Result.ok().put("complaint", complaint);
 	}
 
@@ -74,8 +85,10 @@ public class ComplaintController {
 	@ResponseBody
 	@RequestMapping("/save")
 	public Result save(@RequestBody Complaint complaint) {
+		complaint.setComplainCode("C"+System.currentTimeMillis());
 		complaintService.save(complaint);
-
+		//新增或修改投诉内容
+		complaintContentService.saveOrUpdateList(complaint,complaint.getComplaintContents());
 		return Result.ok();
 	}
 
@@ -86,6 +99,8 @@ public class ComplaintController {
 	@RequestMapping("/update")
 	public Result update(@RequestBody Complaint complaint) {
 		complaintService.update(complaint);
+		//新增或修改投诉内容
+		complaintContentService.saveOrUpdateList(complaint,complaint.getComplaintContents());
 		return Result.ok();
 	}
 

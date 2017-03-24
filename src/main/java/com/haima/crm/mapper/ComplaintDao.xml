@@ -102,6 +102,7 @@
 	<sql id="Complaint_condition">
 		<where>
         <trim suffix="" suffixOverrides="and">
+        	`del_flag` = 0 and
 			<if test="complainCode != null and complainCode != ''">
 				`complain_code` = #{complainCode} and 			
 			</if>
@@ -219,9 +220,6 @@
 			<if test="customerLevel != null and customerLevel != ''">
 				`customer_level` = #{customerLevel} and 			
 			</if>
-			<if test="delFlag != null and delFlag != 0 ">
-				`del_flag` = #{delFlag} and 			
-			</if>
 			<if test="createBy != null and createBy != ''">
 				`create_by` = #{createBy} and 			
 			</if>
@@ -243,7 +241,7 @@
 		<include refid="Complaint_columns" />
 		from t_complaint 
 		where
-		id = #{value}
+		id = #{value} and `del_flag` = 0 
 	</select>
 
 	<select id="queryList" resultMap="RM_Complaint">

@@ -15,7 +15,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @date 2017-03-23 19:55:47
  */
 @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
-public class ComplaintContent implements Serializable {
+public class ComplaintContent extends PageVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//序号

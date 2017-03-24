@@ -44,6 +44,7 @@
 	<sql id="ComplaintDelay_condition">
 		<where>
         <trim suffix="" suffixOverrides="and">
+        	`del_flag` = 0 and
 			<if test="complainId != null and complainId != 0 ">
 				`complain_id` = #{complainId} and 			
 			</if>
@@ -68,9 +69,6 @@
 			<if test="checkDate != null">
 				`check_date` = #{checkDate} and 			
 			</if>
-			<if test="delFlag != null and delFlag != 0 ">
-				`del_flag` = #{delFlag} and 			
-			</if>
 			<if test="createBy != null and createBy != ''">
 				`create_by` = #{createBy} and 			
 			</if>
@@ -92,7 +90,7 @@
 		<include refid="ComplaintDelay_columns" />
 		from t_complaint_delay 
 		where
-		id = #{value}
+		id = #{value} and `del_flag` = 0
 	</select>
 
 	<select id="queryList" resultMap="RM_ComplaintDelay">

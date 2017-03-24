@@ -2,6 +2,7 @@ package com.haima.crm.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
@@ -104,6 +105,9 @@ public class Complaint extends PageVo implements Serializable {
 	private String updateBy;
 	// 更新时间
 	private Date updateTime;
+
+	// 投诉内容
+	List<ComplaintContent> complaintContents;
 
 	/**
 	 * 设置：序号
@@ -715,6 +719,14 @@ public class Complaint extends PageVo implements Serializable {
 
 	public void setComplainTimeEnd(Date complainTimeEnd) {
 		this.complainTimeEnd = complainTimeEnd;
+	}
+
+	public List<ComplaintContent> getComplaintContents() {
+		return complaintContents;
+	}
+
+	public void setComplaintContents(List<ComplaintContent> complaintContents) {
+		this.complaintContents = complaintContents;
 	}
 
 }
