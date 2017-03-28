@@ -8,22 +8,22 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 
 /**
- * 记录投诉内容信息
+ * 投诉单处理记录
  * 
  * @author doujinxian
  * @email doujinxian@126.com
  * @date 2017-03-23 19:55:47
  */
 @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
-public class ComplaintContent extends PageVo implements Serializable {
+public class ComplaintDealLog extends PageVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//序号
 	private Integer id;
 	//投诉单号
 	private String complainCode;
-	//投诉内容
-	private String complainContent;
+	//处理记录
+	private String content;
 	//删除标识
 	private Integer delFlag;
 	//创建人
@@ -59,17 +59,12 @@ public class ComplaintContent extends PageVo implements Serializable {
 	public String getComplainCode() {
 		return complainCode;
 	}
-	/**
-	 * 设置：投诉内容
-	 */
-	public void setComplainContent(String complainContent) {
-		this.complainContent = complainContent;
+	
+	public String getContent() {
+		return content;
 	}
-	/**
-	 * 获取：投诉内容
-	 */
-	public String getComplainContent() {
-		return complainContent;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	/**
 	 * 设置：删除标识

@@ -30,11 +30,6 @@ public class ComplaintFlowController {
 	@Autowired
 	private ComplaintFlowService complaintFlowService;
 	
-	@RequestMapping("/complaintflow.html")
-	public String list(){
-		return "complaintflow/complaintflow.html";
-	}
-	
 	/**
 	 * 列表
 	 */

@@ -30,11 +30,6 @@ public class CustomerCarController {
 	@Autowired
 	private CustomerCarService customerCarService;
 	
-	@RequestMapping("/customercar.html")
-	public String list(){
-		return "customercar/customercar.html";
-	}
-	
 	/**
 	 * 列表
 	 */

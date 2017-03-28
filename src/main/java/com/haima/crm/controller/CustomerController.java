@@ -30,11 +30,6 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 	
-	@RequestMapping("/customer.html")
-	public String list(){
-		return "customer/customer.html";
-	}
-	
 	/**
 	 * 列表
 	 */

@@ -89,8 +89,8 @@ public class Complaint extends PageVo implements Serializable {
 	private String recordBy;
 	// 销售服务店
 	private String salesServicesStore;
-	// 预计完成时间
-	private Date estimateFinishTime;
+	// 投诉内容
+	private String complaintContent;
 	// 满意度
 	private String satisfactionDegree;
 	// 客户级别
@@ -107,7 +107,7 @@ public class Complaint extends PageVo implements Serializable {
 	private Date updateTime;
 
 	// 投诉内容
-	List<ComplaintContent> complaintContents;
+	List<ComplaintDealLog> complaintDealLogs;
 
 	/**
 	 * 设置：序号
@@ -593,18 +593,13 @@ public class Complaint extends PageVo implements Serializable {
 		return salesServicesStore;
 	}
 
-	/**
-	 * 设置：预计完成时间
-	 */
-	public void setEstimateFinishTime(Date estimateFinishTime) {
-		this.estimateFinishTime = estimateFinishTime;
+
+	public String getComplaintContent() {
+		return complaintContent;
 	}
 
-	/**
-	 * 获取：预计完成时间
-	 */
-	public Date getEstimateFinishTime() {
-		return estimateFinishTime;
+	public void setComplaintContent(String complaintContent) {
+		this.complaintContent = complaintContent;
 	}
 
 	/**
@@ -721,12 +716,14 @@ public class Complaint extends PageVo implements Serializable {
 		this.complainTimeEnd = complainTimeEnd;
 	}
 
-	public List<ComplaintContent> getComplaintContents() {
-		return complaintContents;
+	public List<ComplaintDealLog> getComplaintDealLogs() {
+		return complaintDealLogs;
 	}
 
-	public void setComplaintContents(List<ComplaintContent> complaintContents) {
-		this.complaintContents = complaintContents;
+	public void setComplaintDealLogs(List<ComplaintDealLog> complaintDealLogs) {
+		this.complaintDealLogs = complaintDealLogs;
 	}
+
+	
 
 }

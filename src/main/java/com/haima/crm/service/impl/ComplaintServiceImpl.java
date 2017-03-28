@@ -3,12 +3,15 @@ package com.haima.crm.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import com.haima.crm.dao.ComplaintDao;
 import com.haima.crm.entity.Complaint;
 import com.haima.crm.service.ComplaintService;
+import com.haima.crm.utils.DateConvertUtils;
 
 
 
@@ -44,6 +47,12 @@ public class ComplaintServiceImpl implements ComplaintService {
 	
 	@Override
 	public void save(Complaint complaint){
+		Date now = new Date();
+		//TODO
+		complaint.setComplainCode("C"+DateConvertUtils.formatDate(DateConvertUtils.DF_TO_DAY_2)+new Random().nextInt(9000)+1000);
+		complaint.setCreateTime(now);
+		complaint.setUpdateTime(now);
+		complaint.setComplainTime(now);
 		complaintDao.save(complaint);
 	}
 	

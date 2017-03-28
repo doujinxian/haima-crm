@@ -1,29 +1,18 @@
 package com.haima.crm.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.haima.crm.constants.CommonConstants;
 import com.haima.crm.entity.Complaint;
-import com.haima.crm.entity.ComplaintContent;
-import com.haima.crm.entity.CustomerContact;
-import com.haima.crm.service.ComplaintContentService;
+import com.haima.crm.entity.ComplaintDealLog;
+import com.haima.crm.service.ComplaintDealLogService;
 import com.haima.crm.service.ComplaintService;
-import com.haima.crm.service.CustomerContactService;
-import com.haima.crm.utils.DateConvertUtils;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
 
@@ -40,7 +29,7 @@ public class ComplaintController {
 	@Autowired
 	private ComplaintService complaintService;
 	@Autowired
-	private ComplaintContentService complaintContentService;
+	private ComplaintDealLogService complaintDealLogService;
 
 	/*@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -71,10 +60,11 @@ public class ComplaintController {
 	@RequestMapping("/info/{id}")
 	public Result info(@PathVariable(value = "id") Long id) {
 		Complaint complaint = complaintService.queryObject(id);
+		//查询处理记录
 		if(complaint!=null){
-			ComplaintContent cc = new ComplaintContent();
+			ComplaintDealLog cc = new ComplaintDealLog();
 			cc.setComplainCode(complaint.getComplainCode());
-			complaint.setComplaintContents(complaintContentService.queryList(cc));
+			complaint.setComplaintDealLogs(complaintDealLogService.queryList(cc));
 		}
 		return Result.ok().put("complaint", complaint);
 	}
@@ -87,8 +77,8 @@ public class ComplaintController {
 	public Result save(@RequestBody Complaint complaint) {
 		complaint.setComplainCode("C"+System.currentTimeMillis());
 		complaintService.save(complaint);
-		//新增或修改投诉内容
-		complaintContentService.saveOrUpdateList(complaint,complaint.getComplaintContents());
+		//新增或修改处理记录
+		complaintDealLogService.saveOrUpdateList(complaint,complaint.getComplaintDealLogs());
 		return Result.ok();
 	}
 
@@ -99,8 +89,8 @@ public class ComplaintController {
 	@RequestMapping("/update")
 	public Result update(@RequestBody Complaint complaint) {
 		complaintService.update(complaint);
-		//新增或修改投诉内容
-		complaintContentService.saveOrUpdateList(complaint,complaint.getComplaintContents());
+		//新增或修改处理记录
+		complaintDealLogService.saveOrUpdateList(complaint,complaint.getComplaintDealLogs());
 		return Result.ok();
 	}
 

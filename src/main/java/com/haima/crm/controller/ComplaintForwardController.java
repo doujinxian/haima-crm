@@ -30,11 +30,6 @@ public class ComplaintForwardController {
 	@Autowired
 	private ComplaintForwardService complaintForwardService;
 	
-	@RequestMapping("/complaintforward.html")
-	public String list(){
-		return "complaintforward/complaintforward.html";
-	}
-	
 	/**
 	 * 列表
 	 */

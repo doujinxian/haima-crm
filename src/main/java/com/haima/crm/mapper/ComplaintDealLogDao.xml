@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.haima.crm.dao.ComplaintContentDao">
+<mapper namespace="com.haima.crm.dao.ComplaintDealLogDao">
 	
-	<resultMap id="RM_ComplaintContent" type="com.haima.crm.entity.ComplaintContent">
+	<resultMap id="RM_ComplaintDealLog" type="com.haima.crm.entity.ComplaintDealLog">
 			<result property="id" column="id"/>
 			<result property="complainCode" column="complain_code"/>
-			<result property="complainContent" column="complain_content"/>
+			<result property="content" column="content"/>
 			<result property="delFlag" column="del_flag"/>
 			<result property="createBy" column="create_by"/>
 			<result property="createTime" column="create_time"/>
@@ -15,11 +15,11 @@
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="ComplaintContent_columns">
+	<sql id="ComplaintDealLog_columns">
 	    <![CDATA[
 			`id`, 			
 			`complain_code`, 			
-			`complain_content`, 			
+			`content`, 			
 			`del_flag`, 			
 			`create_by`, 			
 			`create_time`, 			
@@ -29,15 +29,15 @@
 	</sql>
 	
 	<!-- 用于where查询公用抽取的列 -->
-	<sql id="ComplaintContent_condition">
+	<sql id="ComplaintDealLog_condition">
 		<where>
         <trim suffix="" suffixOverrides="and">
         	`del_flag` = 0 and 
 			<if test="complainCode != null and complainCode != ''">
 				`complain_code` = #{complainCode} and 			
 			</if>
-			<if test="complainContent != null and complainContent != ''">
-				`complain_content` = #{complainContent} and 			
+			<if test="content != null and content != ''">
+				`content` = #{content} and 			
 			</if>
 			<if test="createBy != null and createBy != ''">
 				`create_by` = #{createBy} and 			
@@ -55,19 +55,19 @@
 		</where>
 	</sql>
 	
-	<select id="queryObject" resultMap="RM_ComplaintContent">
+	<select id="queryObject" resultMap="RM_ComplaintDealLog">
 		select 
-		<include refid="ComplaintContent_columns" />
-		from t_complaint_content 
+		<include refid="ComplaintDealLog_columns" />
+		from t_complaint_deal_log 
 		where
 		id = #{value} and `del_flag` = 0
 	</select>
 
-	<select id="queryList" resultMap="RM_ComplaintContent">
+	<select id="queryList" resultMap="RM_ComplaintDealLog">
 		select 
-		<include refid="ComplaintContent_columns" />
-		from t_complaint_content
-		<include refid="ComplaintContent_condition"/> 
+		<include refid="ComplaintDealLog_columns" />
+		from t_complaint_deal_log
+		<include refid="ComplaintDealLog_condition"/> 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
@@ -76,19 +76,19 @@
  	<select id="queryTotal" resultType="java.lang.Integer">
 		select 
 		count(1) 
-		from t_complaint_content 
-		<include refid="ComplaintContent_condition"/>
+		from t_complaint_deal_log 
+		<include refid="ComplaintDealLog_condition"/>
 	</select>
 	 
-	<insert id="save" parameterType="com.haima.crm.entity.ComplaintContent" useGeneratedKeys="true" keyProperty="id">
-		insert into t_complaint_content
+	<insert id="save" parameterType="com.haima.crm.entity.ComplaintDealLog" useGeneratedKeys="true" keyProperty="id">
+		insert into t_complaint_deal_log
 		(
 		<trim suffix="" suffixOverrides=",">
 			<if test="complainCode!=null and complainCode != ''">
 				complain_code, 			
 			</if>
-			<if test="complainContent!=null and complainContent != ''">
-				complain_content, 			
+			<if test="content!=null and content != ''">
+				content, 			
 			</if>
 			<if test="delFlag!=null and delFlag != 0 ">
 				del_flag, 			
@@ -113,8 +113,8 @@
 			<if test="complainCode!=null and complainCode != ''">
 				#{complainCode}, 			
 			</if>
-			<if test="complainContent!=null and complainContent != ''">
-				#{complainContent}, 			
+			<if test="content!=null and content != ''">
+				#{content}, 			
 			</if>
 			<if test="delFlag!=null and delFlag != 0 ">
 				#{delFlag}, 			
@@ -135,14 +135,14 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.haima.crm.entity.ComplaintContent">
-		update t_complaint_content 
+	<update id="update" parameterType="com.haima.crm.entity.ComplaintDealLog">
+		update t_complaint_deal_log 
 		<set>
 			<if test="complainCode != null and complainCode != ''">
 				`complain_code` = #{complainCode}, 			
 			</if>
-			<if test="complainContent != null and complainContent != ''">
-				`complain_content` = #{complainContent}, 			
+			<if test="content != null and content != ''">
+				`content` = #{content}, 			
 			</if>
 			<if test="delFlag != null and delFlag != 0 ">
 				`del_flag` = #{delFlag}, 			
@@ -164,11 +164,11 @@
 	</update>
 	
 	<delete id="delete">
-		delete from t_complaint_content where id = #{value}
+		delete from t_complaint_deal_log where id = #{value}
 	</delete>
 	
 	<delete id="deleteBatch">
-		delete from t_complaint_content where id in 
+		delete from t_complaint_deal_log where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

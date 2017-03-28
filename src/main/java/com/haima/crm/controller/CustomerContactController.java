@@ -30,11 +30,6 @@ public class CustomerContactController {
 	@Autowired
 	private CustomerContactService customerContactService;
 	
-	@RequestMapping("/customercontact.html")
-	public String list(){
-		return "customercontact/customercontact.html";
-	}
-	
 	/**
 	 * 列表
 	 */

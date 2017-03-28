@@ -11,29 +11,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
-import com.haima.crm.entity.ComplaintContent;
-import com.haima.crm.service.ComplaintContentService;
+import com.haima.crm.entity.ComplaintDealLog;
+import com.haima.crm.service.ComplaintDealLogService;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
 
 
 /**
- * 记录投诉内容信息
+ * 投诉单处理记录
  * 
  * @author doujinxian
  * @email doujinxian@126.com
  * @date 2017-03-23 19:55:47
  */
 @Controller
-@RequestMapping("complaintcontent")
-public class ComplaintContentController {
+@RequestMapping("complaintdeallog")
+public class ComplaintDealLogController {
 	@Autowired
-	private ComplaintContentService complaintContentService;
-	
-	@RequestMapping("/complaintcontent.html")
-	public String list(){
-		return "complaintcontent/complaintcontent.html";
-	}
+	private ComplaintDealLogService complaintDealLogService;
 	
 	/**
 	 * 列表
@@ -46,10 +41,10 @@ public class ComplaintContentController {
 		map.put("limit", limit);
 		
 		//查询列表数据
-		List<ComplaintContent> complaintContentList = complaintContentService.queryList(map);
-		int total = complaintContentService.queryTotal(map);
+		List<ComplaintDealLog> complaintDealLogList = complaintDealLogService.queryList(map);
+		int total = complaintDealLogService.queryTotal(map);
 		
-		PageUtils pageUtil = new PageUtils(complaintContentList, total, limit, page);
+		PageUtils pageUtil = new PageUtils(complaintDealLogList, total, limit, page);
 		
 		return Result.ok().put("page", pageUtil);
 	}
@@ -61,9 +56,9 @@ public class ComplaintContentController {
 	@ResponseBody
 	@RequestMapping("/info/{id}")
 	public Result info(@PathVariable("id") Integer id){
-		ComplaintContent complaintContent = complaintContentService.queryObject(id);
+		ComplaintDealLog complaintDealLog = complaintDealLogService.queryObject(id);
 		
-		return Result.ok().put("complaintContent", complaintContent);
+		return Result.ok().put("complaintDealLog", complaintDealLog);
 	}
 	
 	/**
@@ -71,8 +66,8 @@ public class ComplaintContentController {
 	 */
 	@ResponseBody
 	@RequestMapping("/save")
-	public Result save(@RequestBody ComplaintContent complaintContent){
-		complaintContentService.save(complaintContent);
+	public Result save(@RequestBody ComplaintDealLog complaintDealLog){
+		complaintDealLogService.save(complaintDealLog);
 		
 		return Result.ok();
 	}
@@ -82,8 +77,8 @@ public class ComplaintContentController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	public Result update(@RequestBody ComplaintContent complaintContent){
-		complaintContentService.update(complaintContent);
+	public Result update(@RequestBody ComplaintDealLog complaintDealLog){
+		complaintDealLogService.update(complaintDealLog);
 		
 		return Result.ok();
 	}
@@ -94,7 +89,7 @@ public class ComplaintContentController {
 	@ResponseBody
 	@RequestMapping("/delete")
 	public Result delete(@RequestBody Integer[] ids){
-		complaintContentService.deleteBatch(ids);
+		complaintDealLogService.deleteBatch(ids);
 		
 		return Result.ok();
 	}

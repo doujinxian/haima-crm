@@ -39,7 +39,7 @@
 			<result property="traceBy" column="trace_by"/>
 			<result property="recordBy" column="record_by"/>
 			<result property="salesServicesStore" column="sales_services_store"/>
-			<result property="estimateFinishTime" column="estimate_finish_time"/>
+			<result property="complaintContent" column="complaint_content"/>
 			<result property="satisfactionDegree" column="satisfaction_degree"/>
 			<result property="customerLevel" column="customer_level"/>
 			<result property="delFlag" column="del_flag"/>
@@ -87,7 +87,7 @@
 			`trace_by`, 			
 			`record_by`, 			
 			`sales_services_store`, 			
-			`estimate_finish_time`, 			
+			`complaint_content`, 			
 			`satisfaction_degree`, 			
 			`customer_level`, 			
 			`del_flag`, 			
@@ -211,8 +211,8 @@
 			<if test="salesServicesStore != null and salesServicesStore != ''">
 				`sales_services_store` = #{salesServicesStore} and 			
 			</if>
-			<if test="estimateFinishTime != null">
-				`estimate_finish_time` = #{estimateFinishTime} and 			
+			<if test="complaintContent != null">
+				`complaint_content` = #{complaintContent} and 			
 			</if>
 			<if test="satisfactionDegree != null and satisfactionDegree != ''">
 				`satisfaction_degree` = #{satisfactionDegree} and 			
@@ -367,8 +367,8 @@
 			<if test="salesServicesStore!=null and salesServicesStore != ''">
 				sales_services_store, 			
 			</if>
-			<if test="estimateFinishTime!=null">
-				estimate_finish_time, 			
+			<if test="complaintContent!=null">
+				complaint_content, 			
 			</if>
 			<if test="satisfactionDegree!=null and satisfactionDegree != ''">
 				satisfaction_degree, 			
@@ -498,8 +498,8 @@
 			<if test="salesServicesStore!=null and salesServicesStore != ''">
 				#{salesServicesStore}, 			
 			</if>
-			<if test="estimateFinishTime!=null">
-				#{estimateFinishTime}, 			
+			<if test="complaintContent!=null">
+				#{complaintContent}, 			
 			</if>
 			<if test="satisfactionDegree!=null and satisfactionDegree != ''">
 				#{satisfactionDegree}, 			
@@ -631,8 +631,8 @@
 			<if test="salesServicesStore != null and salesServicesStore != ''">
 				`sales_services_store` = #{salesServicesStore}, 			
 			</if>
-			<if test="estimateFinishTime != null">
-				`estimate_finish_time` = #{estimateFinishTime}, 			
+			<if test="complaintContent != null">
+				`complaint_content` = #{complaintContent}, 			
 			</if>
 			<if test="satisfactionDegree != null and satisfactionDegree != ''">
 				`satisfaction_degree` = #{satisfactionDegree}, 			

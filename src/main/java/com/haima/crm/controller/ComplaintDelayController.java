@@ -30,11 +30,6 @@ public class ComplaintDelayController {
 	@Autowired
 	private ComplaintDelayService complaintDelayService;
 	
-	@RequestMapping("/complaintdelay.html")
-	public String list(){
-		return "complaintdelay/complaintdelay.html";
-	}
-	
 	/**
 	 * 列表
 	 */
