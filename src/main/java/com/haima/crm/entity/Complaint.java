@@ -55,10 +55,16 @@ public class Complaint extends PageVo implements Serializable {
 	private String salesServicesService;
 	// 服务店代码
 	private String salesServicesCode;
-	// 投诉状态
+	// 投诉状态 (0:未处理,1:处理中  3:申请关闭,4:已关闭)
 	private String complainStatus;
-	// 回访状态
+	// 回访状态 (0:待回访 1:已回访 2:回访成功 3:回访失败);
 	private String callbackStatus;
+	// 转发状态 0 ：未转发、1：已经发
+	private String forwardStatus;
+	// 申请延迟状态(0 ：未延迟、1：已申请 :2： 已批复)
+	private String delayStatus;
+	// 分配状态(0：未分配:1：已分配:2:已更换 )
+	private String distributeStatus;
 	// 回访时间
 	private Date callbackTime;
 	// 车辆颜色
@@ -107,7 +113,11 @@ public class Complaint extends PageVo implements Serializable {
 	private Date updateTime;
 
 	// 投诉内容
-	List<ComplaintDealLog> complaintDealLogs;
+	private List<ComplaintDealLog> complaintDealLogs;
+	//延迟记录
+	private ComplaintDelay complaintDelay;
+	//记录投诉审核信息
+	private ComplaintFlow complaintFlow;
 
 	/**
 	 * 设置：序号
@@ -722,6 +732,46 @@ public class Complaint extends PageVo implements Serializable {
 
 	public void setComplaintDealLogs(List<ComplaintDealLog> complaintDealLogs) {
 		this.complaintDealLogs = complaintDealLogs;
+	}
+
+	public String getForwardStatus() {
+		return forwardStatus;
+	}
+
+	public void setForwardStatus(String forwardStatus) {
+		this.forwardStatus = forwardStatus;
+	}
+
+	public String getDelayStatus() {
+		return delayStatus;
+	}
+
+	public void setDelayStatus(String delayStatus) {
+		this.delayStatus = delayStatus;
+	}
+
+	public String getDistributeStatus() {
+		return distributeStatus;
+	}
+
+	public void setDistributeStatus(String distributeStatus) {
+		this.distributeStatus = distributeStatus;
+	}
+
+	public ComplaintDelay getComplaintDelay() {
+		return complaintDelay;
+	}
+
+	public void setComplaintDelay(ComplaintDelay complaintDelay) {
+		this.complaintDelay = complaintDelay;
+	}
+
+	public ComplaintFlow getComplaintFlow() {
+		return complaintFlow;
+	}
+
+	public void setComplaintFlow(ComplaintFlow complaintFlow) {
+		this.complaintFlow = complaintFlow;
 	}
 
 	

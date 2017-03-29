@@ -24,6 +24,9 @@
 			<result property="salesServicesCode" column="sales_services_code"/>
 			<result property="complainStatus" column="complain_status"/>
 			<result property="callbackStatus" column="callback_status"/>
+			<result property="forwardStatus" column="forward_status"/>
+			<result property="delayStatus" column="delay_status"/>
+			<result property="distributeStatus" column="distribute_status"/>
 			<result property="callbackTime" column="callback_time"/>
 			<result property="carColor" column="car_color"/>
 			<result property="mileage" column="mileage"/>
@@ -72,6 +75,9 @@
 			`sales_services_code`,	
 			`complain_status`, 			
 			`callback_status`, 			
+			`forward_status`, 			
+			`delay_status`, 			
+			`distribute_status`, 			
 			`callback_time`, 			
 			`car_color`, 			
 			`mileage`, 			
@@ -165,6 +171,15 @@
 			</if>
 			<if test="callbackStatus != null and callbackStatus != ''">
 				`callback_status` = #{callbackStatus} and 			
+			</if>
+			<if test="forwardStatus != null and forwardStatus != ''">
+				`forward_status` = #{forwardStatus} and 			
+			</if>
+			<if test="delayStatus != null and delayStatus != ''">
+				`delay_status` = #{delayStatus} and 			
+			</if>
+			<if test="distributeStatus != null and distributeStatus != ''">
+				`distribute_status` = #{distributeStatus} and 			
 			</if>
 			<if test="callbackTime != null">
 				`callback_time` = #{callbackTime} and 			
@@ -322,6 +337,15 @@
 			<if test="callbackStatus!=null and callbackStatus != ''">
 				callback_status, 			
 			</if>
+			<if test="forwardStatus!=null and forwardStatus != ''">
+				forward_status, 			
+			</if>
+			<if test="delayStatus!=null and delayStatus != ''">
+				delay_status, 			
+			</if>
+			<if test="distributeStatus!=null and distributeStatus != ''">
+				distribute_status, 			
+			</if>
 			<if test="callbackTime!=null">
 				callback_time, 			
 			</if>
@@ -452,6 +476,15 @@
 			</if>
 			<if test="callbackStatus!=null and callbackStatus != ''">
 				#{callbackStatus}, 			
+			</if>
+			<if test="forwardStatus!=null and forwardStatus != ''">
+				#{forwardStatus}, 			
+			</if>
+			<if test="delayStatus!=null and delayStatus != ''">
+				#{delayStatus}, 			
+			</if>
+			<if test="distributeStatus!=null and distributeStatus != ''">
+				#{distributeStatus}, 			
 			</if>
 			<if test="callbackTime!=null">
 				#{callbackTime}, 			
@@ -585,6 +618,15 @@
 			</if>
 			<if test="callbackStatus != null and callbackStatus != ''">
 				`callback_status` = #{callbackStatus}, 			
+			</if>
+			<if test="forwardStatus != null and forwardStatus != ''">
+				`forward_status` = #{forwardStatus}, 			
+			</if>
+			<if test="delayStatus != null and delayStatus != ''">
+				`delay_status` = #{delayStatus}, 			
+			</if>
+			<if test="distributeStatus != null and distributeStatus != ''">
+				`distribute_status` = #{distributeStatus}, 			
 			</if>
 			<if test="callbackTime != null">
 				`callback_time` = #{callbackTime}, 			

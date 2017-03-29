@@ -58,6 +58,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 	
 	@Override
 	public void update(Complaint complaint){
+		complaint.setUpdateTime(new Date());
 		complaintDao.update(complaint);
 	}
 	

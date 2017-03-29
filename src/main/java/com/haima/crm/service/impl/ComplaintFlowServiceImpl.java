@@ -3,6 +3,7 @@ package com.haima.crm.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -34,11 +35,18 @@ public class ComplaintFlowServiceImpl implements ComplaintFlowService {
 	
 	@Override
 	public void save(ComplaintFlow complaintFlow){
+		Date now = new Date();
+		complaintFlow.setCreateTime(now);
+		complaintFlow.setUpdateTime(now);
+		complaintFlow.setPorposDate(now);
 		complaintFlowDao.save(complaintFlow);
 	}
 	
 	@Override
 	public void update(ComplaintFlow complaintFlow){
+		Date now = new Date();
+		complaintFlow.setUpdateTime(now);
+		complaintFlow.setCheckDate(now);
 		complaintFlowDao.update(complaintFlow);
 	}
 	

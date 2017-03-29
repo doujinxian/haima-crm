@@ -22,19 +22,19 @@ public class ComplaintDelay implements Serializable {
 	private Integer id;
 	//投诉单id
 	private Long complainId;
-	//投诉单号
-	private String complainCode;
+	//批复状态
+	private String replyStatus;
 	//申请日期
 	private Date porposDate;
 	//延迟理由
 	private String delayReason;
 	//预计完成时间
 	private Date estimateFinishTime;
-	//审核人
+	//批复人
 	private String checker;
-	//审核意见
+	//批复意见
 	private String checkInfo;
-	//审核日期
+	//批复日期
 	private Date checkDate;
 	//删除标识
 	private Integer delFlag;
@@ -72,16 +72,16 @@ public class ComplaintDelay implements Serializable {
 		return complainId;
 	}
 	/**
-	 * 设置：投诉单号
+	 * 设置：批复状态
 	 */
-	public void setComplainCode(String complainCode) {
-		this.complainCode = complainCode;
+	public void setReplyStatus(String replyStatus) {
+		this.replyStatus = replyStatus;
 	}
 	/**
-	 * 获取：投诉单号
+	 * 获取：批复状态
 	 */
-	public String getComplainCode() {
-		return complainCode;
+	public String getReplyStatus() {
+		return replyStatus;
 	}
 	/**
 	 * 设置：申请日期
@@ -120,37 +120,37 @@ public class ComplaintDelay implements Serializable {
 		return estimateFinishTime;
 	}
 	/**
-	 * 设置：审核人
+	 * 设置：批复人
 	 */
 	public void setChecker(String checker) {
 		this.checker = checker;
 	}
 	/**
-	 * 获取：审核人
+	 * 获取：批复人
 	 */
 	public String getChecker() {
 		return checker;
 	}
 	/**
-	 * 设置：审核意见
+	 * 设置：批复意见
 	 */
 	public void setCheckInfo(String checkInfo) {
 		this.checkInfo = checkInfo;
 	}
 	/**
-	 * 获取：审核意见
+	 * 获取：批复意见
 	 */
 	public String getCheckInfo() {
 		return checkInfo;
 	}
 	/**
-	 * 设置：审核日期
+	 * 设置：批复日期
 	 */
 	public void setCheckDate(Date checkDate) {
 		this.checkDate = checkDate;
 	}
 	/**
-	 * 获取：审核日期
+	 * 获取：批复日期
 	 */
 	public Date getCheckDate() {
 		return checkDate;

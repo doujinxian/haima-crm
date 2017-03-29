@@ -6,7 +6,7 @@
 	<resultMap id="RM_ComplaintDelay" type="com.haima.crm.entity.ComplaintDelay">
 			<result property="id" column="id"/>
 			<result property="complainId" column="complain_id"/>
-			<result property="complainCode" column="complain_code"/>
+			<result property="replyStatus" column="reply_status"/>
 			<result property="porposDate" column="porpos_date"/>
 			<result property="delayReason" column="delay_reason"/>
 			<result property="estimateFinishTime" column="estimate_finish_time"/>
@@ -25,7 +25,7 @@
 	    <![CDATA[
 			`id`, 			
 			`complain_id`, 			
-			`complain_code`, 			
+			`reply_status`, 			
 			`porpos_date`, 			
 			`delay_reason`, 			
 			`estimate_finish_time`, 			
@@ -48,8 +48,8 @@
 			<if test="complainId != null and complainId != 0 ">
 				`complain_id` = #{complainId} and 			
 			</if>
-			<if test="complainCode != null and complainCode != ''">
-				`complain_code` = #{complainCode} and 			
+			<if test="replyStatus != null and replyStatus != ''">
+				`reply_status` = #{replyStatus} and 			
 			</if>
 			<if test="porposDate != null">
 				`porpos_date` = #{porposDate} and 			
@@ -117,8 +117,8 @@
 			<if test="complainId!=null and complainId != 0 ">
 				complain_id, 			
 			</if>
-			<if test="complainCode!=null and complainCode != ''">
-				complain_code, 			
+			<if test="replyStatus!=null and replyStatus != ''">
+				reply_status, 			
 			</if>
 			<if test="porposDate!=null">
 				porpos_date, 			
@@ -161,8 +161,8 @@
 			<if test="complainId!=null and complainId != 0 ">
 				#{complainId}, 			
 			</if>
-			<if test="complainCode!=null and complainCode != ''">
-				#{complainCode}, 			
+			<if test="replyStatus!=null and replyStatus != ''">
+				#{replyStatus}, 			
 			</if>
 			<if test="porposDate!=null">
 				#{porposDate}, 			
@@ -207,8 +207,8 @@
 			<if test="complainId != null and complainId != 0 ">
 				`complain_id` = #{complainId}, 			
 			</if>
-			<if test="complainCode != null and complainCode != ''">
-				`complain_code` = #{complainCode}, 			
+			<if test="replyStatus != null and replyStatus != ''">
+				`reply_status` = #{replyStatus}, 			
 			</if>
 			<if test="porposDate != null">
 				`porpos_date` = #{porposDate}, 			

@@ -5,14 +5,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.stereotype.Controller;
 
+import com.haima.crm.constants.CommonConstants;
+import com.haima.crm.entity.Complaint;
 import com.haima.crm.entity.ComplaintFlow;
 import com.haima.crm.service.ComplaintFlowService;
+import com.haima.crm.service.ComplaintService;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
 
@@ -29,6 +32,8 @@ import com.haima.crm.utils.Result;
 public class ComplaintFlowController {
 	@Autowired
 	private ComplaintFlowService complaintFlowService;
+	@Autowired
+	private ComplaintService complaintService;
 	
 	/**
 	 * 列表
@@ -67,6 +72,17 @@ public class ComplaintFlowController {
 	@ResponseBody
 	@RequestMapping("/save")
 	public Result save(@RequestBody ComplaintFlow complaintFlow){
+		Long complainId = complaintFlow.getComplainId();
+		if(complainId==null){
+			return Result.error("complainId不能为空");
+		}
+		//修改投诉单延迟状态为已申请
+		Complaint complaint = new Complaint();
+		complaint.setId(complainId);
+		complaint.setComplainStatus(CommonConstants.COMPLAIN_STATUS_APPLY_CLOSE);
+		complaint.setCallbackStatus(complaintFlow.getCallbackStatus());
+		complaint.setCallbackTime(complaintFlow.getCallbackTime());
+		complaintService.update(complaint);
 		complaintFlowService.save(complaintFlow);
 		
 		return Result.ok();
@@ -78,6 +94,27 @@ public class ComplaintFlowController {
 	@ResponseBody
 	@RequestMapping("/update")
 	public Result update(@RequestBody ComplaintFlow complaintFlow){
+		String complaintStatus = null;
+		//申请通过，投诉单状态置为已关闭
+		if(CommonConstants.CHECK_STATUS_AGREE.endsWith(complaintFlow.getCheckStatus())){
+			complaintStatus = CommonConstants.COMPLAIN_STATUS_CLOSE;
+		}
+		//申请不通过，投诉单状态置为处理中
+		else if(CommonConstants.CHECK_STATUS_DISAGREE.endsWith(complaintFlow.getCheckStatus())){
+			complaintStatus = CommonConstants.COMPLAIN_STATUS_IN_DEAL;
+		}
+		if(complaintStatus!=null){
+			Long complainId = complaintFlow.getComplainId();
+			if(complainId==null){
+				return Result.error("complainId不能为空");
+			}
+			//修改投诉单延迟状态为已批复
+			Complaint complaint = new Complaint();
+			complaint.setId(complainId);
+			complaint.setComplainStatus(complaintStatus);
+			complaintService.update(complaint);
+		}
+		
 		complaintFlowService.update(complaintFlow);
 		
 		return Result.ok();

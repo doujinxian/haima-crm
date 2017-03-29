@@ -5,9 +5,11 @@
 	
 	<resultMap id="RM_ComplaintFlow" type="com.haima.crm.entity.ComplaintFlow">
 			<result property="id" column="id"/>
-			<result property="complainCode" column="complain_code"/>
-			<result property="checkType" column="check_type"/>
+			<result property="complainId" column="complain_id"/>
+			<result property="store" column="store"/>
 			<result property="proposer" column="proposer"/>
+			<result property="callbackStatus" column="callback_status"/>
+			<result property="callbackTime" column="callback_time"/>
 			<result property="checker" column="checker"/>
 			<result property="porposDate" column="porpos_date"/>
 			<result property="checkInfo" column="check_info"/>
@@ -23,9 +25,11 @@
 	<sql id="ComplaintFlow_columns">
 	    <![CDATA[
 			`id`, 			
-			`complain_code`, 			
-			`check_type`, 			
+			`complain_id`, 			
+			`store`, 			
 			`proposer`, 			
+			`callback_status`, 			
+			`callback_time`, 			
 			`checker`, 			
 			`porpos_date`, 			
 			`check_info`, 			
@@ -42,14 +46,20 @@
 	<sql id="ComplaintFlow_condition">
 		<where>
         <trim suffix="" suffixOverrides="and">
-			<if test="complainCode != null and complainCode != ''">
-				`complain_code` = #{complainCode} and 			
+			<if test="complainId != null and complainId != ''">
+				`complain_id` = #{complainId} and 			
 			</if>
-			<if test="checkType != null and checkType != 0 ">
-				`check_type` = #{checkType} and 			
+			<if test="store != null and store != '' ">
+				`store` = #{store} and 			
 			</if>
 			<if test="proposer != null and proposer != ''">
 				`proposer` = #{proposer} and 			
+			</if>
+			<if test="callbackStatus != null and callbackStatus != ''">
+				`callback_status` = #{callbackStatus} and 			
+			</if>
+			<if test="callbackTime != null">
+				`callback_time` = #{callbackTime} and 			
 			</if>
 			<if test="checker != null and checker != ''">
 				`checker` = #{checker} and 			
@@ -111,14 +121,20 @@
 		insert into t_complaint_flow
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="complainCode!=null and complainCode != ''">
-				complain_code, 			
+			<if test="complainId!=null and complainId != ''">
+				complain_id, 			
 			</if>
-			<if test="checkType!=null and checkType != 0 ">
-				check_type, 			
+			<if test="store!=null and store != '' ">
+				store, 			
 			</if>
 			<if test="proposer!=null and proposer != ''">
 				proposer, 			
+			</if>
+			<if test="callbackStatus!=null and callbackStatus != ''">
+				callback_status, 			
+			</if>
+			<if test="callbackTime!=null">
+				callback_time, 			
 			</if>
 			<if test="checker!=null and checker != ''">
 				checker, 			
@@ -152,14 +168,20 @@
 		values
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="complainCode!=null and complainCode != ''">
-				#{complainCode}, 			
+			<if test="complainId!=null and complainId != ''">
+				#{complainId}, 			
 			</if>
-			<if test="checkType!=null and checkType != 0 ">
-				#{checkType}, 			
+			<if test="store!=null and store != '' ">
+				#{store}, 			
 			</if>
 			<if test="proposer!=null and proposer != ''">
 				#{proposer}, 			
+			</if>
+			<if test="callbackStatus!=null and callbackStatus != ''">
+				#{callbackStatus}, 			
+			</if>
+			<if test="callbackTime!=null">
+				#{callbackTime}, 		
 			</if>
 			<if test="checker!=null and checker != ''">
 				#{checker}, 			
@@ -195,14 +217,20 @@
 	<update id="update" parameterType="com.haima.crm.entity.ComplaintFlow">
 		update t_complaint_flow 
 		<set>
-			<if test="complainCode != null and complainCode != ''">
-				`complain_code` = #{complainCode}, 			
+			<if test="complainId != null and complainId != ''">
+				`complain_id` = #{complainId}, 			
 			</if>
-			<if test="checkType != null and checkType != 0 ">
-				`check_type` = #{checkType}, 			
+			<if test="store != null and store != '' ">
+				`store` = #{store}, 			
 			</if>
 			<if test="proposer != null and proposer != ''">
 				`proposer` = #{proposer}, 			
+			</if>
+			<if test="callbackStatus!=null and callbackStatus != ''">
+				`callback_status` = #{callbackStatus}, 			
+			</if>
+			<if test="callbackTime!=null">
+				`callback_time` = #{callbackTime}, 		
 			</if>
 			<if test="checker != null and checker != ''">
 				`checker` = #{checker}, 			

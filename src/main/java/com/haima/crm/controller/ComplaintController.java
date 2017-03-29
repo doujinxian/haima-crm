@@ -1,6 +1,8 @@
 package com.haima.crm.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,9 +11,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.haima.crm.constants.CommonConstants;
 import com.haima.crm.entity.Complaint;
 import com.haima.crm.entity.ComplaintDealLog;
+import com.haima.crm.entity.ComplaintDelay;
+import com.haima.crm.entity.ComplaintFlow;
 import com.haima.crm.service.ComplaintDealLogService;
+import com.haima.crm.service.ComplaintDelayService;
+import com.haima.crm.service.ComplaintFlowService;
 import com.haima.crm.service.ComplaintService;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
@@ -29,14 +36,11 @@ public class ComplaintController {
 	@Autowired
 	private ComplaintService complaintService;
 	@Autowired
+	private ComplaintDelayService complaintDelayService;
+	@Autowired
+	private ComplaintFlowService complaintFlowService;
+	@Autowired
 	private ComplaintDealLogService complaintDealLogService;
-
-	/*@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat(DateConvertUtils.FORMAT_DATE_19);
-		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-	}*/
 
 	/**
 	 * 列表
@@ -60,11 +64,25 @@ public class ComplaintController {
 	@RequestMapping("/info/{id}")
 	public Result info(@PathVariable(value = "id") Long id) {
 		Complaint complaint = complaintService.queryObject(id);
-		//查询处理记录
 		if(complaint!=null){
-			ComplaintDealLog cc = new ComplaintDealLog();
-			cc.setComplainCode(complaint.getComplainCode());
-			complaint.setComplaintDealLogs(complaintDealLogService.queryList(cc));
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("complainId", id);
+			//查询延迟记录
+			if(!CommonConstants.DELAY_STATUS_DEFAULT.equals(complaint.getDelayStatus())){
+				List<ComplaintDelay> delays = complaintDelayService.queryList(map);
+				if(delays.size()>0){
+					complaint.setComplaintDelay(delays.get(delays.size()-1));
+				}
+			}
+			//查询审核记录
+			if(!CommonConstants.COMPLAIN_STATUS_DEFAULT.equals(complaint.getComplainStatus()) && !CommonConstants.COMPLAIN_STATUS_IN_DEAL.equals(complaint.getComplainStatus())){
+				List<ComplaintFlow> flows = complaintFlowService.queryList(map);
+				if(flows.size()>0){
+					complaint.setComplaintFlow(flows.get(flows.size()-1));
+				}
+			}
+			//查询处理记录
+			complaint.setComplaintDealLogs(complaintDealLogService.queryList(map));
 		}
 		return Result.ok().put("complaint", complaint);
 	}
@@ -88,9 +106,16 @@ public class ComplaintController {
 	@ResponseBody
 	@RequestMapping("/update")
 	public Result update(@RequestBody Complaint complaint) {
+		List<ComplaintDealLog> dealLogs = complaint.getComplaintDealLogs();
+		if(dealLogs!=null && dealLogs.size()>0){
+			//第一次添加处理记录，将投诉单未处理状态置为处理中
+			if(CommonConstants.COMPLAIN_STATUS_DEFAULT.equals(complaint.getComplainStatus())){
+				complaint.setComplainStatus(CommonConstants.COMPLAIN_STATUS_IN_DEAL);
+			}
+			//新增或修改处理记录
+			complaintDealLogService.saveOrUpdateList(complaint,complaint.getComplaintDealLogs());
+		}
 		complaintService.update(complaint);
-		//新增或修改处理记录
-		complaintDealLogService.saveOrUpdateList(complaint,complaint.getComplaintDealLogs());
 		return Result.ok();
 	}
 
