@@ -5,14 +5,18 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.stereotype.Controller;
 
+import com.haima.crm.constants.CommonConstants;
+import com.haima.crm.entity.Complaint;
+import com.haima.crm.entity.ComplaintDelay;
 import com.haima.crm.entity.ComplaintForward;
 import com.haima.crm.service.ComplaintForwardService;
+import com.haima.crm.service.ComplaintService;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
 
@@ -22,13 +26,15 @@ import com.haima.crm.utils.Result;
  * 
  * @author doujinxian
  * @email doujinxian@126.com
- * @date 2017-03-23 19:55:47
+ * @date 2017-03-30 19:39:58
  */
 @Controller
 @RequestMapping("complaintforward")
 public class ComplaintForwardController {
 	@Autowired
 	private ComplaintForwardService complaintForwardService;
+	@Autowired
+	private ComplaintService complaintService;
 	
 	/**
 	 * 列表
@@ -67,8 +73,17 @@ public class ComplaintForwardController {
 	@ResponseBody
 	@RequestMapping("/save")
 	public Result save(@RequestBody ComplaintForward complaintForward){
-		complaintForwardService.save(complaintForward);
+		Long complainId = complaintForward.getComplainId();
+		if(complainId==null){
+			return Result.error("complainId不能为空");
+		}
+		//修改投诉单转发状态为已转发
+		Complaint complaint = new Complaint();
+		complaint.setId(complainId);
+		complaint.setForwardStatus(CommonConstants.FORWARD_STATUS_HAS_FORWARD);
+		complaintService.update(complaint);
 		
+		complaintForwardService.save(complaintForward);
 		return Result.ok();
 	}
 	

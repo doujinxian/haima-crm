@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.haima.crm.dao.ComplaintForwardDao">
+<mapper namespace="com.haima.crm.dao.ComplaintDistributeDao">
 	
-	<resultMap id="RM_ComplaintForward" type="com.haima.crm.entity.ComplaintForward">
+	<resultMap id="RM_ComplaintDistribute" type="com.haima.crm.entity.ComplaintDistribute">
 			<result property="id" column="id"/>
 			<result property="complainId" column="complain_id"/>
-			<result property="forwardType" column="forward_type"/>
-			<result property="forwardTo" column="forward_to"/>
+			<result property="handleUser" column="handle_user"/>
 			<result property="handleStatus" column="handle_status"/>
 			<result property="handleDate" column="handle_date"/>
+			<result property="delFlag" column="del_flag"/>
 			<result property="createBy" column="create_by"/>
 			<result property="createTime" column="create_time"/>
 			<result property="updateBy" column="update_by"/>
@@ -17,14 +17,14 @@
 	</resultMap>
 	
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="ComplaintForward_columns">
+	<sql id="ComplaintDistribute_columns">
 	    <![CDATA[
 			`id`, 			
 			`complain_id`, 			
-			`forward_type`, 			
-			`forward_to`, 			
+			`handle_user`, 			
 			`handle_status`, 			
 			`handle_date`, 			
+			`del_flag`, 			
 			`create_by`, 			
 			`create_time`, 			
 			`update_by`, 			
@@ -33,17 +33,15 @@
 	</sql>
 	
 	<!-- 用于where查询公用抽取的列 -->
-	<sql id="ComplaintForward_condition">
+	<sql id="ComplaintDistribute_condition">
 		<where>
         <trim suffix="" suffixOverrides="and">
+        	`del_flag` = 0 and
 			<if test="complainId != null and complainId != 0 ">
 				`complain_id` = #{complainId} and 			
 			</if>
-			<if test="forwardType != null and forwardType != ''">
-				`forward_type` = #{forwardType} and 			
-			</if>
-			<if test="forwardTo != null and forwardTo != ''">
-				`forward_to` = #{forwardTo} and 			
+			<if test="handleUser != null and handleUser != ''">
+				`handle_user` = #{handleUser} and 			
 			</if>
 			<if test="handleStatus != null and handleStatus != 0 ">
 				`handle_status` = #{handleStatus} and 			
@@ -67,19 +65,19 @@
 		</where>
 	</sql>
 	
-	<select id="queryObject" resultMap="RM_ComplaintForward">
+	<select id="queryObject" resultMap="RM_ComplaintDistribute">
 		select 
-		<include refid="ComplaintForward_columns" />
-		from t_complaint_forward 
+		<include refid="ComplaintDistribute_columns" />
+		from t_complaint_distribute 
 		where
 		id = #{value}
 	</select>
 
-	<select id="queryList" resultMap="RM_ComplaintForward">
+	<select id="queryList" resultMap="RM_ComplaintDistribute">
 		select 
-		<include refid="ComplaintForward_columns" />
-		from t_complaint_forward
-		<include refid="ComplaintForward_condition"/> 
+		<include refid="ComplaintDistribute_columns" />
+		from t_complaint_distribute
+		<include refid="ComplaintDistribute_condition"/> 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
@@ -88,28 +86,28 @@
  	<select id="queryTotal" resultType="java.lang.Integer">
 		select 
 		count(1) 
-		from t_complaint_forward 
-		<include refid="ComplaintForward_condition"/>
+		from t_complaint_distribute 
+		<include refid="ComplaintDistribute_condition"/>
 	</select>
 	 
-	<insert id="save" parameterType="com.haima.crm.entity.ComplaintForward" useGeneratedKeys="true" keyProperty="id">
-		insert into t_complaint_forward
+	<insert id="save" parameterType="com.haima.crm.entity.ComplaintDistribute" useGeneratedKeys="true" keyProperty="id">
+		insert into t_complaint_distribute
 		(
 		<trim suffix="" suffixOverrides=",">
 			<if test="complainId !=null and complainId != 0 ">
 				complain_id, 			
 			</if>
-			<if test="forwardType !=null and forwardType != ''">
-				forward_type, 			
-			</if>
-			<if test="forwardTo !=null and forwardTo != ''">
-				forward_to, 			
+			<if test="handleUser !=null and handleUser != ''">
+				handle_user, 			
 			</if>
 			<if test="handleStatus !=null and handleStatus != 0 ">
 				handle_status, 			
 			</if>
 			<if test="handleDate !=null">
 				handle_date, 			
+			</if>
+			<if test="delFlag !=null and delFlag != 0 ">
+				del_flag, 			
 			</if>
 			<if test="createBy !=null and createBy != ''">
 				create_by, 			
@@ -131,17 +129,17 @@
 			<if test="complainId !=null and complainId != 0 ">
 				#{complainId}, 			
 			</if>
-			<if test="forwardType !=null and forwardType != ''">
-				#{forwardType}, 			
-			</if>
-			<if test="forwardTo !=null and forwardTo != ''">
-				#{forwardTo}, 			
+			<if test="handleUser !=null and handleUser != ''">
+				#{handleUser}, 			
 			</if>
 			<if test="handleStatus !=null and handleStatus != 0 ">
 				#{handleStatus}, 			
 			</if>
 			<if test="handleDate !=null">
 				#{handleDate}, 			
+			</if>
+			<if test="delFlag !=null and delFlag != 0 ">
+				#{delFlag}, 			
 			</if>
 			<if test="createBy !=null and createBy != ''">
 				#{createBy}, 			
@@ -159,23 +157,23 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.haima.crm.entity.ComplaintForward">
-		update t_complaint_forward 
+	<update id="update" parameterType="com.haima.crm.entity.ComplaintDistribute">
+		update t_complaint_distribute 
 		<set>
 			<if test="complainId != null and complainId != 0 ">
 				`complain_id` = #{complainId}, 			
 			</if>
-			<if test="forwardType != null and forwardType != ''">
-				`forward_type` = #{forwardType}, 			
-			</if>
-			<if test="forwardTo != null and forwardTo != ''">
-				`forward_to` = #{forwardTo}, 			
+			<if test="handleUser != null and handleUser != ''">
+				`handle_user` = #{handleUser}, 			
 			</if>
 			<if test="handleStatus != null and handleStatus != 0 ">
 				`handle_status` = #{handleStatus}, 			
 			</if>
 			<if test="handleDate != null">
 				`handle_date` = #{handleDate}, 			
+			</if>
+			<if test="delFlag != null and delFlag != 0 ">
+				`del_flag` = #{delFlag}, 			
 			</if>
 			<if test="createBy != null and createBy != ''">
 				`create_by` = #{createBy}, 			
@@ -194,11 +192,11 @@
 	</update>
 	
 	<delete id="delete">
-		delete from t_complaint_forward where id = #{value}
+		delete from t_complaint_distribute where id = #{value}
 	</delete>
 	
 	<delete id="deleteBatch">
-		delete from t_complaint_forward where id in 
+		delete from t_complaint_distribute where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

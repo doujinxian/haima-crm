@@ -95,7 +95,7 @@
 	<select id="queryObject" resultMap="RM_ComplaintFlow">
 		select 
 		<include refid="ComplaintFlow_columns" />
-		from t_complaint_flow 
+		from t_complaint_audit 
 		where
 		id = #{value}
 	</select>
@@ -103,7 +103,7 @@
 	<select id="queryList" resultMap="RM_ComplaintFlow">
 		select 
 		<include refid="ComplaintFlow_columns" />
-		from t_complaint_flow
+		from t_complaint_audit
 		<include refid="ComplaintFlow_condition"/> 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
@@ -113,12 +113,12 @@
  	<select id="queryTotal" resultType="java.lang.Integer">
 		select 
 		count(1) 
-		from t_complaint_flow 
+		from t_complaint_audit 
 		<include refid="ComplaintFlow_condition"/>
 	</select>
 	 
 	<insert id="save" parameterType="com.haima.crm.entity.ComplaintFlow" useGeneratedKeys="true" keyProperty="id">
-		insert into t_complaint_flow
+		insert into t_complaint_audit
 		(
 		<trim suffix="" suffixOverrides=",">
 			<if test="complainId!=null and complainId != ''">
@@ -215,7 +215,7 @@
 	</insert>
 	 
 	<update id="update" parameterType="com.haima.crm.entity.ComplaintFlow">
-		update t_complaint_flow 
+		update t_complaint_audit 
 		<set>
 			<if test="complainId != null and complainId != ''">
 				`complain_id` = #{complainId}, 			
@@ -264,11 +264,11 @@
 	</update>
 	
 	<delete id="delete">
-		delete from t_complaint_flow where id = #{value}
+		delete from t_complaint_audit where id = #{value}
 	</delete>
 	
 	<delete id="deleteBatch">
-		delete from t_complaint_flow where id in 
+		delete from t_complaint_audit where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

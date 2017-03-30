@@ -6,27 +6,27 @@ import java.util.Date;
 
 
 /**
- * 记录投诉转发信息
+ * 记录投诉分配信息
  * 
  * @author doujinxian
  * @email doujinxian@126.com
  * @date 2017-03-30 19:39:58
  */
-public class ComplaintForward implements Serializable {
+public class ComplaintDistribute implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//序号
 	private Integer id;
 	//投诉单id
 	private Long complainId;
-	//转发对象 1:总部人员  0:4S店 
-	private String forwardType;
-	//总部人员/4S店
-	private String forwardTo;
+	//分配给
+	private String handleUser;
 	//处理状态
 	private Integer handleStatus;
 	//处理日期
 	private Date handleDate;
+	//删除标识
+	private Integer delFlag;
 	//创建人
 	private String createBy;
 	//创建时间
@@ -61,28 +61,16 @@ public class ComplaintForward implements Serializable {
 		return complainId;
 	}
 	/**
-	 * 设置：转发对象 1:总部人员  0:4S店 
+	 * 设置：分配给
 	 */
-	public void setForwardType(String forwardType) {
-		this.forwardType = forwardType;
+	public void setHandleUser(String handleUser) {
+		this.handleUser = handleUser;
 	}
 	/**
-	 * 获取：转发对象 1:总部人员  0:4S店 
+	 * 获取：分配给
 	 */
-	public String getForwardType() {
-		return forwardType;
-	}
-	/**
-	 * 设置：总部人员/4S店
-	 */
-	public void setForwardTo(String forwardTo) {
-		this.forwardTo = forwardTo;
-	}
-	/**
-	 * 获取：总部人员/4S店
-	 */
-	public String getForwardTo() {
-		return forwardTo;
+	public String getHandleUser() {
+		return handleUser;
 	}
 	/**
 	 * 设置：处理状态
@@ -107,6 +95,18 @@ public class ComplaintForward implements Serializable {
 	 */
 	public Date getHandleDate() {
 		return handleDate;
+	}
+	/**
+	 * 设置：删除标识
+	 */
+	public void setDelFlag(Integer delFlag) {
+		this.delFlag = delFlag;
+	}
+	/**
+	 * 获取：删除标识
+	 */
+	public Integer getDelFlag() {
+		return delFlag;
 	}
 	/**
 	 * 设置：创建人
