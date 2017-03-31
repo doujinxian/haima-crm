@@ -86,7 +86,13 @@
 				`update_by` = #{updateBy} and 			
 			</if>
 			<if test="updateTime != null">
-				`update_time` = #{updateTime}			
+				`update_time` = #{updateTime}	 and	
+			</if>
+			<if test="complaintIds != null">
+				complain_id in 
+				<foreach item="complaintId" collection="complaintIds" open="(" separator="," close=")">
+					#{complaintId}
+				</foreach>	
 			</if>
         </trim>
 		</where>

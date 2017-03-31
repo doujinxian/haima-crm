@@ -88,11 +88,11 @@ public class ComplaintDelayController {
 	}
 	
 	/**
-	 * 修改
+	 * 审核
 	 */
 	@ResponseBody
-	@RequestMapping("/update")
-	public Result update(@RequestBody ComplaintDelay complaintDelay){
+	@RequestMapping("/audit")
+	public Result audit(@RequestBody ComplaintDelay complaintDelay){
 		if(CommonConstants.REPLY_STATUS_AGREE.endsWith(complaintDelay.getReplyStatus()) || CommonConstants.REPLY_STATUS_DISAGREE.endsWith(complaintDelay.getReplyStatus())){
 			Long complainId = complaintDelay.getComplainId();
 			if(complainId==null){
@@ -104,6 +104,16 @@ public class ComplaintDelayController {
 			complaint.setDelayStatus(CommonConstants.DELAY_STATUS_AUDIT);
 			complaintService.update(complaint);
 		}
+		complaintDelayService.update(complaintDelay);
+		
+		return Result.ok();
+	}
+	/**
+	 * 修改
+	 */
+	@ResponseBody
+	@RequestMapping("/update")
+	public Result update(@RequestBody ComplaintDelay complaintDelay){
 		complaintDelayService.update(complaintDelay);
 		
 		return Result.ok();

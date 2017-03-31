@@ -2,8 +2,11 @@ package com.haima.crm.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.haima.crm.vo.PageVo;
 
 /**
  * 记录投诉审核信息
@@ -13,7 +16,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @date 2017-03-23 19:55:47
  */
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class ComplaintFlow implements Serializable {
+public class ComplaintFlow extends PageVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// 序号
@@ -46,6 +49,8 @@ public class ComplaintFlow implements Serializable {
 	private String updateBy;
 	// 更新时间
 	private Date updateTime;
+	
+	private List<Long> complaintIds;
 
 	/**
 	 * 设置：序号
@@ -233,4 +238,11 @@ public class ComplaintFlow implements Serializable {
 		this.store = store;
 	}
 
+	public List<Long> getComplaintIds() {
+		return complaintIds;
+	}
+
+	public void setComplaintIds(List<Long> complaintIds) {
+		this.complaintIds = complaintIds;
+	}
 }

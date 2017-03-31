@@ -3,6 +3,8 @@ package com.haima.crm.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.haima.crm.vo.PageVo;
+
 
 
 /**
@@ -12,7 +14,7 @@ import java.util.Date;
  * @email doujinxian@126.com
  * @date 2017-03-30 19:39:58
  */
-public class ComplaintForward implements Serializable {
+public class ComplaintForward extends PageVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//序号

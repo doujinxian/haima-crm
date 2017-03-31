@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import com.haima.crm.vo.PageVo;
+
 
 
 /**

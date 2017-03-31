@@ -176,7 +176,14 @@
 				`forward_status` = #{forwardStatus} and 			
 			</if>
 			<if test="delayStatus != null and delayStatus != ''">
-				`delay_status` = #{delayStatus} and 			
+				<choose>
+					<when test="delayStatus == '12'">
+						`delay_status` IN ('1','2') and
+					</when>
+					<otherwise>
+						`delay_status` = #{delayStatus} and 
+					</otherwise>
+				</choose>
 			</if>
 			<if test="distributeStatus != null and distributeStatus != ''">
 				`distribute_status` = #{distributeStatus} and 			

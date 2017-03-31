@@ -2,9 +2,10 @@ package com.haima.crm.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.haima.crm.vo.ComplaintVo;
 
 /**
  * 记录投诉信息
@@ -14,7 +15,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @date 2017-03-23 19:55:46
  */
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class Complaint extends PageVo implements Serializable {
+public class Complaint extends ComplaintVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// 序号
@@ -41,8 +42,6 @@ public class Complaint extends PageVo implements Serializable {
 	private String complainLevel;
 	// 投诉时间
 	private Date complainTime;
-	private Date complainTimeStart;// 查询使用
-	private Date complainTimeEnd;// 查询使用
 	// 需完成时间
 	private Date finishTime;
 	// 投诉关闭时间
@@ -111,13 +110,6 @@ public class Complaint extends PageVo implements Serializable {
 	private String updateBy;
 	// 更新时间
 	private Date updateTime;
-
-	// 投诉内容
-	private List<ComplaintDealLog> complaintDealLogs;
-	//延迟记录
-	private ComplaintDelay complaintDelay;
-	//记录投诉审核信息
-	private ComplaintFlow complaintFlow;
 
 	/**
 	 * 设置：序号
@@ -710,30 +702,6 @@ public class Complaint extends PageVo implements Serializable {
 		return updateTime;
 	}
 
-	public Date getComplainTimeStart() {
-		return complainTimeStart;
-	}
-
-	public void setComplainTimeStart(Date complainTimeStart) {
-		this.complainTimeStart = complainTimeStart;
-	}
-
-	public Date getComplainTimeEnd() {
-		return complainTimeEnd;
-	}
-
-	public void setComplainTimeEnd(Date complainTimeEnd) {
-		this.complainTimeEnd = complainTimeEnd;
-	}
-
-	public List<ComplaintDealLog> getComplaintDealLogs() {
-		return complaintDealLogs;
-	}
-
-	public void setComplaintDealLogs(List<ComplaintDealLog> complaintDealLogs) {
-		this.complaintDealLogs = complaintDealLogs;
-	}
-
 	public String getForwardStatus() {
 		return forwardStatus;
 	}
@@ -758,22 +726,5 @@ public class Complaint extends PageVo implements Serializable {
 		this.distributeStatus = distributeStatus;
 	}
 
-	public ComplaintDelay getComplaintDelay() {
-		return complaintDelay;
-	}
-
-	public void setComplaintDelay(ComplaintDelay complaintDelay) {
-		this.complaintDelay = complaintDelay;
-	}
-
-	public ComplaintFlow getComplaintFlow() {
-		return complaintFlow;
-	}
-
-	public void setComplaintFlow(ComplaintFlow complaintFlow) {
-		this.complaintFlow = complaintFlow;
-	}
-
-	
 
 }

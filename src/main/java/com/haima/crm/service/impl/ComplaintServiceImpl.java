@@ -1,15 +1,21 @@
 package com.haima.crm.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.haima.crm.dao.ComplaintDao;
+import com.haima.crm.dao.ComplaintDelayDao;
+import com.haima.crm.dao.ComplaintFlowDao;
 import com.haima.crm.entity.Complaint;
+import com.haima.crm.entity.ComplaintDelay;
+import com.haima.crm.entity.ComplaintFlow;
 import com.haima.crm.service.ComplaintService;
 import com.haima.crm.utils.DateConvertUtils;
 
@@ -19,6 +25,10 @@ import com.haima.crm.utils.DateConvertUtils;
 public class ComplaintServiceImpl implements ComplaintService {
 	@Autowired
 	private ComplaintDao complaintDao;
+	@Autowired
+	private ComplaintDelayDao complaintDelayDao;
+	@Autowired
+	private ComplaintFlowDao complaintFlowDao;
 	
 	@Override
 	public Complaint queryObject(Long id){
@@ -32,9 +42,57 @@ public class ComplaintServiceImpl implements ComplaintService {
 	
 	@Override
 	public List<Complaint> queryList(Complaint complaint) {
-		return complaintDao.queryList(complaint);
+		List<Complaint> complaints = complaintDao.queryList(complaint);
+		if(complaints.size()==0){
+			return complaints;
+		}
+		if(complaint.getIfSelectDelayInfo()!=null && complaint.getIfSelectDelayInfo()){
+			List<Long> complaintIds = getComplaintsIds(complaints);
+			ComplaintDelay params = new ComplaintDelay();
+			params.setComplaintIds(complaintIds);
+			List<ComplaintDelay> queryList = complaintDelayDao.queryList(params);
+			for(ComplaintDelay cd :queryList){
+				setComplaintDelay(cd,complaints);
+			}
+		}
+		if(complaint.getIfSelectFlowInfo()!=null && complaint.getIfSelectFlowInfo()){
+			List<Long> complaintIds = getComplaintsIds(complaints);
+			ComplaintFlow params = new ComplaintFlow();
+			params.setComplaintIds(complaintIds);
+			List<ComplaintFlow> queryList = complaintFlowDao.queryList(params);
+			for(ComplaintFlow cd :queryList){
+				setComplaintFlow(cd,complaints);
+			}
+		}
+		return complaints;
 	}
 	
+	private void setComplaintFlow(ComplaintFlow cd, List<Complaint> complaints) {
+		for(Complaint c : complaints){
+			if(c.getId().equals(cd.getComplainId())){
+				c.setComplaintFlow(cd);
+				return;
+			}
+		}
+	}
+
+	private void setComplaintDelay(ComplaintDelay cd, List<Complaint> complaints) {
+		for(Complaint c : complaints){
+			if(c.getId().equals(cd.getComplainId())){
+				c.setComplaintDelay(cd);
+				return;
+			}
+		}
+	}
+
+	private List<Long> getComplaintsIds(List<Complaint> complaints) {
+		List<Long> complaintIds = new ArrayList<Long>();
+		for(Complaint c :complaints){
+			complaintIds.add(c.getId());
+		}
+		return complaintIds;
+	}
+
 	@Override
 	public int queryTotal(Map<String, Object> map){
 		return complaintDao.queryTotal(map);

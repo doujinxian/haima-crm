@@ -1,4 +1,4 @@
-package com.haima.crm.entity;
+package com.haima.crm.vo;
 
 import java.io.Serializable;
 
