@@ -66,11 +66,11 @@ public class ComplaintDealLogServiceImpl implements ComplaintDealLogService {
 				if(cc.getId()==null){
 					cc.setCreateTime(now);
 					cc.setUpdateTime(now);
-					cc.setComplainCode(complaint.getComplainCode());
+					cc.setComplainId(complaint.getId());
 					save(cc);
 				}else{
 					cc.setUpdateTime(now);
-					cc.setComplainCode(complaint.getComplainCode());
+					cc.setComplainId(complaint.getId());
 					update(cc);
 				}
 			}

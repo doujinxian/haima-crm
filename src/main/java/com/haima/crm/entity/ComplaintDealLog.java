@@ -20,8 +20,8 @@ public class ComplaintDealLog extends PageVo implements Serializable {
 	
 	//序号
 	private Integer id;
-	//投诉单号
-	private String complainCode;
+	//投诉单id
+	private Long complainId;
 	//处理记录
 	private String content;
 	//删除标识
@@ -47,19 +47,13 @@ public class ComplaintDealLog extends PageVo implements Serializable {
 	public Integer getId() {
 		return id;
 	}
-	/**
-	 * 设置：投诉单号
-	 */
-	public void setComplainCode(String complainCode) {
-		this.complainCode = complainCode;
-	}
-	/**
-	 * 获取：投诉单号
-	 */
-	public String getComplainCode() {
-		return complainCode;
-	}
 	
+	public Long getComplainId() {
+		return complainId;
+	}
+	public void setComplainId(Long complainId) {
+		this.complainId = complainId;
+	}
 	public String getContent() {
 		return content;
 	}

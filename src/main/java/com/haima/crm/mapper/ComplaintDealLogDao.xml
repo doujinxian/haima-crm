@@ -5,7 +5,7 @@
 	
 	<resultMap id="RM_ComplaintDealLog" type="com.haima.crm.entity.ComplaintDealLog">
 			<result property="id" column="id"/>
-			<result property="complainCode" column="complain_code"/>
+			<result property="complainId" column="complain_id"/>
 			<result property="content" column="content"/>
 			<result property="delFlag" column="del_flag"/>
 			<result property="createBy" column="create_by"/>
@@ -18,7 +18,7 @@
 	<sql id="ComplaintDealLog_columns">
 	    <![CDATA[
 			`id`, 			
-			`complain_code`, 			
+			`complain_id`, 			
 			`content`, 			
 			`del_flag`, 			
 			`create_by`, 			
@@ -33,8 +33,8 @@
 		<where>
         <trim suffix="" suffixOverrides="and">
         	`del_flag` = 0 and 
-			<if test="complainCode != null and complainCode != ''">
-				`complain_code` = #{complainCode} and 			
+			<if test="complainId != null and complainId != ''">
+				`complain_id` = #{complainId} and 			
 			</if>
 			<if test="content != null and content != ''">
 				`content` = #{content} and 			
@@ -84,8 +84,8 @@
 		insert into t_complaint_deal_log
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="complainCode!=null and complainCode != ''">
-				complain_code, 			
+			<if test="complainId!=null and complainId != ''">
+				complain_id, 			
 			</if>
 			<if test="content!=null and content != ''">
 				content, 			
@@ -110,8 +110,8 @@
 		values
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="complainCode!=null and complainCode != ''">
-				#{complainCode}, 			
+			<if test="complainId!=null and complainId != ''">
+				#{complainId}, 			
 			</if>
 			<if test="content!=null and content != ''">
 				#{content}, 			
@@ -138,8 +138,8 @@
 	<update id="update" parameterType="com.haima.crm.entity.ComplaintDealLog">
 		update t_complaint_deal_log 
 		<set>
-			<if test="complainCode != null and complainCode != ''">
-				`complain_code` = #{complainCode}, 			
+			<if test="complainId != null and complainId != ''">
+				`complain_id` = #{complainId}, 			
 			</if>
 			<if test="content != null and content != ''">
 				`content` = #{content}, 			
