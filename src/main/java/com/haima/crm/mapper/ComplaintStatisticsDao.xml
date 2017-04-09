@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haima.crm.dao.ComplaintStatisticsDao">
+	
+	<resultMap id="RM_Complaint_Statistics_Analysis" type="com.haima.crm.entity.ComplaintStatistics">
+		<result property="statisticsType" column="statistics_type"/>
+		<result property="complaintCount" column="complaint_cot"/>
+		<result property="complaintCountRatio" column="complaint_count_ratio"/>
+		<result property="closeComplaintCount" column="close_complaint_cot"/>
+		<result property="closeComplaintCountRatio" column="close_complaint_count_ratio"/>
+		<result property="timelyCloseComplaintCount" column="timely_close_complaint_cot"/>
+		<result property="complaintSatisfactionRatio" column="complaint_satisfaction_ratio"/>
+		<result property="timelyComplaintHandlingRatio" column="timely_complaint_handling_ratio"/>
+	</resultMap>
+
+	<resultMap id="RM_Complaint_Statistics_Satisfaction" type="com.haima.crm.entity.ComplaintStatisticsSatisfaction">
+		<result property="statisticsType" column="statistics_type"/>
+		<result property="complaintCount" column="complaint_cot"/>
+		<result property="satisfactionCount" column="satisfaction_cot"/>
+		<result property="commonSatisfactionCount" column="common_satisfaction_cot"/>
+		<result property="dissatisfactionCount" column="dissatisfaction_cot"/>
+		<result property="satisfactionRatio" column="satisfaction_ratio"/>
+		<result property="commonSatisfactionRatio" column="common_satisfaction_ratio"/>
+		<result property="dissatisfactionRatio" column="dissatisfaction_ratio"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Complaint_columns">
+	    <![CDATA[
+
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="Complaint_condition">
+		<where>
+			<trim suffix="" suffixOverrides="and">
+				`del_flag` = 0 and
+				<if test="complainType != null and complainType != ''">
+					`complain_type` = #{complainType} and
+				</if>
+				<if test="complainTimeStart != null">
+					`complain_time` &gt;= #{complainTimeStart} and
+				</if>
+				<if test="complainTimeEnd != null">
+					`complain_time` &lt; #{complainTimeEnd} and
+				</if>
+				<if test="salesServicesService != null and salesServicesService != ''">
+					`sales_services_service` = #{salesServicesService} and
+				</if>
+				<if test="salesServicesCode != null and salesServicesCode != ''">
+					`sales_services_code` = #{salesServicesCode}
+				</if>
+			</trim>
+		</where>
+	</sql>
+	
+	<select id="queryAnalysisList" resultMap="RM_Complaint_Statistics_Analysis" parameterType="com.haima.crm.vo.ComplaintStatisticsVo">
+		<![CDATA[
+		SELECT a.statistics_type,
+				a.complaint_cot,
+				IF(a.complaint_all_cot=0,0.00,ROUND(a.complaint_cot*100/a.complaint_all_cot,2)) complaint_count_ratio,
+				a.close_complaint_cot,
+				IF(complaint_cot=0,0,ROUND(a.close_complaint_cot*100/a.complaint_cot)) close_complaint_count_ratio,
+				a.timely_close_complaint_cot,
+				IF(complaint_cot=0,0,ROUND(a.complaint_satisfaction_cot*100/a.complaint_cot)) complaint_satisfaction_ratio,
+				IF(complaint_cot=0,0,ROUND(a.timely_close_complaint_cot*100/a.complaint_cot)) timely_complaint_handling_ratio
+			FROM (SELECT t.statistics_type,
+							SUM(t.close_complaint_cot) close_complaint_cot,
+							SUM(t.complaint_cot) complaint_cot,
+							SUM(t.timely_close_complaint_cot) timely_close_complaint_cot,
+							SUM(t.complaint_satisfaction_cot) complaint_satisfaction_cot,
+							ct.complaint_all_cot
+						FROM
+							(SELECT
+									c.${statisticsType} statistics_type,
+									IF(c.complain_status=4,1,0) close_complaint_cot,
+									1 complaint_cot,
+									IF(c.complain_status=4 AND c.close_time<=c.finish_time,1,0) timely_close_complaint_cot,
+									IF(c.satisfaction_degree=0,1,0) complaint_satisfaction_cot
+								FROM t_complaint c
+		]]>
+									<include refid="Complaint_condition"/>
+								) t,(select count(*) complaint_all_cot from t_complaint
+										<include refid="Complaint_condition"/>
+									) ct
+
+				  GROUP BY t.statistics_type) a
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryAnalysisTotal" resultType="java.lang.Integer">
+		<![CDATA[
+		select 
+		count(1) 
+		from (SELECT t.statistics_type,
+		SUM(t.close_complaint_cot) close_complaint_cot,
+		SUM(t.complaint_cot) complaint_cot,
+		SUM(t.timely_close_complaint_cot) timely_close_complaint_cot,
+		SUM(t.complaint_satisfaction_cot) complaint_satisfaction_cot
+		FROM
+		(SELECT
+		c.${statisticsType} statistics_type,
+		IF(c.complain_status=4,1,0) close_complaint_cot,
+		1 complaint_cot,
+		IF(c.complain_status=4 AND c.close_time<=c.finish_time,1,0) timely_close_complaint_cot,
+		IF(c.satisfaction_degree=0,1,0) complaint_satisfaction_cot
+		FROM t_complaint c
+		]]>
+		<include refid="Complaint_condition"/>
+		) t
+		GROUP BY t.statistics_type) a
+
+	</select>
+
+	<select id="querySatisfactionList" resultMap="RM_Complaint_Statistics_Satisfaction" parameterType="com.haima.crm.vo.ComplaintStatisticsVo">
+		<![CDATA[
+		SELECT a.statistics_type,
+				a.complaint_cot,
+				a.satisfaction_cot,
+				a.common_satisfaction_cot,
+				a.dissatisfaction_cot,
+				IF(complaint_cot=0,0,ROUND(a.satisfaction_cot*100/a.complaint_cot,2)) satisfaction_ratio,
+				IF(complaint_cot=0,0,ROUND(a.common_satisfaction_cot*100/a.complaint_cot,2)) common_satisfaction_ratio,
+				IF(complaint_cot=0,0,ROUND(a.dissatisfaction_cot*100/a.complaint_cot,2)) dissatisfaction_cot
+			FROM (SELECT t.statistics_type,
+							SUM(t.complaint_cot) complaint_cot,
+							SUM(t.satisfaction_cot) satisfaction_cot,
+							SUM(t.common_satisfaction_cot) common_satisfaction_cot,
+							SUM(t.dissatisfaction_cot) dissatisfaction_cot
+						FROM
+							(SELECT
+									c.${statisticsType} statistics_type,
+									1 complaint_cot,
+									IF(c.satisfaction_degree=0,1,0) satisfaction_cot,
+									IF(c.satisfaction_degree=1,1,0) common_satisfaction_cot,
+									IF(c.satisfaction_degree=2,1,0) dissatisfaction_cot
+								FROM t_complaint c
+		]]>
+		<include refid="Complaint_condition"/>
+		) t
+		GROUP BY t.statistics_type) a
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="querySatisfactionTotal" resultType="java.lang.Integer">
+		<![CDATA[
+		select
+		count(1)
+		from (SELECT t.statistics_type,
+							SUM(t.complaint_cot) complaint_cot,
+							SUM(t.satisfaction_cot) satisfaction_cot,
+							SUM(t.common_satisfaction_cot) common_satisfaction_cot,
+							SUM(t.dissatisfaction_cot) dissatisfaction_cot
+						FROM
+							(SELECT
+									c.${statisticsType} statistics_type,
+									1 complaint_cot,
+									IF(c.satisfaction_degree=0,1,0) satisfaction_cot,
+									IF(c.satisfaction_degree=1,1,0) common_satisfaction_cot,
+									IF(c.satisfaction_degree=2,1,0) dissatisfaction_cot
+								FROM t_complaint c
+		]]>
+		<include refid="Complaint_condition"/>
+		) t
+		GROUP BY t.statistics_type) a
+
+	</select>
+	 
+</mapper>
