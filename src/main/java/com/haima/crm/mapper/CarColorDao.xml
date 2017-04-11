@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haima.crm.dao.CarColorDao">
+	
+	<resultMap id="RM_CarColor" type="com.haima.crm.entity.CarColor">
+			<result property="id" column="id"/>
+			<result property="carId" column="car_id"/>
+			<result property="colorId" column="color_id"/>
+			<result property="delFlg" column="del_flg"/>
+			<result property="creator" column="creator"/>
+			<result property="createTime" column="create_time"/>
+			<result property="modifier" column="modifier"/>
+			<result property="modifyTime" column="modify_time"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="CarColor_columns">
+	    <![CDATA[
+			`id`, 			
+			`car_id`, 			
+			`color_id`, 			
+			`del_flg`, 			
+			`creator`, 			
+			`create_time`, 			
+			`modifier`, 			
+			`modify_time`			
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="CarColor_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="carId != null and carId != 0 ">
+				`car_id` = #{carId} and 			
+			</if>
+			<if test="colorId != null and colorId != 0 ">
+				`color_id` = #{colorId} and 			
+			</if>
+			<if test="delFlg != null and delFlg != ''">
+				`del_flg` = #{delFlg} and 			
+			</if>
+			<if test="creator != null and creator != ''">
+				`creator` = #{creator} and 			
+			</if>
+			<if test="createTime != null">
+				`create_time` = #{createTime} and 			
+			</if>
+			<if test="modifier != null and modifier != ''">
+				`modifier` = #{modifier} and 			
+			</if>
+			<if test="modifyTime != null">
+				`modify_time` = #{modifyTime}			
+			</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_CarColor">
+		select 
+		<include refid="CarColor_columns" />
+		from m_car_color 
+		where
+		id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_CarColor">
+		select 
+		<include refid="CarColor_columns" />
+		from m_car_color
+		<include refid="CarColor_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from m_car_color 
+		<include refid="CarColor_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.CarColor" useGeneratedKeys="true" keyProperty="id">
+		insert into m_car_color
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="carId !=null and carId != 0 ">
+				car_id, 			
+			</if>
+			<if test="colorId !=null and colorId != 0 ">
+				color_id, 			
+			</if>
+			<if test="delFlg !=null and delFlg != ''">
+				del_flg, 			
+			</if>
+			<if test="creator !=null and creator != ''">
+				creator, 			
+			</if>
+			<if test="createTime !=null">
+				create_time, 			
+			</if>
+			<if test="modifier !=null and modifier != ''">
+				modifier, 			
+			</if>
+			<if test="modifyTime !=null">
+				modify_time			
+			</if>
+	     </trim>
+		)
+		values
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="carId !=null and carId != 0 ">
+				#{carId}, 			
+			</if>
+			<if test="colorId !=null and colorId != 0 ">
+				#{colorId}, 			
+			</if>
+			<if test="delFlg !=null and delFlg != ''">
+				#{delFlg}, 			
+			</if>
+			<if test="creator !=null and creator != ''">
+				#{creator}, 			
+			</if>
+			<if test="createTime !=null">
+				#{createTime}, 			
+			</if>
+			<if test="modifier !=null and modifier != ''">
+				#{modifier}, 			
+			</if>
+			<if test="modifyTime !=null">
+				#{modifyTime}			
+			</if>
+	     </trim>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.haima.crm.entity.CarColor">
+		update m_car_color 
+		<set>
+			<if test="carId != null and carId != 0 ">
+				`car_id` = #{carId}, 			
+			</if>
+			<if test="colorId != null and colorId != 0 ">
+				`color_id` = #{colorId}, 			
+			</if>
+			<if test="delFlg != null and delFlg != ''">
+				`del_flg` = #{delFlg}, 			
+			</if>
+			<if test="creator != null and creator != ''">
+				`creator` = #{creator}, 			
+			</if>
+			<if test="createTime != null">
+				`create_time` = #{createTime}, 			
+			</if>
+			<if test="modifier != null and modifier != ''">
+				`modifier` = #{modifier}, 			
+			</if>
+			<if test="modifyTime != null">
+				`modify_time` = #{modifyTime}			
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from m_car_color where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from m_car_color where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

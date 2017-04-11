@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haima.crm.dao.CarDao">
+	
+	<resultMap id="RM_Car" type="com.haima.crm.entity.Car">
+			<result property="carId" column="car_id"/>
+			<result property="carSeriesId" column="car_series_id"/>
+			<result property="carSeriesCode" column="car_series_code"/>
+			<result property="carModelId" column="car_model_id"/>
+			<result property="carModelCode" column="car_model_code"/>
+			<result property="carSetupId" column="car_setup_id"/>
+			<result property="carSetupCode" column="car_setup_code"/>
+			<result property="carSetupName" column="car_setup_name"/>
+			<result property="toHundredTime" column="to_hundred_time"/>
+			<result property="useOilValue" column="use_oil_value"/>
+			<result property="isHqStand" column="is_hq_stand"/>
+			<result property="retailPrice" column="retail_price"/>
+			<result property="costPrice" column="cost_price"/>
+			<result property="financeType" column="finance_type"/>
+			<result property="isDiscount" column="is_discount"/>
+			<result property="entrepotId" column="entrepot_id"/>
+			<result property="letstand" column="letstand"/>
+			<result property="maxPower" column="max_power"/>
+			<result property="maxSpeed" column="max_speed"/>
+			<result property="maxTotalMass" column="max_total_mass"/>
+			<result property="maxTurnSpace" column="max_turn_space"/>
+			<result property="modelSimple" column="model_simple"/>
+			<result property="modelYear" column="model_year"/>
+			<result property="oil" column="oil"/>
+			<result property="oilBoxVolume" column="oil_box_volume"/>
+			<result property="ringModel" column="ring_model"/>
+			<result property="setupMass" column="setup_mass"/>
+			<result property="businessEnable" column="business_enable"/>
+			<result property="delFlg" column="del_flg"/>
+			<result property="creator" column="creator"/>
+			<result property="createTime" column="create_time"/>
+			<result property="modifier" column="modifier"/>
+			<result property="modifyTime" column="modify_time"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Car_columns">
+	    <![CDATA[
+			`car_id`, 			
+			`car_series_id`, 			
+			`car_series_code`, 			
+			`car_model_id`, 			
+			`car_model_code`, 			
+			`car_setup_id`, 			
+			`car_setup_code`, 			
+			`car_setup_name`, 			
+			`to_hundred_time`, 			
+			`use_oil_value`, 			
+			`is_hq_stand`, 			
+			`retail_price`, 			
+			`cost_price`, 			
+			`finance_type`, 			
+			`is_discount`, 			
+			`entrepot_id`, 			
+			`letstand`, 			
+			`max_power`, 			
+			`max_speed`, 			
+			`max_total_mass`, 			
+			`max_turn_space`, 			
+			`model_simple`, 			
+			`model_year`, 			
+			`oil`, 			
+			`oil_box_volume`, 			
+			`ring_model`, 			
+			`setup_mass`, 			
+			`business_enable`, 			
+			`del_flg`, 			
+			`creator`, 			
+			`create_time`, 			
+			`modifier`, 			
+			`modify_time`			
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="Car_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="carSeriesId != null and carSeriesId != 0 ">
+				`car_series_id` = #{carSeriesId} and 			
+			</if>
+			<if test="carSeriesCode != null and carSeriesCode != ''">
+				`car_series_code` = #{carSeriesCode} and 			
+			</if>
+			<if test="carModelId != null and carModelId != 0 ">
+				`car_model_id` = #{carModelId} and 			
+			</if>
+			<if test="carModelCode != null and carModelCode != ''">
+				`car_model_code` = #{carModelCode} and 			
+			</if>
+			<if test="carSetupId != null and carSetupId != 0 ">
+				`car_setup_id` = #{carSetupId} and 			
+			</if>
+			<if test="carSetupCode != null and carSetupCode != ''">
+				`car_setup_code` = #{carSetupCode} and 			
+			</if>
+			<if test="carSetupName != null and carSetupName != ''">
+				`car_setup_name` = #{carSetupName} and 			
+			</if>
+			<if test="toHundredTime != null and toHundredTime != ''">
+				`to_hundred_time` = #{toHundredTime} and 			
+			</if>
+			<if test="useOilValue != null and useOilValue != ''">
+				`use_oil_value` = #{useOilValue} and 			
+			</if>
+			<if test="isHqStand != null and isHqStand != 0 ">
+				`is_hq_stand` = #{isHqStand} and 			
+			</if>
+			<if test="retailPrice != null and retailPrice != 0 ">
+				`retail_price` = #{retailPrice} and 			
+			</if>
+			<if test="costPrice != null and costPrice != 0 ">
+				`cost_price` = #{costPrice} and 			
+			</if>
+			<if test="financeType != null and financeType != 0 ">
+				`finance_type` = #{financeType} and 			
+			</if>
+			<if test="isDiscount != null and isDiscount != 0 ">
+				`is_discount` = #{isDiscount} and 			
+			</if>
+			<if test="entrepotId != null and entrepotId != 0 ">
+				`entrepot_id` = #{entrepotId} and 			
+			</if>
+			<if test="letstand != null and letstand != ''">
+				`letstand` = #{letstand} and 			
+			</if>
+			<if test="maxPower != null and maxPower != ''">
+				`max_power` = #{maxPower} and 			
+			</if>
+			<if test="maxSpeed != null and maxSpeed != ''">
+				`max_speed` = #{maxSpeed} and 			
+			</if>
+			<if test="maxTotalMass != null and maxTotalMass != ''">
+				`max_total_mass` = #{maxTotalMass} and 			
+			</if>
+			<if test="maxTurnSpace != null and maxTurnSpace != ''">
+				`max_turn_space` = #{maxTurnSpace} and 			
+			</if>
+			<if test="modelSimple != null and modelSimple != ''">
+				`model_simple` = #{modelSimple} and 			
+			</if>
+			<if test="modelYear != null and modelYear != ''">
+				`model_year` = #{modelYear} and 			
+			</if>
+			<if test="oil != null and oil != ''">
+				`oil` = #{oil} and 			
+			</if>
+			<if test="oilBoxVolume != null and oilBoxVolume != ''">
+				`oil_box_volume` = #{oilBoxVolume} and 			
+			</if>
+			<if test="ringModel != null and ringModel != ''">
+				`ring_model` = #{ringModel} and 			
+			</if>
+			<if test="setupMass != null and setupMass != ''">
+				`setup_mass` = #{setupMass} and 			
+			</if>
+			<if test="businessEnable != null and businessEnable != 0 ">
+				`business_enable` = #{businessEnable} and 			
+			</if>
+			<if test="delFlg != null and delFlg != ''">
+				`del_flg` = #{delFlg} and 			
+			</if>
+			<if test="creator != null and creator != ''">
+				`creator` = #{creator} and 			
+			</if>
+			<if test="createTime != null">
+				`create_time` = #{createTime} and 			
+			</if>
+			<if test="modifier != null and modifier != ''">
+				`modifier` = #{modifier} and 			
+			</if>
+			<if test="modifyTime != null">
+				`modify_time` = #{modifyTime}			
+			</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_Car">
+		select 
+		<include refid="Car_columns" />
+		from m_car 
+		where
+		car_id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_Car">
+		select 
+		<include refid="Car_columns" />
+		from m_car
+		<include refid="Car_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from m_car 
+		<include refid="Car_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.Car">
+		insert into m_car
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="carId !=null and carId != 0 ">
+				car_id, 			
+			</if>
+			<if test="carSeriesId !=null and carSeriesId != 0 ">
+				car_series_id, 			
+			</if>
+			<if test="carSeriesCode !=null and carSeriesCode != ''">
+				car_series_code, 			
+			</if>
+			<if test="carModelId !=null and carModelId != 0 ">
+				car_model_id, 			
+			</if>
+			<if test="carModelCode !=null and carModelCode != ''">
+				car_model_code, 			
+			</if>
+			<if test="carSetupId !=null and carSetupId != 0 ">
+				car_setup_id, 			
+			</if>
+			<if test="carSetupCode !=null and carSetupCode != ''">
+				car_setup_code, 			
+			</if>
+			<if test="carSetupName !=null and carSetupName != ''">
+				car_setup_name, 			
+			</if>
+			<if test="toHundredTime !=null and toHundredTime != ''">
+				to_hundred_time, 			
+			</if>
+			<if test="useOilValue !=null and useOilValue != ''">
+				use_oil_value, 			
+			</if>
+			<if test="isHqStand !=null and isHqStand != 0 ">
+				is_hq_stand, 			
+			</if>
+			<if test="retailPrice !=null and retailPrice != 0 ">
+				retail_price, 			
+			</if>
+			<if test="costPrice !=null and costPrice != 0 ">
+				cost_price, 			
+			</if>
+			<if test="financeType !=null and financeType != 0 ">
+				finance_type, 			
+			</if>
+			<if test="isDiscount !=null and isDiscount != 0 ">
+				is_discount, 			
+			</if>
+			<if test="entrepotId !=null and entrepotId != 0 ">
+				entrepot_id, 			
+			</if>
+			<if test="letstand !=null and letstand != ''">
+				letstand, 			
+			</if>
+			<if test="maxPower !=null and maxPower != ''">
+				max_power, 			
+			</if>
+			<if test="maxSpeed !=null and maxSpeed != ''">
+				max_speed, 			
+			</if>
+			<if test="maxTotalMass !=null and maxTotalMass != ''">
+				max_total_mass, 			
+			</if>
+			<if test="maxTurnSpace !=null and maxTurnSpace != ''">
+				max_turn_space, 			
+			</if>
+			<if test="modelSimple !=null and modelSimple != ''">
+				model_simple, 			
+			</if>
+			<if test="modelYear !=null and modelYear != ''">
+				model_year, 			
+			</if>
+			<if test="oil !=null and oil != ''">
+				oil, 			
+			</if>
+			<if test="oilBoxVolume !=null and oilBoxVolume != ''">
+				oil_box_volume, 			
+			</if>
+			<if test="ringModel !=null and ringModel != ''">
+				ring_model, 			
+			</if>
+			<if test="setupMass !=null and setupMass != ''">
+				setup_mass, 			
+			</if>
+			<if test="businessEnable !=null and businessEnable != 0 ">
+				business_enable, 			
+			</if>
+			<if test="delFlg !=null and delFlg != ''">
+				del_flg, 			
+			</if>
+			<if test="creator !=null and creator != ''">
+				creator, 			
+			</if>
+			<if test="createTime !=null">
+				create_time, 			
+			</if>
+			<if test="modifier !=null and modifier != ''">
+				modifier, 			
+			</if>
+			<if test="modifyTime !=null">
+				modify_time			
+			</if>
+	     </trim>
+		)
+		values
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="carId !=null and carId != 0 ">
+				#{carId}, 			
+			</if>
+			<if test="carSeriesId !=null and carSeriesId != 0 ">
+				#{carSeriesId}, 			
+			</if>
+			<if test="carSeriesCode !=null and carSeriesCode != ''">
+				#{carSeriesCode}, 			
+			</if>
+			<if test="carModelId !=null and carModelId != 0 ">
+				#{carModelId}, 			
+			</if>
+			<if test="carModelCode !=null and carModelCode != ''">
+				#{carModelCode}, 			
+			</if>
+			<if test="carSetupId !=null and carSetupId != 0 ">
+				#{carSetupId}, 			
+			</if>
+			<if test="carSetupCode !=null and carSetupCode != ''">
+				#{carSetupCode}, 			
+			</if>
+			<if test="carSetupName !=null and carSetupName != ''">
+				#{carSetupName}, 			
+			</if>
+			<if test="toHundredTime !=null and toHundredTime != ''">
+				#{toHundredTime}, 			
+			</if>
+			<if test="useOilValue !=null and useOilValue != ''">
+				#{useOilValue}, 			
+			</if>
+			<if test="isHqStand !=null and isHqStand != 0 ">
+				#{isHqStand}, 			
+			</if>
+			<if test="retailPrice !=null and retailPrice != 0 ">
+				#{retailPrice}, 			
+			</if>
+			<if test="costPrice !=null and costPrice != 0 ">
+				#{costPrice}, 			
+			</if>
+			<if test="financeType !=null and financeType != 0 ">
+				#{financeType}, 			
+			</if>
+			<if test="isDiscount !=null and isDiscount != 0 ">
+				#{isDiscount}, 			
+			</if>
+			<if test="entrepotId !=null and entrepotId != 0 ">
+				#{entrepotId}, 			
+			</if>
+			<if test="letstand !=null and letstand != ''">
+				#{letstand}, 			
+			</if>
+			<if test="maxPower !=null and maxPower != ''">
+				#{maxPower}, 			
+			</if>
+			<if test="maxSpeed !=null and maxSpeed != ''">
+				#{maxSpeed}, 			
+			</if>
+			<if test="maxTotalMass !=null and maxTotalMass != ''">
+				#{maxTotalMass}, 			
+			</if>
+			<if test="maxTurnSpace !=null and maxTurnSpace != ''">
+				#{maxTurnSpace}, 			
+			</if>
+			<if test="modelSimple !=null and modelSimple != ''">
+				#{modelSimple}, 			
+			</if>
+			<if test="modelYear !=null and modelYear != ''">
+				#{modelYear}, 			
+			</if>
+			<if test="oil !=null and oil != ''">
+				#{oil}, 			
+			</if>
+			<if test="oilBoxVolume !=null and oilBoxVolume != ''">
+				#{oilBoxVolume}, 			
+			</if>
+			<if test="ringModel !=null and ringModel != ''">
+				#{ringModel}, 			
+			</if>
+			<if test="setupMass !=null and setupMass != ''">
+				#{setupMass}, 			
+			</if>
+			<if test="businessEnable !=null and businessEnable != 0 ">
+				#{businessEnable}, 			
+			</if>
+			<if test="delFlg !=null and delFlg != ''">
+				#{delFlg}, 			
+			</if>
+			<if test="creator !=null and creator != ''">
+				#{creator}, 			
+			</if>
+			<if test="createTime !=null">
+				#{createTime}, 			
+			</if>
+			<if test="modifier !=null and modifier != ''">
+				#{modifier}, 			
+			</if>
+			<if test="modifyTime !=null">
+				#{modifyTime}			
+			</if>
+	     </trim>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.haima.crm.entity.Car">
+		update m_car 
+		<set>
+			<if test="carSeriesId != null and carSeriesId != 0 ">
+				`car_series_id` = #{carSeriesId}, 			
+			</if>
+			<if test="carSeriesCode != null and carSeriesCode != ''">
+				`car_series_code` = #{carSeriesCode}, 			
+			</if>
+			<if test="carModelId != null and carModelId != 0 ">
+				`car_model_id` = #{carModelId}, 			
+			</if>
+			<if test="carModelCode != null and carModelCode != ''">
+				`car_model_code` = #{carModelCode}, 			
+			</if>
+			<if test="carSetupId != null and carSetupId != 0 ">
+				`car_setup_id` = #{carSetupId}, 			
+			</if>
+			<if test="carSetupCode != null and carSetupCode != ''">
+				`car_setup_code` = #{carSetupCode}, 			
+			</if>
+			<if test="carSetupName != null and carSetupName != ''">
+				`car_setup_name` = #{carSetupName}, 			
+			</if>
+			<if test="toHundredTime != null and toHundredTime != ''">
+				`to_hundred_time` = #{toHundredTime}, 			
+			</if>
+			<if test="useOilValue != null and useOilValue != ''">
+				`use_oil_value` = #{useOilValue}, 			
+			</if>
+			<if test="isHqStand != null and isHqStand != 0 ">
+				`is_hq_stand` = #{isHqStand}, 			
+			</if>
+			<if test="retailPrice != null and retailPrice != 0 ">
+				`retail_price` = #{retailPrice}, 			
+			</if>
+			<if test="costPrice != null and costPrice != 0 ">
+				`cost_price` = #{costPrice}, 			
+			</if>
+			<if test="financeType != null and financeType != 0 ">
+				`finance_type` = #{financeType}, 			
+			</if>
+			<if test="isDiscount != null and isDiscount != 0 ">
+				`is_discount` = #{isDiscount}, 			
+			</if>
+			<if test="entrepotId != null and entrepotId != 0 ">
+				`entrepot_id` = #{entrepotId}, 			
+			</if>
+			<if test="letstand != null and letstand != ''">
+				`letstand` = #{letstand}, 			
+			</if>
+			<if test="maxPower != null and maxPower != ''">
+				`max_power` = #{maxPower}, 			
+			</if>
+			<if test="maxSpeed != null and maxSpeed != ''">
+				`max_speed` = #{maxSpeed}, 			
+			</if>
+			<if test="maxTotalMass != null and maxTotalMass != ''">
+				`max_total_mass` = #{maxTotalMass}, 			
+			</if>
+			<if test="maxTurnSpace != null and maxTurnSpace != ''">
+				`max_turn_space` = #{maxTurnSpace}, 			
+			</if>
+			<if test="modelSimple != null and modelSimple != ''">
+				`model_simple` = #{modelSimple}, 			
+			</if>
+			<if test="modelYear != null and modelYear != ''">
+				`model_year` = #{modelYear}, 			
+			</if>
+			<if test="oil != null and oil != ''">
+				`oil` = #{oil}, 			
+			</if>
+			<if test="oilBoxVolume != null and oilBoxVolume != ''">
+				`oil_box_volume` = #{oilBoxVolume}, 			
+			</if>
+			<if test="ringModel != null and ringModel != ''">
+				`ring_model` = #{ringModel}, 			
+			</if>
+			<if test="setupMass != null and setupMass != ''">
+				`setup_mass` = #{setupMass}, 			
+			</if>
+			<if test="businessEnable != null and businessEnable != 0 ">
+				`business_enable` = #{businessEnable}, 			
+			</if>
+			<if test="delFlg != null and delFlg != ''">
+				`del_flg` = #{delFlg}, 			
+			</if>
+			<if test="creator != null and creator != ''">
+				`creator` = #{creator}, 			
+			</if>
+			<if test="createTime != null">
+				`create_time` = #{createTime}, 			
+			</if>
+			<if test="modifier != null and modifier != ''">
+				`modifier` = #{modifier}, 			
+			</if>
+			<if test="modifyTime != null">
+				`modify_time` = #{modifyTime}			
+			</if>
+		</set>
+		where car_id = #{carId}
+	</update>
+	
+	<delete id="delete">
+		delete from m_car where car_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from m_car where car_id in 
+		<foreach item="carId" collection="array" open="(" separator="," close=")">
+			#{carId}
+		</foreach>
+	</delete>
+
+</mapper>

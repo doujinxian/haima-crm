@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haima.crm.dao.CarSeriesDao">
+	
+	<resultMap id="RM_CarSeries" type="com.haima.crm.entity.CarSeries">
+			<result property="carSeriesId" column="car_series_id"/>
+			<result property="carSeriesCode" column="car_series_code"/>
+			<result property="carSeriesName" column="car_series_name"/>
+			<result property="brand" column="brand"/>
+			<result property="origin" column="origin"/>
+			<result property="delFlg" column="del_flg"/>
+			<result property="creator" column="creator"/>
+			<result property="createTime" column="create_time"/>
+			<result property="modifier" column="modifier"/>
+			<result property="modifyTime" column="modify_time"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="CarSeries_columns">
+	    <![CDATA[
+			`car_series_id`, 			
+			`car_series_code`, 			
+			`car_series_name`, 			
+			`brand`, 			
+			`origin`, 			
+			`del_flg`, 			
+			`creator`, 			
+			`create_time`, 			
+			`modifier`, 			
+			`modify_time`			
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="CarSeries_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="carSeriesCode != null and carSeriesCode != ''">
+				`car_series_code` = #{carSeriesCode} and 			
+			</if>
+			<if test="carSeriesName != null and carSeriesName != ''">
+				`car_series_name` = #{carSeriesName} and 			
+			</if>
+			<if test="brand != null and brand != ''">
+				`brand` = #{brand} and 			
+			</if>
+			<if test="origin != null and origin != ''">
+				`origin` = #{origin} and 			
+			</if>
+			<if test="delFlg != null and delFlg != ''">
+				`del_flg` = #{delFlg} and 			
+			</if>
+			<if test="creator != null and creator != ''">
+				`creator` = #{creator} and 			
+			</if>
+			<if test="createTime != null">
+				`create_time` = #{createTime} and 			
+			</if>
+			<if test="modifier != null and modifier != ''">
+				`modifier` = #{modifier} and 			
+			</if>
+			<if test="modifyTime != null">
+				`modify_time` = #{modifyTime}			
+			</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_CarSeries">
+		select 
+		<include refid="CarSeries_columns" />
+		from m_car_series 
+		where
+		car_series_id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_CarSeries">
+		select 
+		<include refid="CarSeries_columns" />
+		from m_car_series
+		<include refid="CarSeries_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from m_car_series 
+		<include refid="CarSeries_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.CarSeries">
+		insert into m_car_series
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="carSeriesId !=null and carSeriesId != 0 ">
+				car_series_id, 			
+			</if>
+			<if test="carSeriesCode !=null and carSeriesCode != ''">
+				car_series_code, 			
+			</if>
+			<if test="carSeriesName !=null and carSeriesName != ''">
+				car_series_name, 			
+			</if>
+			<if test="brand !=null and brand != ''">
+				brand, 			
+			</if>
+			<if test="origin !=null and origin != ''">
+				origin, 			
+			</if>
+			<if test="delFlg !=null and delFlg != ''">
+				del_flg, 			
+			</if>
+			<if test="creator !=null and creator != ''">
+				creator, 			
+			</if>
+			<if test="createTime !=null">
+				create_time, 			
+			</if>
+			<if test="modifier !=null and modifier != ''">
+				modifier, 			
+			</if>
+			<if test="modifyTime !=null">
+				modify_time			
+			</if>
+	     </trim>
+		)
+		values
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="carSeriesId !=null and carSeriesId != 0 ">
+				#{carSeriesId}, 			
+			</if>
+			<if test="carSeriesCode !=null and carSeriesCode != ''">
+				#{carSeriesCode}, 			
+			</if>
+			<if test="carSeriesName !=null and carSeriesName != ''">
+				#{carSeriesName}, 			
+			</if>
+			<if test="brand !=null and brand != ''">
+				#{brand}, 			
+			</if>
+			<if test="origin !=null and origin != ''">
+				#{origin}, 			
+			</if>
+			<if test="delFlg !=null and delFlg != ''">
+				#{delFlg}, 			
+			</if>
+			<if test="creator !=null and creator != ''">
+				#{creator}, 			
+			</if>
+			<if test="createTime !=null">
+				#{createTime}, 			
+			</if>
+			<if test="modifier !=null and modifier != ''">
+				#{modifier}, 			
+			</if>
+			<if test="modifyTime !=null">
+				#{modifyTime}			
+			</if>
+	     </trim>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.haima.crm.entity.CarSeries">
+		update m_car_series 
+		<set>
+			<if test="carSeriesCode != null and carSeriesCode != ''">
+				`car_series_code` = #{carSeriesCode}, 			
+			</if>
+			<if test="carSeriesName != null and carSeriesName != ''">
+				`car_series_name` = #{carSeriesName}, 			
+			</if>
+			<if test="brand != null and brand != ''">
+				`brand` = #{brand}, 			
+			</if>
+			<if test="origin != null and origin != ''">
+				`origin` = #{origin}, 			
+			</if>
+			<if test="delFlg != null and delFlg != ''">
+				`del_flg` = #{delFlg}, 			
+			</if>
+			<if test="creator != null and creator != ''">
+				`creator` = #{creator}, 			
+			</if>
+			<if test="createTime != null">
+				`create_time` = #{createTime}, 			
+			</if>
+			<if test="modifier != null and modifier != ''">
+				`modifier` = #{modifier}, 			
+			</if>
+			<if test="modifyTime != null">
+				`modify_time` = #{modifyTime}			
+			</if>
+		</set>
+		where car_series_id = #{carSeriesId}
+	</update>
+	
+	<delete id="delete">
+		delete from m_car_series where car_series_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from m_car_series where car_series_id in 
+		<foreach item="carSeriesId" collection="array" open="(" separator="," close=")">
+			#{carSeriesId}
+		</foreach>
+	</delete>
+
+</mapper>

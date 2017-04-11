@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haima.crm.dao.CodeDao">
+	
+	<resultMap id="RM_Code" type="com.haima.crm.entity.Code">
+			<result property="id" column="id"/>
+			<result property="type" column="type"/>
+			<result property="code" column="code"/>
+			<result property="name" column="name"/>
+			<result property="remark" column="remark"/>
+			<result property="order" column="order"/>
+			<result property="delFlg" column="del_flg"/>
+			<result property="creator" column="creator"/>
+			<result property="createDate" column="create_date"/>
+			<result property="modifier" column="modifier"/>
+			<result property="modifyDate" column="modify_date"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Code_columns">
+	    <![CDATA[
+			`id`, 			
+			`type`, 			
+			`code`, 			
+			`name`, 			
+			`remark`, 			
+			`order`, 			
+			`del_flg`, 			
+			`creator`, 			
+			`create_date`, 			
+			`modifier`, 			
+			`modify_date`			
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="Code_condition">
+		<where>
+        <trim suffix="" suffixOverrides="and">
+			<if test="type != null and type != ''">
+				`type` = #{type} and 			
+			</if>
+			<if test="code != null and code != ''">
+				`code` = #{code} and 			
+			</if>
+			<if test="name != null and name != ''">
+				`name` = #{name} and 			
+			</if>
+			<if test="remark != null and remark != ''">
+				`remark` = #{remark} and 			
+			</if>
+			<if test="order != null and order != 0 ">
+				`order` = #{order} and 			
+			</if>
+			<if test="delFlg != null and delFlg != ''">
+				`del_flg` = #{delFlg} and 			
+			</if>
+			<if test="creator != null and creator != ''">
+				`creator` = #{creator} and 			
+			</if>
+			<if test="createDate != null">
+				`create_date` = #{createDate} and 			
+			</if>
+			<if test="modifier != null and modifier != ''">
+				`modifier` = #{modifier} and 			
+			</if>
+			<if test="modifyDate != null">
+				`modify_date` = #{modifyDate}			
+			</if>
+        </trim>
+		</where>
+	</sql>
+	
+	<select id="queryObject" resultMap="RM_Code">
+		select 
+		<include refid="Code_columns" />
+		from m_code 
+		where
+		id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="RM_Code">
+		select 
+		<include refid="Code_columns" />
+		from m_code
+		<include refid="Code_condition"/> 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="java.lang.Integer">
+		select 
+		count(1) 
+		from m_code 
+		<include refid="Code_condition"/>
+	</select>
+	 
+	<insert id="save" parameterType="com.haima.crm.entity.Code" useGeneratedKeys="true" keyProperty="id">
+		insert into m_code
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="type !=null and type != ''">
+				type, 			
+			</if>
+			<if test="code !=null and code != ''">
+				code, 			
+			</if>
+			<if test="name !=null and name != ''">
+				name, 			
+			</if>
+			<if test="remark !=null and remark != ''">
+				remark, 			
+			</if>
+			<if test="order !=null and order != 0 ">
+				order, 			
+			</if>
+			<if test="delFlg !=null and delFlg != ''">
+				del_flg, 			
+			</if>
+			<if test="creator !=null and creator != ''">
+				creator, 			
+			</if>
+			<if test="createDate !=null">
+				create_date, 			
+			</if>
+			<if test="modifier !=null and modifier != ''">
+				modifier, 			
+			</if>
+			<if test="modifyDate !=null">
+				modify_date			
+			</if>
+	     </trim>
+		)
+		values
+		(
+		<trim suffix="" suffixOverrides=",">
+			<if test="type !=null and type != ''">
+				#{type}, 			
+			</if>
+			<if test="code !=null and code != ''">
+				#{code}, 			
+			</if>
+			<if test="name !=null and name != ''">
+				#{name}, 			
+			</if>
+			<if test="remark !=null and remark != ''">
+				#{remark}, 			
+			</if>
+			<if test="order !=null and order != 0 ">
+				#{order}, 			
+			</if>
+			<if test="delFlg !=null and delFlg != ''">
+				#{delFlg}, 			
+			</if>
+			<if test="creator !=null and creator != ''">
+				#{creator}, 			
+			</if>
+			<if test="createDate !=null">
+				#{createDate}, 			
+			</if>
+			<if test="modifier !=null and modifier != ''">
+				#{modifier}, 			
+			</if>
+			<if test="modifyDate !=null">
+				#{modifyDate}			
+			</if>
+	     </trim>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.haima.crm.entity.Code">
+		update m_code 
+		<set>
+			<if test="type != null and type != ''">
+				`type` = #{type}, 			
+			</if>
+			<if test="code != null and code != ''">
+				`code` = #{code}, 			
+			</if>
+			<if test="name != null and name != ''">
+				`name` = #{name}, 			
+			</if>
+			<if test="remark != null and remark != ''">
+				`remark` = #{remark}, 			
+			</if>
+			<if test="order != null and order != 0 ">
+				`order` = #{order}, 			
+			</if>
+			<if test="delFlg != null and delFlg != ''">
+				`del_flg` = #{delFlg}, 			
+			</if>
+			<if test="creator != null and creator != ''">
+				`creator` = #{creator}, 			
+			</if>
+			<if test="createDate != null">
+				`create_date` = #{createDate}, 			
+			</if>
+			<if test="modifier != null and modifier != ''">
+				`modifier` = #{modifier}, 			
+			</if>
+			<if test="modifyDate != null">
+				`modify_date` = #{modifyDate}			
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from m_code where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from m_code where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
