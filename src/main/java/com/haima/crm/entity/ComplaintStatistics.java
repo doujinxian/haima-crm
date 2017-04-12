@@ -22,6 +22,8 @@ public class ComplaintStatistics {
     private String timelyComplaintHandlingRatio;
     //统计方式
     private String statisticsType;
+    //投诉类型
+    private String complainType;
 
     public int getComplaintCount() {
         return complaintCount;
@@ -86,4 +88,13 @@ public class ComplaintStatistics {
     public void setStatisticsType(String statisticsType) {
         this.statisticsType = statisticsType;
     }
+
+	public String getComplainType() {
+		return complainType;
+	}
+
+	public void setComplainType(String complainType) {
+		this.complainType = complainType;
+	}
+    
 }

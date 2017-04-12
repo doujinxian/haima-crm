@@ -36,7 +36,7 @@ public class ComplaintStatisticsController {
      */
     @ResponseBody
     @RequestMapping("/analysis/list")
-    public Result analysisList(ComplaintStatisticsVo complaintStatisticsVo) {
+    public Result analysisList(@RequestBody ComplaintStatisticsVo complaintStatisticsVo) {
         if(StringUtils.isEmpty(complaintStatisticsVo.getStatisticsType())){
             return Result.error("statisticsType不能为空!");
         }
@@ -60,7 +60,7 @@ public class ComplaintStatisticsController {
      */
     @ResponseBody
     @RequestMapping("/satisfaction/list")
-    public Result satisfactionList(ComplaintStatisticsVo complaintStatisticsVo) {
+    public Result satisfactionList(@RequestBody ComplaintStatisticsVo complaintStatisticsVo) {
         if(StringUtils.isEmpty(complaintStatisticsVo.getStatisticsType())){
             return Result.error("statisticsType不能为空!");
         }
