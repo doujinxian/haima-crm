@@ -55,6 +55,30 @@
 			</trim>
 		</where>
 	</sql>
+
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="Complaint_condition_satisfaction">
+		<where>
+			<trim suffix="" suffixOverrides="and">
+				`del_flag` = 0 and `complain_status` = 4 and
+				<if test="complainType != null and complainType != ''">
+					`complain_type` = #{complainType} and
+				</if>
+				<if test="complainTimeStart != null">
+					`complain_time` &gt;= #{complainTimeStart} and
+				</if>
+				<if test="complainTimeEnd != null">
+					`complain_time` &lt; #{complainTimeEnd} and
+				</if>
+				<if test="salesServicesService != null and salesServicesService != ''">
+					`sales_services_service` = #{salesServicesService} and
+				</if>
+				<if test="salesServicesCode != null and salesServicesCode != ''">
+					`sales_services_code` = #{salesServicesCode}
+				</if>
+			</trim>
+		</where>
+	</sql>
 	
 	<select id="queryAnalysisList" resultMap="RM_Complaint_Statistics_Analysis" parameterType="com.haima.crm.vo.ComplaintStatisticsVo">
 		<![CDATA[
@@ -77,7 +101,7 @@
 									c.${statisticsType} statistics_type,
 									IF(c.complain_status=4,1,0) close_complaint_cot,
 									1 complaint_cot,
-									IF(c.complain_status=4 AND c.close_time<=c.finish_time,1,0) timely_close_complaint_cot,
+									IF(c.complain_status=4 AND c.delay_status=0,1,0) timely_close_complaint_cot,
 									IF(c.satisfaction_degree=0,1,0) complaint_satisfaction_cot
 								FROM t_complaint c
 		]]>
@@ -106,7 +130,7 @@
 		c.${statisticsType} statistics_type,
 		IF(c.complain_status=4,1,0) close_complaint_cot,
 		1 complaint_cot,
-		IF(c.complain_status=4 AND c.close_time<=c.finish_time,1,0) timely_close_complaint_cot,
+		IF(c.complain_status=4 AND c.delay_status=0,1,0) timely_close_complaint_cot,
 		IF(c.satisfaction_degree=0,1,0) complaint_satisfaction_cot
 		FROM t_complaint c
 		]]>
@@ -117,7 +141,6 @@
 	</select>
 
 	<select id="querySatisfactionList" resultMap="RM_Complaint_Statistics_Satisfaction" parameterType="com.haima.crm.vo.ComplaintStatisticsVo">
-		<![CDATA[
 		SELECT a.statistics_type,
 				a.complaint_cot,
 				a.satisfaction_cot,
@@ -138,9 +161,17 @@
 									IF(c.satisfaction_degree=0,1,0) satisfaction_cot,
 									IF(c.satisfaction_degree=1,1,0) common_satisfaction_cot,
 									IF(c.satisfaction_degree=2,1,0) dissatisfaction_cot
-								FROM t_complaint c
-		]]>
-		<include refid="Complaint_condition"/>
+								FROM (SELECT
+										  *,
+										  IF(
+											delay_status = 0,
+											'未延迟申请',
+											'已延迟申请'
+										  ) complain_isDelay,
+											'全国' all_country
+										FROM
+										  t_complaint
+										<include refid="Complaint_condition_satisfaction"/> ) c
 		) t
 		GROUP BY t.statistics_type) a
 		<if test="offset != null and limit != null">
@@ -149,7 +180,7 @@
 	</select>
 
 	<select id="querySatisfactionTotal" resultType="java.lang.Integer">
-		<![CDATA[
+
 		select
 		count(1)
 		from (SELECT t.statistics_type,
@@ -164,9 +195,17 @@
 									IF(c.satisfaction_degree=0,1,0) satisfaction_cot,
 									IF(c.satisfaction_degree=1,1,0) common_satisfaction_cot,
 									IF(c.satisfaction_degree=2,1,0) dissatisfaction_cot
-								FROM t_complaint c
-		]]>
-		<include refid="Complaint_condition"/>
+								FROM (SELECT
+										  *,
+										  IF(
+											delay_status = 0,
+											'未延期',
+											'已延期'
+										  ) complain_isDelay,
+											'全国' all_country
+										FROM
+										  t_complaint
+										<include refid="Complaint_condition_satisfaction"/> ) c
 		) t
 		GROUP BY t.statistics_type) a
 
