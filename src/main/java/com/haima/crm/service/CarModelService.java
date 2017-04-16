@@ -1,9 +1,9 @@
 package com.haima.crm.service;
 
-import com.haima.crm.entity.CarModel;
-
 import java.util.List;
 import java.util.Map;
+
+import com.haima.crm.entity.CarModel;
 
 /**
  * 
@@ -18,7 +18,11 @@ public interface CarModelService {
 	
 	List<CarModel> queryList(Map<String, Object> map);
 	
+	List<CarModel> queryList(CarModel carModel);
+	
 	int queryTotal(Map<String, Object> map);
+	
+	int queryTotal(CarModel carModel);
 	
 	void save(CarModel carModel);
 	

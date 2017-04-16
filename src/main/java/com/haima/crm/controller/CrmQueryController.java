@@ -1,21 +1,18 @@
 package com.haima.crm.controller;
 
-import com.haima.crm.constants.StatisticsTypeConfig;
-import com.haima.crm.dto.CustomerCarDTO;
-import com.haima.crm.entity.ComplaintStatistics;
-import com.haima.crm.service.CrmQueryService;
-import com.haima.crm.utils.PageUtils;
-import com.haima.crm.utils.Result;
-import com.haima.crm.vo.ComplaintStatisticsVo;
-import com.haima.crm.vo.CrmCustomerCarVo;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import com.haima.crm.dto.CustomerCarDTO;
+import com.haima.crm.service.CrmQueryService;
+import com.haima.crm.utils.PageUtils;
+import com.haima.crm.utils.Result;
+import com.haima.crm.vo.CrmCustomerCarVo;
 
 /**
  * @author lushaozhong
@@ -30,7 +27,7 @@ public class CrmQueryController {
     private CrmQueryService crmQueryService;
 
     /**
-     * 统计分析列表
+     * 人车查询接口（新增投诉单点击vin码弹框，获取人车信息，也调用这个接口）
      */
     @ResponseBody
     @RequestMapping("/customer/car/list")

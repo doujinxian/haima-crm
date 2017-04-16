@@ -270,7 +270,8 @@
 		select 
 		<include refid="Complaint_columns" />
 		from t_complaint
-		<include refid="Complaint_condition"/> 
+		<include refid="Complaint_condition"/>
+		order by update_time desc
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>

@@ -5,16 +5,18 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.stereotype.Controller;
 
 import com.haima.crm.entity.CarModel;
+import com.haima.crm.entity.Complaint;
 import com.haima.crm.service.CarModelService;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
+import com.haima.crm.vo.CarModelVo;
 
 
 /**
@@ -35,16 +37,12 @@ public class CarModelController {
 	 */
 	@ResponseBody
 	@RequestMapping("/list")
-	public Result list(Integer page, Integer limit){
-		Map<String, Object> map = new HashMap<>();
-		map.put("offset", (page - 1) * limit);
-		map.put("limit", limit);
-		
+	public Result list(@RequestBody CarModel carModelVo){
 		//查询列表数据
-		List<CarModel> carModelList = carModelService.queryList(map);
-		int total = carModelService.queryTotal(map);
+		List<CarModel> carModelList = carModelService.queryList(carModelVo);
+		int total = carModelService.queryTotal(carModelVo);
 		
-		PageUtils pageUtil = new PageUtils(carModelList, total, limit, page);
+		PageUtils pageUtil = new PageUtils(carModelList, total, carModelVo.getLimit(), carModelVo.getPage());
 		
 		return Result.ok().put("page", pageUtil);
 	}

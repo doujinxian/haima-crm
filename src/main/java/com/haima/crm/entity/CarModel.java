@@ -3,6 +3,8 @@ package com.haima.crm.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.haima.crm.vo.CarModelVo;
+
 
 
 /**
@@ -12,7 +14,7 @@ import java.util.Date;
  * @email doujinxian@126.com
  * @date 2017-04-11 17:25:30
  */
-public class CarModel implements Serializable {
+public class CarModel extends CarModelVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//车系id

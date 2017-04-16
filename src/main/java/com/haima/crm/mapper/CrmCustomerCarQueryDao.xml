@@ -38,7 +38,7 @@
 				<if test="carSeriesName != null and carSeriesName != ''">
 					mcs.car_series_name = #{carSeriesName} and
 				</if>
-				<if test="carSeriesName != null and carSeriesName != ''">
+				<if test="carModelName != null and carModelName != ''">
 					mcm.car_model_name = #{carModelName} and
 				</if>
 				<if test="purchaseDateStart != null">
