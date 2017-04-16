@@ -37,7 +37,7 @@
 		<where>
         <trim suffix="" suffixOverrides="and">
 			<if test="vin != null and vin != ''">
-				`vin` = #{vin} and 			
+				`vin` = #{vin} and
 			</if>
 			<if test="plateNo != null and plateNo != ''">
 				`plate_no` = #{plateNo} and 			

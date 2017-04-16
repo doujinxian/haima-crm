@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haima.crm.dao.CrmCustomerCarQueryDao">
+	
+	<resultMap id="Crm_Customer_Car" type="com.haima.crm.dto.CustomerCarDTO">
+		<result property="vin" column="vin"/>
+		<result property="customerId" column="customer_id"/>
+		<result property="customerName" column="customer_name"/>
+		<result property="phone" column="phone"/>
+		<result property="plateNo" column="plate_no"/>
+		<result property="salesServicesService" column="sales_services_service"/>
+		<result property="carSeriesName" column="car_series_name"/>
+		<result property="carModelCode" column="car_model_code"/>
+		<result property="carModelName" column="car_model_name"/>
+		<result property="purchaseDate" column="purchase_date"/>
+		<result property="colorName" column="color_name"/>
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Complaint_columns">
+	    <![CDATA[
+
+	    ]]>
+	</sql>
+	
+	<!-- 用于where查询公用抽取的列 -->
+	<sql id="Complaint_condition">
+		<where>
+			<trim suffix="" suffixOverrides="and">
+				cc.del_flg = 0 and
+				<if test="vin != null and vin != ''">
+					cc.vin = #{vin} and
+				</if>
+				<if test="plateNo != null and plateNo != ''">
+					cc.plate_no = #{plateNo} and
+				</if>
+				<if test="carSeriesName != null and carSeriesName != ''">
+					mcs.car_series_name = #{carSeriesName} and
+				</if>
+				<if test="carSeriesName != null and carSeriesName != ''">
+					mcm.car_model_name = #{carModelName} and
+				</if>
+				<if test="purchaseDateStart != null">
+					cc.purchase_date &gt;= #{purchaseDateStart} and
+				</if>
+				<if test="purchaseDateEnd != null">
+					cc.purchase_date &lt; #{purchaseDateEnd} and
+				</if>
+				<if test="customerName != null and customerName != ''">
+					c.customer_name = #{customerName} and
+				</if>
+				<if test="phone != null and phone != ''">
+					c.phone = #{phone} and
+				</if>
+				<if test="moofunId != null">
+					c.moofun_id = #{moofunId} and
+				</if>
+				<if test="idNo != null and idNo != ''">
+					c.id_no = #{idNo} and
+				</if>
+
+			</trim>
+		</where>
+	</sql>
+	
+	<select id="queryCustomerCarList" resultMap="Crm_Customer_Car" parameterType="com.haima.crm.vo.CrmCustomerCarVo">
+		SELECT
+			cc.vin,
+			c.customer_id,
+			c.customer_name,
+			c.phone,
+			cc.plate_no,
+			'' sales_services_service,
+			mcs.car_series_name,
+			mcm.car_model_code,
+			mcm.car_model_name,
+			cc.purchase_date,
+			mcl.color_name
+		FROM
+			t_customer_car cc
+			INNER JOIN t_customer c
+				ON cc.customer_id = c.customer_id
+			INNER JOIN m_car mc
+				ON cc.car_id = mc.car_id
+			INNER JOIN m_car_series mcs
+				ON mc.car_series_id = mcs.car_series_id
+			INNER JOIN m_car_model mcm
+				ON mc.car_model_id = mcm.car_model_id
+			INNER JOIN m_color mcl
+				ON cc.car_color_id = mcl.color_id
+			<include refid="Complaint_condition"/>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryCustomerCarTotal" resultType="java.lang.Integer">
+		  select
+			count(1)
+		  from
+			t_customer_car cc
+			INNER JOIN t_customer c
+				ON cc.customer_id = c.customer_id
+			INNER JOIN m_car mc
+				ON cc.car_id = mc.car_id
+			INNER JOIN m_car_series mcs
+				ON mc.car_series_id = mcs.car_series_id
+			INNER JOIN m_car_model mcm
+				ON mc.car_model_id = mcm.car_model_id
+			<include refid="Complaint_condition"/>
+	</select>
+	 
+</mapper>

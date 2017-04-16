@@ -35,10 +35,11 @@ public class CustomerCarController {
 	 */
 	@ResponseBody
 	@RequestMapping("/list")
-	public Result list(Integer page, Integer limit){
+	public Result list(Integer page, Integer limit, String vin){
 		Map<String, Object> map = new HashMap<>();
 		map.put("offset", (page - 1) * limit);
 		map.put("limit", limit);
+		map.put("vin",vin);
 		
 		//查询列表数据
 		List<CustomerCar> customerCarList = customerCarService.queryList(map);
