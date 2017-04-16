@@ -81,7 +81,6 @@
 	</sql>
 	
 	<select id="queryAnalysisList" resultMap="RM_Complaint_Statistics_Analysis" parameterType="com.haima.crm.vo.ComplaintStatisticsVo">
-		<![CDATA[
 		SELECT a.statistics_type,
 				a.complaint_cot,
 				IF(a.complaint_all_cot=0,0.00,ROUND(a.complaint_cot*100/a.complaint_all_cot,2)) complaint_count_ratio,
@@ -103,9 +102,14 @@
 									1 complaint_cot,
 									IF(c.complain_status=4 AND c.delay_status=0,1,0) timely_close_complaint_cot,
 									IF(c.satisfaction_degree=0,1,0) complaint_satisfaction_cot
-								FROM t_complaint c
-		]]>
-									<include refid="Complaint_condition"/>
+								FROM (SELECT
+										  *,
+											'投诉总量' complain_gross
+										FROM
+										  t_complaint
+											<include refid="Complaint_condition"/>
+									  ) c
+
 								) t,(select count(*) complaint_all_cot from t_complaint
 										<include refid="Complaint_condition"/>
 									) ct
@@ -117,8 +121,7 @@
 	</select>
 	
  	<select id="queryAnalysisTotal" resultType="java.lang.Integer">
-		<![CDATA[
-		select 
+		select
 		count(1) 
 		from (SELECT t.statistics_type,
 		SUM(t.close_complaint_cot) close_complaint_cot,
@@ -132,9 +135,13 @@
 		1 complaint_cot,
 		IF(c.complain_status=4 AND c.delay_status=0,1,0) timely_close_complaint_cot,
 		IF(c.satisfaction_degree=0,1,0) complaint_satisfaction_cot
-		FROM t_complaint c
-		]]>
-		<include refid="Complaint_condition"/>
+		FROM (SELECT
+				  *,
+					'投诉总量' complain_gross
+				FROM
+				  t_complaint
+					<include refid="Complaint_condition"/>
+			  ) c
 		) t
 		GROUP BY t.statistics_type) a
 
