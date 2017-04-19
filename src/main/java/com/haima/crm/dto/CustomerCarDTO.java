@@ -30,6 +30,10 @@ public class CustomerCarDTO {
     private Date purchaseDate;
     //车颜色
     private String colorName;
+    //moofun账号
+    private Integer moofunId;
+    //身份证号
+    private String idNo;
 
     public String getVin() {
         return vin;
@@ -114,4 +118,20 @@ public class CustomerCarDTO {
     public void setColorName(String colorName) {
         this.colorName = colorName;
     }
+
+	public Integer getMoofunId() {
+		return moofunId;
+	}
+
+	public void setMoofunId(Integer moofunId) {
+		this.moofunId = moofunId;
+	}
+
+	public String getIdNo() {
+		return idNo;
+	}
+
+	public void setIdNo(String idNo) {
+		this.idNo = idNo;
+	}
 }

@@ -3,6 +3,8 @@ package com.haima.crm.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import com.haima.crm.vo.PageVo;
 
 
@@ -14,6 +16,7 @@ import com.haima.crm.vo.PageVo;
  * @email doujinxian@126.com
  * @date 2017-03-30 19:39:58
  */
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class ComplaintDistribute extends PageVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

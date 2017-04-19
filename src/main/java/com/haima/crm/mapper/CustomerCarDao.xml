@@ -9,6 +9,7 @@
 			<result property="plateNo" column="plate_no"/>
 			<result property="carId" column="car_id"/>
 			<result property="carColorId" column="car_color_id"/>
+			<result property="purchaseDate" column="purchase_date"/>
 			<result property="delFlg" column="del_flg"/>
 			<result property="creator" column="creator"/>
 			<result property="createTime" column="create_time"/>
@@ -24,6 +25,7 @@
 			`plate_no`, 			
 			`car_id`, 			
 			`car_color_id`, 			
+			`purchase_date`, 			
 			`del_flg`, 			
 			`creator`, 			
 			`create_time`, 			
@@ -37,7 +39,7 @@
 		<where>
         <trim suffix="" suffixOverrides="and">
 			<if test="vin != null and vin != ''">
-				`vin` = #{vin} and
+				`vin` = #{vin} and 			
 			</if>
 			<if test="plateNo != null and plateNo != ''">
 				`plate_no` = #{plateNo} and 			
@@ -47,6 +49,9 @@
 			</if>
 			<if test="carColorId != null and carColorId != 0 ">
 				`car_color_id` = #{carColorId} and 			
+			</if>
+			<if test="purchaseDate != null">
+				`purchase_date` = #{purchaseDate} and 			
 			</if>
 			<if test="delFlg != null and delFlg != ''">
 				`del_flg` = #{delFlg} and 			
@@ -96,34 +101,37 @@
 		insert into t_customer_car
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="customerId!=null and customerId != 0 ">
+			<if test="customerId !=null and customerId != 0 ">
 				customer_id, 			
 			</if>
-			<if test="vin!=null and vin != ''">
+			<if test="vin !=null and vin != ''">
 				vin, 			
 			</if>
-			<if test="plateNo!=null and plateNo != ''">
+			<if test="plateNo !=null and plateNo != ''">
 				plate_no, 			
 			</if>
-			<if test="carId!=null and carId != 0 ">
+			<if test="carId !=null and carId != 0 ">
 				car_id, 			
 			</if>
-			<if test="carColorId!=null and carColorId != 0 ">
+			<if test="carColorId !=null and carColorId != 0 ">
 				car_color_id, 			
 			</if>
-			<if test="delFlg!=null and delFlg != ''">
+			<if test="purchaseDate !=null">
+				purchase_date, 			
+			</if>
+			<if test="delFlg !=null and delFlg != ''">
 				del_flg, 			
 			</if>
-			<if test="creator!=null and creator != ''">
+			<if test="creator !=null and creator != ''">
 				creator, 			
 			</if>
-			<if test="createTime!=null">
+			<if test="createTime !=null">
 				create_time, 			
 			</if>
-			<if test="modifier!=null and modifier != ''">
+			<if test="modifier !=null and modifier != ''">
 				modifier, 			
 			</if>
-			<if test="modifyTime!=null">
+			<if test="modifyTime !=null">
 				modify_time			
 			</if>
 	     </trim>
@@ -131,34 +139,37 @@
 		values
 		(
 		<trim suffix="" suffixOverrides=",">
-			<if test="customerId!=null and customerId != 0 ">
+			<if test="customerId !=null and customerId != 0 ">
 				#{customerId}, 			
 			</if>
-			<if test="vin!=null and vin != ''">
+			<if test="vin !=null and vin != ''">
 				#{vin}, 			
 			</if>
-			<if test="plateNo!=null and plateNo != ''">
+			<if test="plateNo !=null and plateNo != ''">
 				#{plateNo}, 			
 			</if>
-			<if test="carId!=null and carId != 0 ">
+			<if test="carId !=null and carId != 0 ">
 				#{carId}, 			
 			</if>
-			<if test="carColorId!=null and carColorId != 0 ">
+			<if test="carColorId !=null and carColorId != 0 ">
 				#{carColorId}, 			
 			</if>
-			<if test="delFlg!=null and delFlg != ''">
+			<if test="purchaseDate !=null">
+				#{purchaseDate}, 			
+			</if>
+			<if test="delFlg !=null and delFlg != ''">
 				#{delFlg}, 			
 			</if>
-			<if test="creator!=null and creator != ''">
+			<if test="creator !=null and creator != ''">
 				#{creator}, 			
 			</if>
-			<if test="createTime!=null">
+			<if test="createTime !=null">
 				#{createTime}, 			
 			</if>
-			<if test="modifier!=null and modifier != ''">
+			<if test="modifier !=null and modifier != ''">
 				#{modifier}, 			
 			</if>
-			<if test="modifyTime!=null">
+			<if test="modifyTime !=null">
 				#{modifyTime}			
 			</if>
 	     </trim>
@@ -179,6 +190,9 @@
 			</if>
 			<if test="carColorId != null and carColorId != 0 ">
 				`car_color_id` = #{carColorId}, 			
+			</if>
+			<if test="purchaseDate != null">
+				`purchase_date` = #{purchaseDate}, 			
 			</if>
 			<if test="delFlg != null and delFlg != ''">
 				`del_flg` = #{delFlg}, 			

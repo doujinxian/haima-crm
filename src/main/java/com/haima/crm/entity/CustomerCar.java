@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import com.haima.crm.vo.CustomerCarVo;
+
 
 
 /**
@@ -12,10 +14,10 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * 
  * @author doujinxian
  * @email doujinxian@126.com
- * @date 2017-03-23 19:55:47
+ * @date 2017-04-18 18:30:13
  */
-@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
-public class CustomerCar implements Serializable {
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+public class CustomerCar extends CustomerCarVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//客户id
@@ -28,6 +30,8 @@ public class CustomerCar implements Serializable {
 	private Integer carId;
 	//车颜色id
 	private Integer carColorId;
+	//购车日期
+	private Date purchaseDate;
 	//是否删除：0未1是
 	private String delFlg;
 	//创建者
@@ -98,6 +102,18 @@ public class CustomerCar implements Serializable {
 	 */
 	public Integer getCarColorId() {
 		return carColorId;
+	}
+	/**
+	 * 设置：购车日期
+	 */
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
+	/**
+	 * 获取：购车日期
+	 */
+	public Date getPurchaseDate() {
+		return purchaseDate;
 	}
 	/**
 	 * 设置：是否删除：0未1是

@@ -12,14 +12,18 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * 
  * @author doujinxian
  * @email doujinxian@126.com
- * @date 2017-03-23 19:55:47
+ * @date 2017-04-18 18:30:13
  */
-@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//
 	private Long customerId;
+	//
+	private Long pcId;
+	//
+	private Long moofunId;
 	//车主姓名
 	private String customerName;
 	//性别: 0-未知; 1-男; 2-女
@@ -48,16 +52,16 @@ public class Customer implements Serializable {
 	private Integer city;
 	//区/县
 	private Integer district;
-	//联系人
-	private String contact;
-	//联系地址
-	private String contactAddress;
+	//区域
+	private String area;
 	//客户类型1 A类客户 B类客户 C类客户 D类客户
 	private String customerType1;
 	//1-一类客户 2-二类客户 3-三类客户 4-四类客户
 	private String customerType2;
 	//职业
 	private String occupation;
+	//学历
+	private String education;
 	//工作单位
 	private String company;
 	//职位
@@ -76,6 +80,8 @@ public class Customer implements Serializable {
 	private String wechat;
 	//微博
 	private String weibo;
+	//了解渠道
+	private String knowFrom;
 	//备注
 	private String remark;
 	//是否删除：0未1是
@@ -100,6 +106,30 @@ public class Customer implements Serializable {
 	 */
 	public Long getCustomerId() {
 		return customerId;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setPcId(Long pcId) {
+		this.pcId = pcId;
+	}
+	/**
+	 * 获取：
+	 */
+	public Long getPcId() {
+		return pcId;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setMoofunId(Long moofunId) {
+		this.moofunId = moofunId;
+	}
+	/**
+	 * 获取：
+	 */
+	public Long getMoofunId() {
+		return moofunId;
 	}
 	/**
 	 * 设置：车主姓名
@@ -270,28 +300,16 @@ public class Customer implements Serializable {
 		return district;
 	}
 	/**
-	 * 设置：联系人
+	 * 设置：区域
 	 */
-	public void setContact(String contact) {
-		this.contact = contact;
+	public void setArea(String area) {
+		this.area = area;
 	}
 	/**
-	 * 获取：联系人
+	 * 获取：区域
 	 */
-	public String getContact() {
-		return contact;
-	}
-	/**
-	 * 设置：联系地址
-	 */
-	public void setContactAddress(String contactAddress) {
-		this.contactAddress = contactAddress;
-	}
-	/**
-	 * 获取：联系地址
-	 */
-	public String getContactAddress() {
-		return contactAddress;
+	public String getArea() {
+		return area;
 	}
 	/**
 	 * 设置：客户类型1 A类客户 B类客户 C类客户 D类客户
@@ -328,6 +346,18 @@ public class Customer implements Serializable {
 	 */
 	public String getOccupation() {
 		return occupation;
+	}
+	/**
+	 * 设置：学历
+	 */
+	public void setEducation(String education) {
+		this.education = education;
+	}
+	/**
+	 * 获取：学历
+	 */
+	public String getEducation() {
+		return education;
 	}
 	/**
 	 * 设置：工作单位
@@ -436,6 +466,18 @@ public class Customer implements Serializable {
 	 */
 	public String getWeibo() {
 		return weibo;
+	}
+	/**
+	 * 设置：了解渠道
+	 */
+	public void setKnowFrom(String knowFrom) {
+		this.knowFrom = knowFrom;
+	}
+	/**
+	 * 获取：了解渠道
+	 */
+	public String getKnowFrom() {
+		return knowFrom;
 	}
 	/**
 	 * 设置：备注

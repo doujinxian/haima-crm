@@ -15,6 +15,8 @@
 		<result property="carModelName" column="car_model_name"/>
 		<result property="purchaseDate" column="purchase_date"/>
 		<result property="colorName" column="color_name"/>
+		<result property="moofunId" column="moofun_id"/>
+		<result property="idNo" column="id_no"/>
 	</resultMap>
 
 	<!-- 用于select查询公用抽取的列 -->
@@ -48,13 +50,13 @@
 					cc.purchase_date &lt; #{purchaseDateEnd} and
 				</if>
 				<if test="customerName != null and customerName != ''">
-					c.customer_name = #{customerName} and
+					c.customer_name like CONCAT('%',#{customerName},'%') and
 				</if>
 				<if test="phone != null and phone != ''">
 					c.phone = #{phone} and
 				</if>
 				<if test="moofunId != null">
-					c.moofun_id = #{moofunId} and
+					c.moofun_id like CONCAT('%',#{moofunId},'%') and
 				</if>
 				<if test="idNo != null and idNo != ''">
 					c.id_no = #{idNo} and
@@ -76,7 +78,9 @@
 			mcm.car_model_code,
 			mcm.car_model_name,
 			cc.purchase_date,
-			mcl.color_name
+			mcl.color_name,
+			c.moofun_id,
+			c.id_no
 		FROM
 			t_customer_car cc
 			INNER JOIN t_customer c
