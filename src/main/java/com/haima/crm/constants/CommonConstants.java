@@ -1,6 +1,9 @@
 package com.haima.crm.constants;
 
 public class CommonConstants {
+	public static final String UMS_OUT_URL = "https://ums.tongter.com:8443/ums2/api";
+	public static final String UMS_TICKET = "41b99d404b74f5f8bcaa224fa4e40135";
+	
 	// del_flag 删除标记
 	public final static Integer DEL_FLAG_FALSE = 0;
 	public final static Integer DEL_FLAG_TRUE = 1;
@@ -30,15 +33,15 @@ public class CommonConstants {
 	public final static String DISTRIBUTE_STATUS_DEFAULT = "0";
 	public final static String DISTRIBUTE_STATUS_DISTRIBUTED = "1";
 	public final static String DISTRIBUTE_STATUS_CHANGED = "2";
-	
-	//批复状态（0：默认 1：同意，2：不同意）t_complaint_delay
-	public final static String REPLY_STATUS_DEFAULT= "0";
+
+	// 批复状态（0：默认 1：同意，2：不同意）t_complaint_delay
+	public final static String REPLY_STATUS_DEFAULT = "0";
 	public final static String REPLY_STATUS_AGREE = "1";
 	public final static String REPLY_STATUS_DISAGREE = "2";
-	
-	//审核状态(0：默认 1：通过，2：不通过)  t_complaint_flow
-	public final static String CHECK_STATUS_DEFAULT= "0";
+
+	// 审核状态(0：默认 1：通过，2：不通过) t_complaint_flow
+	public final static String CHECK_STATUS_DEFAULT = "0";
 	public final static String CHECK_STATUS_AGREE = "1";
 	public final static String CHECK_STATUS_DISAGREE = "2";
-	
+
 }
