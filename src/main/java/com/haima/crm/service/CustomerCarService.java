@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public interface CustomerCarService {
 	
-	CustomerCar queryObject(Long customerId);
+	CustomerCar queryObject(Long id);
 	
 	List<CustomerCar> queryList(Map<String, Object> map);
 	
@@ -24,7 +24,7 @@ public interface CustomerCarService {
 	
 	void update(CustomerCar customerCar);
 	
-	void delete(Long customerId);
+	void delete(Long id);
 	
-	void deleteBatch(Long[] customerIds);
+	void deleteBatch(Long[] ids);
 }

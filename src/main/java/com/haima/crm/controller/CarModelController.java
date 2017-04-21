@@ -1,8 +1,6 @@
 package com.haima.crm.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,11 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.haima.crm.entity.CarModel;
-import com.haima.crm.entity.Complaint;
 import com.haima.crm.service.CarModelService;
 import com.haima.crm.utils.PageUtils;
 import com.haima.crm.utils.Result;
-import com.haima.crm.vo.CarModelVo;
 
 
 /**
@@ -28,7 +24,7 @@ import com.haima.crm.vo.CarModelVo;
  */
 @Controller
 @RequestMapping("carmodel")
-public class CarModelController {
+public class CarModelController extends BaseController{
 	@Autowired
 	private CarModelService carModelService;
 	

@@ -8,6 +8,8 @@ import java.util.Date;
  * @date 2017-04-15 22:11
  */
 public class CustomerCarDTO {
+    // CustomerCar主键Id
+    private Long id;
     // vin码
     private String vin;
     //客户ID
@@ -133,5 +135,13 @@ public class CustomerCarDTO {
 
 	public void setIdNo(String idNo) {
 		this.idNo = idNo;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

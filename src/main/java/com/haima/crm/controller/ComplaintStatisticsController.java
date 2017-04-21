@@ -1,14 +1,7 @@
 package com.haima.crm.controller;
 
-import com.haima.crm.constants.StatisticsTypeConfig;
-import com.haima.crm.entity.Complaint;
-import com.haima.crm.entity.ComplaintStatistics;
-import com.haima.crm.entity.ComplaintStatisticsSatisfaction;
-import com.haima.crm.service.ComplaintStatisticsService;
-import com.haima.crm.utils.PageUtils;
-import com.haima.crm.utils.Result;
-import com.haima.crm.vo.ComplaintStatisticsVo;
-import com.haima.crm.vo.PageVo;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -16,7 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import com.haima.crm.constants.StatisticsTypeConfig;
+import com.haima.crm.entity.ComplaintStatistics;
+import com.haima.crm.entity.ComplaintStatisticsSatisfaction;
+import com.haima.crm.service.ComplaintStatisticsService;
+import com.haima.crm.utils.PageUtils;
+import com.haima.crm.utils.Result;
+import com.haima.crm.vo.ComplaintStatisticsVo;
 
 /**
  * 记录投诉信息
@@ -27,7 +26,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("complaint/statistics")
-public class ComplaintStatisticsController {
+public class ComplaintStatisticsController extends BaseController{
     @Autowired
     private ComplaintStatisticsService complaintStatisticsService;
 

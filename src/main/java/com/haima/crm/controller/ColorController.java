@@ -26,7 +26,7 @@ import com.haima.crm.utils.Result;
  */
 @Controller
 @RequestMapping("color")
-public class ColorController {
+public class ColorController extends BaseController{
 	@Autowired
 	private ColorService colorService;
 	

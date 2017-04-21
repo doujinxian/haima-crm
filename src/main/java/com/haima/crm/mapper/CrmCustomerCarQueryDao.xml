@@ -4,6 +4,7 @@
 <mapper namespace="com.haima.crm.dao.CrmCustomerCarQueryDao">
 	
 	<resultMap id="Crm_Customer_Car" type="com.haima.crm.dto.CustomerCarDTO">
+		<result property="id" column="id"/>
 		<result property="vin" column="vin"/>
 		<result property="customerId" column="customer_id"/>
 		<result property="customerName" column="customer_name"/>
@@ -68,6 +69,7 @@
 	
 	<select id="queryCustomerCarList" resultMap="Crm_Customer_Car" parameterType="com.haima.crm.vo.CrmCustomerCarVo">
 		SELECT
+			cc.id,
 			cc.vin,
 			c.customer_id,
 			c.customer_name,

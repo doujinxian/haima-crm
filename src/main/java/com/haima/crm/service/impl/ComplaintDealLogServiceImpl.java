@@ -67,10 +67,12 @@ public class ComplaintDealLogServiceImpl implements ComplaintDealLogService {
 					cc.setCreateTime(now);
 					cc.setUpdateTime(now);
 					cc.setComplainId(complaint.getId());
+					cc.setCreateBy(complaint.getUpdateBy());
 					save(cc);
 				}else{
 					cc.setUpdateTime(now);
 					cc.setComplainId(complaint.getId());
+					cc.setUpdateBy(complaint.getUpdateBy());
 					update(cc);
 				}
 			}

@@ -1,5 +1,6 @@
 package com.haima.crm.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.haima.crm.constants.CommonConstants;
 import com.haima.crm.entity.Complaint;
-import com.haima.crm.entity.ComplaintDelay;
 import com.haima.crm.entity.ComplaintForward;
 import com.haima.crm.service.ComplaintForwardService;
 import com.haima.crm.service.ComplaintService;
@@ -30,7 +30,7 @@ import com.haima.crm.utils.Result;
  */
 @Controller
 @RequestMapping("complaintforward")
-public class ComplaintForwardController {
+public class ComplaintForwardController extends BaseController{
 	@Autowired
 	private ComplaintForwardService complaintForwardService;
 	@Autowired
@@ -81,8 +81,12 @@ public class ComplaintForwardController {
 		Complaint complaint = new Complaint();
 		complaint.setId(complainId);
 		complaint.setForwardStatus(CommonConstants.FORWARD_STATUS_HAS_FORWARD);
+		complaint.setUpdateBy(getUsername());
+		complaint.setTransTime(new Date());
 		complaintService.update(complaint);
 		
+		complaintForward.setCreateBy(getUsername());
+		complaintForward.setCreateTime(new Date());
 		complaintForwardService.save(complaintForward);
 		return Result.ok();
 	}
@@ -93,6 +97,7 @@ public class ComplaintForwardController {
 	@ResponseBody
 	@RequestMapping("/update")
 	public Result update(@RequestBody ComplaintForward complaintForward){
+		complaintForward.setUpdateBy(getUsername());
 		complaintForwardService.update(complaintForward);
 		
 		return Result.ok();

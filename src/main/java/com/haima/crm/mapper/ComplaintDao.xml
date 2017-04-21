@@ -17,6 +17,7 @@
 			<result property="complainLevel" column="complain_level"/>
 			<result property="complainTime" column="complain_time"/>
 			<result property="finishTime" column="finish_time"/>
+			<result property="responseTime" column="response_time"/>
 			<result property="closeTime" column="close_time"/>
 			<result property="city" column="city"/>
 			<result property="complainSource" column="complain_source"/>
@@ -68,6 +69,7 @@
 			`complain_level`, 			
 			`complain_time`, 			
 			`finish_time`, 			
+			`response_time`, 			
 			`close_time`, 			
 			`city`, 			
 			`complain_source`, 			
@@ -150,6 +152,9 @@
 			</if>
 			<if test="finishTime != null">
 				`finish_time` = #{finishTime} and 			
+			</if>
+			<if test="responseTime != null">
+				`response_time` = #{responseTime} and 			
 			</if>
 			<if test="closeTime != null">
 				`close_time` = #{closeTime} and 			
@@ -324,6 +329,9 @@
 			<if test="finishTime!=null">
 				finish_time, 			
 			</if>
+			<if test="responseTime!=null">
+				response_time, 			
+			</if>
 			<if test="closeTime!=null">
 				close_time, 			
 			</if>
@@ -463,6 +471,9 @@
 			</if>
 			<if test="finishTime!=null">
 				#{finishTime}, 			
+			</if>
+			<if test="responseTime!=null">
+				#{responseTime}, 			
 			</if>
 			<if test="closeTime!=null">
 				#{closeTime}, 			
@@ -605,6 +616,9 @@
 			</if>
 			<if test="finishTime != null">
 				`finish_time` = #{finishTime}, 			
+			</if>
+			<if test="responseTime != null">
+				`response_time` = #{responseTime}, 			
 			</if>
 			<if test="closeTime != null">
 				`close_time` = #{closeTime}, 			

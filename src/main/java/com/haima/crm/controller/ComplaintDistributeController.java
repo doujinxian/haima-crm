@@ -29,7 +29,7 @@ import com.haima.crm.utils.Result;
  */
 @Controller
 @RequestMapping("complaintdistribute")
-public class ComplaintDistributeController {
+public class ComplaintDistributeController extends BaseController{
 	@Autowired
 	private ComplaintDistributeService complaintDistributeService;
 	@Autowired
@@ -93,8 +93,10 @@ public class ComplaintDistributeController {
 		Complaint complaint = new Complaint();
 		complaint.setId(complainId);
 		complaint.setDistributeStatus(CommonConstants.DISTRIBUTE_STATUS_DISTRIBUTED);
+		complaint.setUpdateBy(getUsername());
 		complaintService.update(complaint);
 		
+		complaintDistribute.setCreateBy(getUsername());
 		complaintDistributeService.save(complaintDistribute);
 		
 		return Result.ok();
@@ -114,14 +116,17 @@ public class ComplaintDistributeController {
 		Complaint complaint = new Complaint();
 		complaint.setId(complainId);
 		complaint.setDistributeStatus(CommonConstants.DISTRIBUTE_STATUS_CHANGED);
+		complaint.setUpdateBy(getUsername());
 		complaintService.update(complaint);
 		//将之前的分配记录删除
 		ComplaintDistribute temp = new ComplaintDistribute();
 		temp.setId(complaintDistribute.getId());
 		temp.setDelFlag(CommonConstants.DEL_FLAG_TRUE);
+		temp.setUpdateBy(getUsername());
 		complaintDistributeService.update(temp);
 		//新增分配记录
 		complaintDistribute.setId(null);
+		complaintDistribute.setCreateBy(getUsername());
 		complaintDistributeService.save(complaintDistribute);
 		
 		return Result.ok();
@@ -133,7 +138,7 @@ public class ComplaintDistributeController {
 	@ResponseBody
 	@RequestMapping("/update")
 	public Result update(@RequestBody ComplaintDistribute complaintDistribute){
-		
+		complaintDistribute.setUpdateBy(getUsername());
 		complaintDistributeService.update(complaintDistribute);
 		
 		return Result.ok();

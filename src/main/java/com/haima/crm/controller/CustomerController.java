@@ -26,7 +26,7 @@ import com.haima.crm.utils.Result;
  */
 @Controller
 @RequestMapping("customer")
-public class CustomerController {
+public class CustomerController extends BaseController{
 	@Autowired
 	private CustomerService customerService;
 	

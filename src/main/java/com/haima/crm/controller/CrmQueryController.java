@@ -31,7 +31,7 @@ import com.haima.crm.vo.CrmCustomerCarVo;
 
 @Controller
 @RequestMapping("crm")
-public class CrmQueryController {
+public class CrmQueryController extends BaseController{
     @Autowired
     private CrmQueryService crmQueryService;
     @Autowired
@@ -64,13 +64,13 @@ public class CrmQueryController {
      * 查询人车详情信息接口
      */
     @ResponseBody
-    @RequestMapping("/customer/car/info/{customerId}")
-	public Result info(@PathVariable("customerId") Long customerId){
+    @RequestMapping("/customer/car/info/{customerCarId}")
+	public Result info(@PathVariable("customerCarId") Long customerCarId){
     	//查询人车信息
-    	CustomerCar customerCar = customerCarService.queryObject(customerId);
+    	CustomerCar customerCar = customerCarService.queryObject(customerCarId);
 		if(customerCar!=null){
 			//查询客户详情
-			customerCar.setCustomer(customerService.queryObject(customerId));
+			customerCar.setCustomer(customerService.queryObject(customerCar.getCustomerId()));
 			//查询车颜色
 			if(customerCar.getCarColorId()!=null){
 				customerCar.setCarColor(carColorService.queryObject(Long.valueOf(customerCar.getCarColorId())));

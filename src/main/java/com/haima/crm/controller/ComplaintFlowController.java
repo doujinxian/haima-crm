@@ -1,5 +1,6 @@
 package com.haima.crm.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ import com.haima.crm.utils.Result;
  */
 @Controller
 @RequestMapping("complaintflow")
-public class ComplaintFlowController {
+public class ComplaintFlowController extends BaseController{
 	@Autowired
 	private ComplaintFlowService complaintFlowService;
 	@Autowired
@@ -82,8 +83,44 @@ public class ComplaintFlowController {
 		complaint.setComplainStatus(CommonConstants.COMPLAIN_STATUS_APPLY_CLOSE);
 		complaint.setCallbackStatus(complaintFlow.getCallbackStatus());
 		complaint.setCallbackTime(complaintFlow.getCallbackTime());
+		complaint.setUpdateBy(getUsername());
 		complaintService.update(complaint);
+		complaintFlow.setCreateBy(getUsername());
 		complaintFlowService.save(complaintFlow);
+		
+		return Result.ok();
+	}
+	
+	/**
+	 * 审核
+	 */
+	@ResponseBody
+	@RequestMapping("/audit")
+	public Result audit(@RequestBody ComplaintFlow complaintFlow){
+		String complaintStatus = null;
+		Complaint complaint = new Complaint();
+		//审核通过，投诉单状态置为已关闭
+		if(CommonConstants.CHECK_STATUS_AGREE.endsWith(complaintFlow.getCheckStatus())){
+			complaintStatus = CommonConstants.COMPLAIN_STATUS_CLOSE;
+			complaint.setCloseTime(new Date());
+		}
+		//审核不通过，投诉单状态置为处理中
+		else if(CommonConstants.CHECK_STATUS_DISAGREE.endsWith(complaintFlow.getCheckStatus())){
+			complaintStatus = CommonConstants.COMPLAIN_STATUS_IN_DEAL;
+		}
+		if(complaintStatus!=null){
+			Long complainId = complaintFlow.getComplainId();
+			if(complainId==null){
+				return Result.error("complainId不能为空");
+			}
+			//修改投诉单延迟状态为已关闭/处理中
+			complaint.setId(complainId);
+			complaint.setComplainStatus(complaintStatus);
+			complaint.setCreateBy(getUsername());
+			complaintService.update(complaint);
+		}
+		complaintFlow.setUpdateBy(getUsername());
+		complaintFlowService.update(complaintFlow);
 		
 		return Result.ok();
 	}
@@ -94,27 +131,7 @@ public class ComplaintFlowController {
 	@ResponseBody
 	@RequestMapping("/update")
 	public Result update(@RequestBody ComplaintFlow complaintFlow){
-		String complaintStatus = null;
-		//申请通过，投诉单状态置为已关闭
-		if(CommonConstants.CHECK_STATUS_AGREE.endsWith(complaintFlow.getCheckStatus())){
-			complaintStatus = CommonConstants.COMPLAIN_STATUS_CLOSE;
-		}
-		//申请不通过，投诉单状态置为处理中
-		else if(CommonConstants.CHECK_STATUS_DISAGREE.endsWith(complaintFlow.getCheckStatus())){
-			complaintStatus = CommonConstants.COMPLAIN_STATUS_IN_DEAL;
-		}
-		if(complaintStatus!=null){
-			Long complainId = complaintFlow.getComplainId();
-			if(complainId==null){
-				return Result.error("complainId不能为空");
-			}
-			//修改投诉单延迟状态为已批复
-			Complaint complaint = new Complaint();
-			complaint.setId(complainId);
-			complaint.setComplainStatus(complaintStatus);
-			complaintService.update(complaint);
-		}
-		
+		complaintFlow.setUpdateBy(getUsername());
 		complaintFlowService.update(complaintFlow);
 		
 		return Result.ok();

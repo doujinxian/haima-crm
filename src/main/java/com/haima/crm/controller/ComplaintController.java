@@ -1,8 +1,11 @@
 package com.haima.crm.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +35,7 @@ import com.haima.crm.utils.Result;
  */
 @Controller
 @RequestMapping("complaint")
-public class ComplaintController {
+public class ComplaintController extends BaseController{
 	@Autowired
 	private ComplaintService complaintService;
 	@Autowired
@@ -94,6 +97,7 @@ public class ComplaintController {
 	@RequestMapping("/save")
 	public Result save(@RequestBody Complaint complaint) {
 		complaint.setComplainCode("C"+System.currentTimeMillis());
+		complaint.setCreateBy(getUsername());
 		complaintService.save(complaint);
 		//新增或修改处理记录
 		complaintDealLogService.saveOrUpdateList(complaint,complaint.getComplaintDealLogs());
@@ -105,12 +109,14 @@ public class ComplaintController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	public Result update(@RequestBody Complaint complaint) {
+	public Result update(@RequestBody Complaint complaint, HttpServletRequest request) {
 		List<ComplaintDealLog> dealLogs = complaint.getComplaintDealLogs();
+		complaint.setUpdateBy(getUsername());
 		if(dealLogs!=null && dealLogs.size()>0){
 			//第一次添加处理记录，将投诉单未处理状态置为处理中
 			if(CommonConstants.COMPLAIN_STATUS_DEFAULT.equals(complaint.getComplainStatus())){
 				complaint.setComplainStatus(CommonConstants.COMPLAIN_STATUS_IN_DEAL);
+				complaint.setResponseTime(new Date());
 			}
 			//新增或修改处理记录
 			complaintDealLogService.saveOrUpdateList(complaint,complaint.getComplaintDealLogs());

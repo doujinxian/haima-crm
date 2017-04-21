@@ -18,8 +18,8 @@ public class CustomerCarServiceImpl implements CustomerCarService {
 	private CustomerCarDao customerCarDao;
 	
 	@Override
-	public CustomerCar queryObject(Long customerId){
-		return customerCarDao.queryObject(customerId);
+	public CustomerCar queryObject(Long id){
+		return customerCarDao.queryObject(id);
 	}
 	
 	@Override
@@ -43,13 +43,13 @@ public class CustomerCarServiceImpl implements CustomerCarService {
 	}
 	
 	@Override
-	public void delete(Long customerId){
-		customerCarDao.delete(customerId);
+	public void delete(Long id){
+		customerCarDao.delete(id);
 	}
 	
 	@Override
-	public void deleteBatch(Long[] customerIds){
-		customerCarDao.deleteBatch(customerIds);
+	public void deleteBatch(Long[] ids){
+		customerCarDao.deleteBatch(ids);
 	}
 	
 }

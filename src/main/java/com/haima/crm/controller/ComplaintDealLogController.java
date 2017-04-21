@@ -26,7 +26,7 @@ import com.haima.crm.utils.Result;
  */
 @Controller
 @RequestMapping("complaintdeallog")
-public class ComplaintDealLogController {
+public class ComplaintDealLogController extends BaseController{
 	@Autowired
 	private ComplaintDealLogService complaintDealLogService;
 	
@@ -67,6 +67,7 @@ public class ComplaintDealLogController {
 	@ResponseBody
 	@RequestMapping("/save")
 	public Result save(@RequestBody ComplaintDealLog complaintDealLog){
+		complaintDealLog.setCreateBy(getUsername());
 		complaintDealLogService.save(complaintDealLog);
 		
 		return Result.ok();
@@ -78,6 +79,7 @@ public class ComplaintDealLogController {
 	@ResponseBody
 	@RequestMapping("/update")
 	public Result update(@RequestBody ComplaintDealLog complaintDealLog){
+		complaintDealLog.setUpdateBy(getUsername());
 		complaintDealLogService.update(complaintDealLog);
 		
 		return Result.ok();

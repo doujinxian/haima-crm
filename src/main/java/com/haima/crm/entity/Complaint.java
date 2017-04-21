@@ -44,6 +44,8 @@ public class Complaint extends ComplaintVo implements Serializable {
 	private Date complainTime;
 	// 需完成时间
 	private Date finishTime;
+	// 响应时间
+	private Date responseTime;
 	// 投诉关闭时间
 	private Date closeTime;
 	// 城市
@@ -291,6 +293,15 @@ public class Complaint extends ComplaintVo implements Serializable {
 	 */
 	public Date getFinishTime() {
 		return finishTime;
+	}
+	
+	
+	public Date getResponseTime() {
+		return responseTime;
+	}
+
+	public void setResponseTime(Date responseTime) {
+		this.responseTime = responseTime;
 	}
 
 	/**

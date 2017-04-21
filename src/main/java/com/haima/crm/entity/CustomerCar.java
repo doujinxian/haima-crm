@@ -19,7 +19,8 @@ import com.haima.crm.vo.CustomerCarVo;
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class CustomerCar extends CustomerCarVo implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+	//主键
+	private Long id;
 	//客户id
 	private Long customerId;
 	//vin码
@@ -174,5 +175,11 @@ public class CustomerCar extends CustomerCarVo implements Serializable {
 	 */
 	public Date getModifyTime() {
 		return modifyTime;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

@@ -29,7 +29,7 @@ import com.haima.crm.utils.Result;
  */
 @Controller
 @RequestMapping("complaintdelay")
-public class ComplaintDelayController {
+public class ComplaintDelayController extends BaseController{
 	@Autowired
 	private ComplaintDelayService complaintDelayService;
 	@Autowired
@@ -80,18 +80,20 @@ public class ComplaintDelayController {
 		Complaint complaint = new Complaint();
 		complaint.setId(complainId);
 		complaint.setDelayStatus(CommonConstants.DELAY_STATUS_APPLIED);
+		complaint.setUpdateBy(getUsername());
 		complaintService.update(complaint);
 		
+		complaintDelay.setCreateBy(getUsername());
 		complaintDelayService.save(complaintDelay);
 		
 		return Result.ok();
 	}
 	
 	/**
-	 * 审核
+	 * 批复
 	 */
 	@ResponseBody
-	@RequestMapping("/audit")
+	@RequestMapping("/reply")
 	public Result audit(@RequestBody ComplaintDelay complaintDelay){
 		if(CommonConstants.REPLY_STATUS_AGREE.endsWith(complaintDelay.getReplyStatus()) || CommonConstants.REPLY_STATUS_DISAGREE.endsWith(complaintDelay.getReplyStatus())){
 			Long complainId = complaintDelay.getComplainId();
@@ -102,8 +104,10 @@ public class ComplaintDelayController {
 			Complaint complaint = new Complaint();
 			complaint.setId(complainId);
 			complaint.setDelayStatus(CommonConstants.DELAY_STATUS_AUDIT);
+			complaint.setUpdateBy(getUsername());
 			complaintService.update(complaint);
 		}
+		complaintDelay.setUpdateBy(getUsername());
 		complaintDelayService.update(complaintDelay);
 		
 		return Result.ok();
@@ -114,6 +118,7 @@ public class ComplaintDelayController {
 	@ResponseBody
 	@RequestMapping("/update")
 	public Result update(@RequestBody ComplaintDelay complaintDelay){
+		complaintDelay.setCreateBy(getUsername());
 		complaintDelayService.update(complaintDelay);
 		
 		return Result.ok();
