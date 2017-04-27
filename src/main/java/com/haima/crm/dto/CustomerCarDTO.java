@@ -8,118 +8,138 @@ import java.util.Date;
  * @date 2017-04-15 22:11
  */
 public class CustomerCarDTO {
-    // CustomerCar主键Id
-    private Long id;
-    // vin码
-    private String vin;
-    //客户ID
-    private Long customerId;
-    //车主姓名
-    private String customerName;
-    //移动电话
-    private String phone;
-    // 车牌号
-    private String plateNo;
-    // 销售服务店（服务）
-    private String salesServicesService;
-    //车系
-    private String carSeriesName;
-    //车型代码
-    private String carModelCode;
-    //车型名称
-    private String carModelName;
-    //购车日期
-    private Date purchaseDate;
-    //车颜色
-    private String colorName;
-    //moofun账号
-    private Integer moofunId;
-    //身份证号
-    private String idNo;
+	// CustomerCar主键Id
+	private Long id;
+	// vin码
+	private String vin;
+	// 客户ID
+	private Long customerId;
+	// 车主姓名
+	private String customerName;
+	// 移动电话
+	private String phone;
+	// 城市
+	private String city;
+	// 区域
+	private String area;
+	// 职业
+	private String occupation;
+	// 车牌号
+	private String plateNo;
+	// 行驶公里
+	private String mileage;
+	// 销售服务店（服务）
+	private String salesServicesService;
+	// 车系
+	private String carSeriesName;
+	// 车型代码
+	private String carModelCode;
+	// 车型名称
+	private String carModelName;
+	// 购车日期
+	private Date purchaseDate;
+	// 车颜色
+	private String colorName;
+	// moofun账号
+	private Integer moofunId;
+	// 身份证号
+	private String idNo;
 
-    public String getVin() {
-        return vin;
-    }
+	public String getVin() {
+		return vin;
+	}
 
-    public void setVin(String vin) {
-        this.vin = vin;
-    }
+	public void setVin(String vin) {
+		this.vin = vin;
+	}
 
-    public Long getCustomerId() { return customerId; }
+	public Long getCustomerId() {
+		return customerId;
+	}
 
-    public void setCustomerId(Long customerId) { this.customerId = customerId; }
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
 
-    public String getCustomerName() {
-        return customerName;
-    }
+	public String getCustomerName() {
+		return customerName;
+	}
 
-    public String getCarModelCode() {
-        return carModelCode;
-    }
+	public String getCarModelCode() {
+		return carModelCode;
+	}
 
-    public void setCarModelCode(String carModelCode) {
-        this.carModelCode = carModelCode;
-    }
+	public void setCarModelCode(String carModelCode) {
+		this.carModelCode = carModelCode;
+	}
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public String getPlateNo() {
-        return plateNo;
-    }
+	public String getPlateNo() {
+		return plateNo;
+	}
 
-    public void setPlateNo(String plateNo) {
-        this.plateNo = plateNo;
-    }
+	public void setPlateNo(String plateNo) {
+		this.plateNo = plateNo;
+	}
 
-    public String getSalesServicesService() {
-        return salesServicesService;
-    }
+	public String getMileage() {
+		return mileage;
+	}
 
-    public void setSalesServicesService(String salesServicesService) {
-        this.salesServicesService = salesServicesService;
-    }
+	public void setMileage(String mileage) {
+		this.mileage = mileage;
+	}
 
-    public String getCarSeriesName() {
-        return carSeriesName;
-    }
+	public String getSalesServicesService() {
+		return salesServicesService;
+	}
 
-    public void setCarSeriesName(String carSeriesName) {
-        this.carSeriesName = carSeriesName;
-    }
+	public void setSalesServicesService(String salesServicesService) {
+		this.salesServicesService = salesServicesService;
+	}
 
-    public String getCarModelName() {
-        return carModelName;
-    }
+	public String getCarSeriesName() {
+		return carSeriesName;
+	}
 
-    public void setCarModelName(String carModelName) {
-        this.carModelName = carModelName;
-    }
+	public void setCarSeriesName(String carSeriesName) {
+		this.carSeriesName = carSeriesName;
+	}
 
-    public Date getPurchaseDate() {
-        return purchaseDate;
-    }
+	public String getCarModelName() {
+		return carModelName;
+	}
 
-    public void setPurchaseDate(Date purchaseDate) {
-        this.purchaseDate = purchaseDate;
-    }
+	public void setCarModelName(String carModelName) {
+		this.carModelName = carModelName;
+	}
 
-    public String getColorName() {
-        return colorName;
-    }
+	public Date getPurchaseDate() {
+		return purchaseDate;
+	}
 
-    public void setColorName(String colorName) {
-        this.colorName = colorName;
-    }
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
+
+	public String getColorName() {
+		return colorName;
+	}
+
+	public void setColorName(String colorName) {
+		this.colorName = colorName;
+	}
 
 	public Integer getMoofunId() {
 		return moofunId;
@@ -144,4 +164,29 @@ public class CustomerCarDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public String getOccupation() {
+		return occupation;
+	}
+
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
+	}
+
 }

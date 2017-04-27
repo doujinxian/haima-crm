@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.haima.crm.entity.ComplaintDealLog;
 import com.haima.crm.entity.ComplaintDelay;
@@ -21,8 +22,10 @@ import com.haima.crm.entity.ComplaintFlow;
 public class ComplaintVo extends PageVo implements Serializable {
 	private static final long serialVersionUID = 3039098009796294741L;
 	// 开始时间
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")  
 	private Date complainTimeStart;
 	//结束时间
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")  
 	private Date complainTimeEnd;
 	//是否查询延迟申请信息
 	private Boolean ifSelectDelayInfo;

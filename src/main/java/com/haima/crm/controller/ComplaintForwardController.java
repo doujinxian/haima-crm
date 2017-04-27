@@ -83,7 +83,10 @@ public class ComplaintForwardController extends BaseController{
 		complaint.setForwardStatus(CommonConstants.FORWARD_STATUS_HAS_FORWARD);
 		complaint.setUpdateBy(getUsername());
 		complaint.setTransTime(new Date());
+		//转发后，将投诉单未处理状态置为处理中
+		complaint.setComplainStatus(CommonConstants.COMPLAIN_STATUS_IN_DEAL);
 		complaintService.update(complaint);
+		
 		
 		complaintForward.setCreateBy(getUsername());
 		complaintForward.setCreateTime(new Date());

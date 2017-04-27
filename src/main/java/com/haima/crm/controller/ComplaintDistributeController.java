@@ -1,5 +1,6 @@
 package com.haima.crm.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,7 +94,11 @@ public class ComplaintDistributeController extends BaseController{
 		Complaint complaint = new Complaint();
 		complaint.setId(complainId);
 		complaint.setDistributeStatus(CommonConstants.DISTRIBUTE_STATUS_DISTRIBUTED);
+		//设置分配时间
+		complaint.setResponseTime(new Date());
 		complaint.setUpdateBy(getUsername());
+		//设置投诉管理员
+		complaint.setComplainAdmin(complaintDistribute.getHandleUser());
 		complaintService.update(complaint);
 		
 		complaintDistribute.setCreateBy(getUsername());
@@ -117,6 +122,7 @@ public class ComplaintDistributeController extends BaseController{
 		complaint.setId(complainId);
 		complaint.setDistributeStatus(CommonConstants.DISTRIBUTE_STATUS_CHANGED);
 		complaint.setUpdateBy(getUsername());
+		complaint.setComplainAdmin(complaintDistribute.getHandleUser());
 		complaintService.update(complaint);
 		//将之前的分配记录删除
 		ComplaintDistribute temp = new ComplaintDistribute();

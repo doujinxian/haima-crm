@@ -1,5 +1,9 @@
 package com.haima.crm.constants;
 
+/**
+ * @author jinxian.dou
+ *
+ */
 public class CommonConstants {
 	public static final String UMS_OUT_URL = "https://ums.tongter.com:8443/ums2/api";
 	public static final String UMS_TICKET = "41b99d404b74f5f8bcaa224fa4e40135";
@@ -23,7 +27,11 @@ public class CommonConstants {
 	// 转发状态 0 ：未转发、1：已经发 t_complaint
 	public final static String FORWARD_STATUS_DEFAULT = "0";
 	public final static String FORWARD_STATUS_HAS_FORWARD = "1";
-
+	
+	//转发对象 1:总部人员  0:4S店 
+	public final static String FORWARD_TYPE_USER = "1";
+	public final static String FORWARD_TYPE_4S_SOTORE = "0";
+	
 	// 申请延迟状态(0 ：未延迟、1：已申请 :2： 已批复) t_complaint
 	public final static String DELAY_STATUS_DEFAULT = "0";
 	public final static String DELAY_STATUS_APPLIED = "1";

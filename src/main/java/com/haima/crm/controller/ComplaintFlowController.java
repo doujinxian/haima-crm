@@ -85,6 +85,7 @@ public class ComplaintFlowController extends BaseController{
 		complaint.setCallbackTime(complaintFlow.getCallbackTime());
 		complaint.setUpdateBy(getUsername());
 		complaintService.update(complaint);
+		
 		complaintFlow.setCreateBy(getUsername());
 		complaintFlowService.save(complaintFlow);
 		

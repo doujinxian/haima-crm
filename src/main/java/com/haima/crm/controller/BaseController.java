@@ -1,8 +1,5 @@
 package com.haima.crm.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
 
 import com.haima.crm.userinfo.CurrentUserinfo;
@@ -15,9 +12,6 @@ import com.haima.crm.userinfo.CurrentUserinfo;
  */
 @Controller
 public class BaseController {
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-
 	private static ThreadLocal<CurrentUserinfo> threadLocal = new ThreadLocal<CurrentUserinfo>();
 
 	/**
@@ -34,21 +28,5 @@ public class BaseController {
 	}
 	public void setUserInfo(CurrentUserinfo session) {
 		threadLocal.set(session);
-	}
-
-	public HttpServletRequest getRequest() {
-		return request;
-	}
-
-	public void setRequest(HttpServletRequest request) {
-		this.request = request;
-	}
-
-	public HttpServletResponse getResponse() {
-		return response;
-	}
-
-	public void setResponse(HttpServletResponse response) {
-		this.response = response;
 	}
 }

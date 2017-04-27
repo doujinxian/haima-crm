@@ -9,6 +9,10 @@
 		<result property="customerId" column="customer_id"/>
 		<result property="customerName" column="customer_name"/>
 		<result property="phone" column="phone"/>
+		<result property="city" column="city"/>
+		<result property="occupation" column="occupation"/>
+		<result property="mileage" column="mileage"/>
+		<result property="phone" column="phone"/>
 		<result property="plateNo" column="plate_no"/>
 		<result property="salesServicesService" column="sales_services_service"/>
 		<result property="carSeriesName" column="car_series_name"/>
@@ -74,7 +78,11 @@
 			c.customer_id,
 			c.customer_name,
 			c.phone,
+			c.city,
+  			c.area,
+  			c.occupation,
 			cc.plate_no,
+			cc.mileage,
 			'' sales_services_service,
 			mcs.car_series_name,
 			mcm.car_model_code,
