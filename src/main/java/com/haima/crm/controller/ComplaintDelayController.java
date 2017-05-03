@@ -28,7 +28,7 @@ import com.haima.crm.utils.Result;
  * @date 2017-03-23 19:55:47
  */
 @Controller
-@RequestMapping("complaintdelay")
+@RequestMapping("ccms/complaintdelay")
 public class ComplaintDelayController extends BaseController{
 	@Autowired
 	private ComplaintDelayService complaintDelayService;

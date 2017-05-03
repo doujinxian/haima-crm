@@ -29,7 +29,7 @@ import com.haima.crm.utils.Result;
  * @date 2017-03-30 19:39:58
  */
 @Controller
-@RequestMapping("complaintdistribute")
+@RequestMapping("ccms/complaintdistribute")
 public class ComplaintDistributeController extends BaseController{
 	@Autowired
 	private ComplaintDistributeService complaintDistributeService;

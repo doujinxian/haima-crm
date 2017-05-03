@@ -25,7 +25,7 @@ import com.haima.crm.utils.Result;
  * @date 2017-03-23 19:55:47
  */
 @Controller
-@RequestMapping("customer")
+@RequestMapping("ccms/customer")
 public class CustomerController extends BaseController{
 	@Autowired
 	private CustomerService customerService;

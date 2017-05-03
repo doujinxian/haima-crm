@@ -25,7 +25,7 @@ import com.haima.crm.vo.ComplaintStatisticsVo;
  * @date 2017-04-08 14:15:12
  */
 @Controller
-@RequestMapping("complaint/statistics")
+@RequestMapping("ccms/complaint/statistics")
 public class ComplaintStatisticsController extends BaseController{
     @Autowired
     private ComplaintStatisticsService complaintStatisticsService;

@@ -30,7 +30,7 @@ import com.haima.crm.utils.Result;
  * @date 2017-03-23 19:55:47
  */
 @Controller
-@RequestMapping("complaintdeallog")
+@RequestMapping("ccms/complaintdeallog")
 public class ComplaintDealLogController extends BaseController{
 	@Autowired
 	private ComplaintDealLogService complaintDealLogService;

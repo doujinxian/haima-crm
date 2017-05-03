@@ -29,7 +29,7 @@ import com.haima.crm.utils.Result;
  * @date 2017-03-30 19:39:58
  */
 @Controller
-@RequestMapping("complaintforward")
+@RequestMapping("ccms/complaintforward")
 public class ComplaintForwardController extends BaseController{
 	@Autowired
 	private ComplaintForwardService complaintForwardService;

@@ -25,7 +25,7 @@ import com.haima.crm.utils.Result;
  * @date 2017-04-11 17:25:30
  */
 @Controller
-@RequestMapping("code")
+@RequestMapping("ccms/code")
 public class CodeController extends BaseController{
 	@Autowired
 	private CodeService codeService;

@@ -30,7 +30,7 @@ import com.haima.crm.vo.CrmCustomerCarVo;
  */
 
 @Controller
-@RequestMapping("crm")
+@RequestMapping("ccms/crm")
 public class CrmQueryController extends BaseController{
     @Autowired
     private CrmQueryService crmQueryService;

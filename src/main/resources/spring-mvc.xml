@@ -10,13 +10,13 @@ http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
 	<mvc:annotation-driven />
-
+	
 	<!-- api的调用拦截器 -->
 	<mvc:interceptors>
 		<!-- 对所有请求做登录拦截 -->
 		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/complaint/export"/>
+			<mvc:mapping path="/ccms/**" />
+			<mvc:exclude-mapping path="/ccms/complaint/export"/>
 			<bean class="com.haima.crm.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -60,7 +60,8 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 			<value>4096</value>
 		</property>
 	</bean>
-
+	
+	<mvc:default-servlet-handler />
 	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
 	<context:component-scan base-package="com.haima.crm.controller" />
 
