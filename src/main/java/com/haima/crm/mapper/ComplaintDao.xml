@@ -132,32 +132,17 @@
 			<if test="vno != null and vno != ''">
 				`vno` = #{vno} and 			
 			</if>
-			<if test="buyDate != null">
-				`buy_date` = #{buyDate} and 			
-			</if>
 			<if test="complainType != null and complainType != ''">
 				`complain_type` = #{complainType} and 			
 			</if>
 			<if test="complainLevel != null and complainLevel != ''">
 				`complain_level` = #{complainLevel} and 			
 			</if>
-			<if test="complainTime != null">
-				`complain_time` = #{complainTime} and 			
-			</if>
 			<if test="complainTimeStart != null">
 				`complain_time` &gt;= #{complainTimeStart} and 			
 			</if>
 			<if test="complainTimeEnd != null">
 				`complain_time` &lt; #{complainTimeEnd} and 			
-			</if>
-			<if test="finishTime != null">
-				`finish_time` = #{finishTime} and 			
-			</if>
-			<if test="responseTime != null">
-				`response_time` = #{responseTime} and 			
-			</if>
-			<if test="closeTime != null">
-				`close_time` = #{closeTime} and 			
 			</if>
 			<if test="city != null and city != ''">
 				`city` = #{city} and 			
@@ -193,23 +178,14 @@
 			<if test="distributeStatus != null and distributeStatus != ''">
 				`distribute_status` = #{distributeStatus} and 			
 			</if>
-			<if test="callbackTime != null">
-				`callback_time` = #{callbackTime} and 			
-			</if>
 			<if test="carColor != null and carColor != ''">
 				`car_color` = #{carColor} and 			
-			</if>
-			<if test="mileage != null and mileage != 0 ">
-				`mileage` = #{mileage} and 			
 			</if>
 			<if test="complainBase != null and complainBase != ''">
 				`complain_base` = #{complainBase} and 			
 			</if>
 			<if test="area != null and area != ''">
 				`area` = #{area} and 			
-			</if>
-			<if test="callTimes != null and callTimes != 0 ">
-				`call_times` = #{callTimes} and 			
 			</if>
 			<if test="fileNo != null and fileNo != ''">
 				`file_no` = #{fileNo} and 			
@@ -219,12 +195,6 @@
 			</if>
 			<if test="receivedBy != null and receivedBy != ''">
 				`received_by` = #{receivedBy} and 			
-			</if>
-			<if test="transTime != null">
-				`trans_time` = #{transTime} and 			
-			</if>
-			<if test="otherMsg != null and otherMsg != ''">
-				`other_msg` = #{otherMsg} and 			
 			</if>
 			<if test="carName != null and carName != ''">
 				`car_name` = #{carName} and 			
@@ -250,14 +220,8 @@
 			<if test="createBy != null and createBy != ''">
 				`create_by` = #{createBy} and 			
 			</if>
-			<if test="createTime != null">
-				`create_time` = #{createTime} and 			
-			</if>
 			<if test="updateBy != null and updateBy != ''">
 				`update_by` = #{updateBy} and 			
-			</if>
-			<if test="updateTime != null">
-				`update_time` = #{updateTime}			
 			</if>
         </trim>
 		</where>

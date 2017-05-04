@@ -28,8 +28,18 @@ public class CarSeriesServiceImpl implements CarSeriesService {
 	}
 	
 	@Override
+	public List<CarSeries> queryList(CarSeries carSeries) {
+		return carSeriesDao.queryList(carSeries);
+	}
+	
+	@Override
 	public int queryTotal(Map<String, Object> map){
 		return carSeriesDao.queryTotal(map);
+	}
+	
+	@Override
+	public int queryTotal(CarSeries carSeries) {
+		return carSeriesDao.queryTotal(carSeries);
 	}
 	
 	@Override

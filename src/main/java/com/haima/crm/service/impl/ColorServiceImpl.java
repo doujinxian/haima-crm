@@ -26,12 +26,18 @@ public class ColorServiceImpl implements ColorService {
 	public List<Color> queryList(Map<String, Object> map){
 		return colorDao.queryList(map);
 	}
-	
+	@Override
+	public List<Color> queryList(Color color) {
+		return colorDao.queryList(color);
+	}
 	@Override
 	public int queryTotal(Map<String, Object> map){
 		return colorDao.queryTotal(map);
 	}
-	
+	@Override
+	public int queryTotal(Color color) {
+		return colorDao.queryTotal(color);
+	}
 	@Override
 	public void save(Color color){
 		colorDao.save(color);

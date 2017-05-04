@@ -14,35 +14,34 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
 /**
  * @author jinxian.dou
  *
  */
 @EnableWebMvc  
-@EnableSwagger2  
+@EnableSwagger2
 @ComponentScan(basePackages = {"com.haima.crm.controller"})  
-@Configuration  
+@Configuration
 public class RestApiConfig extends WebMvcConfigurationSupport{  
-  
-    @Bean  
-    public Docket createRestApi() {  
-        return new Docket(DocumentationType.SWAGGER_2)  
-                .apiInfo(apiInfo())  
-                .select()  
-                .apis(RequestHandlerSelectors.basePackage("com.haima.crm.controller"))  
-                .paths(PathSelectors.any())  
-                .build();  
-    }  
-  
-    private ApiInfo apiInfo() {  
-        return new ApiInfoBuilder()  
-                .title("Spring 中使用Swagger2构建RESTful APIs")  
-                .termsOfServiceUrl("http://blog.csdn.net/he90227")  
-                .contact("逍遥飞鹤")  
-                .version("1.1")  
-                .build();  
-    }  
+
+    @Bean
+    public Docket createRestApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.haima.crm.controller"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("CRM RESTful APIs")
+                .description("CRM系统投诉单管理、人车查询相关接口")
+                .termsOfServiceUrl("http://crm.tongter.com:8088/#/login")
+                .contact("豆金贤")
+                .version("1.0")
+                .build();
+    }
+
 }
-
-

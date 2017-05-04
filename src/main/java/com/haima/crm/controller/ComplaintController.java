@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import com.haima.crm.constants.CommonConstants;
+import com.haima.crm.dto.ComplaintDTO;
 import com.haima.crm.entity.Complaint;
 import com.haima.crm.entity.ComplaintDelay;
 import com.haima.crm.entity.ComplaintFlow;
@@ -55,18 +56,34 @@ public class ComplaintController extends BaseController {
 	private ComplaintDealLogService complaintDealLogService;
 
 	/**
-	 * 列表
+	 * 列表外部使用
 	 */
 	@ApiOperation(value = "获取投诉单列表", notes = "根据传过来的complaint条件查询投诉单列表")
-	@ApiImplicitParam(name = "complaint", value = "投诉单详细实体complaint", required = true, dataType = "com.haima.crm.entity.Complaint")
+	@ApiImplicitParam(name = "complaintDto", value = "投诉单查询参数complaintDto", required = true, dataType = "ComplaintDTO")
 	@ResponseBody
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public Result list(@RequestBody Complaint complaint) {
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public Result list( ComplaintDTO complaintDto) {
 		// 查询列表数据
-		List<Complaint> complaintList = complaintService.queryList(complaint);
-		int total = complaintService.queryTotal(complaint);
+		List<Complaint> complaintList = complaintService.queryList(complaintDto);
+		int total = complaintService.queryTotal(complaintDto);
 
-		PageUtils pageUtil = new PageUtils(complaintList, total, complaint.getLimit(), complaint.getPage());
+		PageUtils pageUtil = new PageUtils(complaintList, total, complaintDto.getLimit(), complaintDto.getPage());
+
+		return Result.ok().put("page", pageUtil);
+	}
+	
+	/**
+	 * 列表
+	 */
+	@ApiIgnore
+	@ResponseBody
+	@RequestMapping(value = "/listcomplaint", method = RequestMethod.POST)
+	public Result listcomplaint(@RequestBody ComplaintDTO complaintDto) {
+		// 查询列表数据
+		List<Complaint> complaintList = complaintService.queryList(complaintDto);
+		int total = complaintService.queryTotal(complaintDto);
+
+		PageUtils pageUtil = new PageUtils(complaintList, total, complaintDto.getLimit(), complaintDto.getPage());
 
 		return Result.ok().put("page", pageUtil);
 	}
@@ -142,9 +159,9 @@ public class ComplaintController extends BaseController {
 	 * 导出excel
 	 */
 	@ApiOperation(value = "导出投诉单excel", notes = "根据complaint对象导出投诉单")
-	@ApiImplicitParam(name = "complaint", value = "投诉单详细实体complaint", required = true, dataType = "Complaint")
+	@ApiImplicitParam(name = "complaintDto", value = "投诉单查询参数complaintDto", required = true, dataType = "ComplaintDTO")
 	@RequestMapping(value = "/export", method = RequestMethod.POST)
-	public void exportExcel(Complaint complaint, HttpServletRequest request, HttpServletResponse response) {
+	public void exportExcel(ComplaintDTO complaintDto, HttpServletRequest request, HttpServletResponse response) {
 		int maxExportSize = 100000;
 		/*
 		 * int total = complaintService.queryTotal(complaint);
@@ -152,9 +169,9 @@ public class ComplaintController extends BaseController {
 		 * Result.error("一次只能导出"+maxExportSize+"条数据"); }
 		 */
 		try {
-			complaint.setPage(1);
-			complaint.setLimit(maxExportSize);
-			List<Complaint> complaintList = complaintService.queryList(complaint);
+			complaintDto.setPage(1);
+			complaintDto.setLimit(maxExportSize);
+			List<Complaint> complaintList = complaintService.queryList(complaintDto);
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("complaintList", complaintList);
 			ExcelGenerator.exportExcelAuroWrap(request, response, "complaint_list.xls", "投诉单列表" + DateConvertUtils.formatDate(DateConvertUtils.DF_TO_DAY), map);

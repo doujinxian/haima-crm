@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 import com.haima.crm.constants.CommonConstants;
 import com.haima.crm.entity.Complaint;
 import com.haima.crm.entity.ComplaintDelay;
@@ -27,6 +29,7 @@ import com.haima.crm.utils.Result;
  * @email doujinxian@126.com
  * @date 2017-03-23 19:55:47
  */
+@ApiIgnore
 @Controller
 @RequestMapping("ccms/complaintdelay")
 public class ComplaintDelayController extends BaseController{

@@ -2,7 +2,6 @@ package com.haima.crm.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.haima.crm.dao.ComplaintDao;
 import com.haima.crm.dao.ComplaintDelayDao;
 import com.haima.crm.dao.ComplaintFlowDao;
+import com.haima.crm.dto.ComplaintDTO;
 import com.haima.crm.entity.Complaint;
 import com.haima.crm.entity.ComplaintDelay;
 import com.haima.crm.entity.ComplaintFlow;
@@ -41,12 +41,12 @@ public class ComplaintServiceImpl implements ComplaintService {
 	}
 	
 	@Override
-	public List<Complaint> queryList(Complaint complaint) {
-		List<Complaint> complaints = complaintDao.queryList(complaint);
+	public List<Complaint> queryList(ComplaintDTO complaintDto) {
+		List<Complaint> complaints = complaintDao.queryList(complaintDto);
 		if(complaints.size()==0){
 			return complaints;
 		}
-		if(complaint.getIfSelectDelayInfo()!=null && complaint.getIfSelectDelayInfo()){
+		if(complaintDto.getIfSelectDelayInfo()!=null && complaintDto.getIfSelectDelayInfo()){
 			List<Long> complaintIds = getComplaintsIds(complaints);
 			ComplaintDelay params = new ComplaintDelay();
 			params.setComplaintIds(complaintIds);
@@ -55,7 +55,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 				setComplaintDelay(cd,complaints);
 			}
 		}
-		if(complaint.getIfSelectFlowInfo()!=null && complaint.getIfSelectFlowInfo()){
+		if(complaintDto.getIfSelectFlowInfo()!=null && complaintDto.getIfSelectFlowInfo()){
 			List<Long> complaintIds = getComplaintsIds(complaints);
 			ComplaintFlow params = new ComplaintFlow();
 			params.setComplaintIds(complaintIds);
@@ -99,8 +99,8 @@ public class ComplaintServiceImpl implements ComplaintService {
 	}
 	
 	@Override
-	public int queryTotal(Complaint complaint) {
-		return complaintDao.queryTotal(complaint);
+	public int queryTotal(ComplaintDTO complaintDto) {
+		return complaintDao.queryTotal(complaintDto);
 	}
 	
 	@Override

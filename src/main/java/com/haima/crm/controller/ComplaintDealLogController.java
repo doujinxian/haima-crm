@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.stereotype.Controller;
+
+import springfox.documentation.annotations.ApiIgnore;
 
 import com.haima.crm.entity.Complaint;
 import com.haima.crm.entity.ComplaintDealLog;
@@ -29,6 +31,7 @@ import com.haima.crm.utils.Result;
  * @email doujinxian@126.com
  * @date 2017-03-23 19:55:47
  */
+@ApiIgnore
 @Controller
 @RequestMapping("ccms/complaintdeallog")
 public class ComplaintDealLogController extends BaseController{

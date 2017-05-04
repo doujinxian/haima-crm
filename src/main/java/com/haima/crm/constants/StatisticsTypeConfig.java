@@ -1,7 +1,5 @@
 package com.haima.crm.constants;
 
-import org.apache.commons.logging.LogFactory;
-
 import java.text.MessageFormat;
 import java.util.Enumeration;
 import java.util.HashMap;

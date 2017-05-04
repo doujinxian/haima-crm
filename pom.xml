@@ -11,7 +11,7 @@
 	<properties>
 		<java-version>1.7</java-version>
 		<org.springframework.version>4.2.4.RELEASE</org.springframework.version>
-		<io.springfox.version>2.4.0</io.springfox.version>
+		<io.springfox.version>2.2.2</io.springfox.version>
 		<jackson.version>2.6.5</jackson.version>
 	</properties>
 	<dependencies>

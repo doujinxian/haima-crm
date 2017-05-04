@@ -1,5 +1,6 @@
 package com.haima.crm.dao;
 
+import com.haima.crm.dto.ComplaintDTO;
 import com.haima.crm.entity.Complaint;
 
 /**
@@ -10,5 +11,7 @@ import com.haima.crm.entity.Complaint;
  * @date 2017-03-23 19:55:46
  */
 public interface ComplaintDao extends BaseDao<Complaint> {
+	
+	int queryTotal(ComplaintDTO t);
 	
 }

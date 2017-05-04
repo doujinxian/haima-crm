@@ -1,5 +1,6 @@
 package com.haima.crm.userinfo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,8 @@ import com.haima.crm.utils.HttpUtil;
  */
 @Component
 @Scope("session")
-public class CurrentUserinfo {
+public class CurrentUserinfo implements Serializable{
+	private static final long serialVersionUID = 7017296929713036828L;
 	private Integer id;
 	private String username;
 	private String realname;

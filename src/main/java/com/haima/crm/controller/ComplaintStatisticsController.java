@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 import com.haima.crm.constants.StatisticsTypeConfig;
 import com.haima.crm.entity.ComplaintStatistics;
 import com.haima.crm.entity.ComplaintStatisticsSatisfaction;
@@ -24,6 +26,7 @@ import com.haima.crm.vo.ComplaintStatisticsVo;
  * @email fengying9814@163.com
  * @date 2017-04-08 14:15:12
  */
+@ApiIgnore
 @Controller
 @RequestMapping("ccms/complaint/statistics")
 public class ComplaintStatisticsController extends BaseController{

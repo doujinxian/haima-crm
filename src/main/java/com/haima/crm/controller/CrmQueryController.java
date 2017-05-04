@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 import com.haima.crm.dto.CustomerCarDTO;
 import com.haima.crm.entity.Car;
 import com.haima.crm.entity.CustomerCar;
@@ -28,7 +30,7 @@ import com.haima.crm.vo.CrmCustomerCarVo;
  * @version 1.0
  * @date 2017-04-15 21:40
  */
-
+@ApiIgnore
 @Controller
 @RequestMapping("ccms/crm")
 public class CrmQueryController extends BaseController{

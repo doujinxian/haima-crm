@@ -27,4 +27,8 @@ public interface ColorService {
 	void delete(Integer colorId);
 	
 	void deleteBatch(Integer[] colorIds);
+
+	List<Color> queryList(Color color);
+
+	int queryTotal(Color color);
 }

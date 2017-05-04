@@ -2,10 +2,9 @@ package com.haima.crm.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import com.haima.crm.vo.ComplaintVo;
 
 /**
  * 记录投诉信息
@@ -15,9 +14,8 @@ import com.haima.crm.vo.ComplaintVo;
  * @date 2017-03-23 19:55:46
  */
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class Complaint extends ComplaintVo implements Serializable {
+public class Complaint implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	// 序号
 	private Long id;
 	// 投诉单号
@@ -56,7 +54,7 @@ public class Complaint extends ComplaintVo implements Serializable {
 	private String salesServicesService;
 	// 服务店代码
 	private String salesServicesCode;
-	// 投诉状态 (0:未处理,1:处理中  3:申请关闭,4:已关闭)
+	// 投诉状态 (0:未处理,1:处理中 3:申请关闭,4:已关闭)
 	private String complainStatus;
 	// 回访状态 (0:待回访 1:已回访 2:回访成功 3:回访失败);
 	private String callbackStatus;
@@ -112,6 +110,37 @@ public class Complaint extends ComplaintVo implements Serializable {
 	private String updateBy;
 	// 更新时间
 	private Date updateTime;
+
+	// 投诉内容
+	private List<ComplaintDealLog> complaintDealLogs;
+	// 延迟记录
+	private ComplaintDelay complaintDelay;
+	// 记录投诉审核信息
+	private ComplaintFlow complaintFlow;
+
+	public List<ComplaintDealLog> getComplaintDealLogs() {
+		return complaintDealLogs;
+	}
+
+	public void setComplaintDealLogs(List<ComplaintDealLog> complaintDealLogs) {
+		this.complaintDealLogs = complaintDealLogs;
+	}
+
+	public ComplaintDelay getComplaintDelay() {
+		return complaintDelay;
+	}
+
+	public void setComplaintDelay(ComplaintDelay complaintDelay) {
+		this.complaintDelay = complaintDelay;
+	}
+
+	public ComplaintFlow getComplaintFlow() {
+		return complaintFlow;
+	}
+
+	public void setComplaintFlow(ComplaintFlow complaintFlow) {
+		this.complaintFlow = complaintFlow;
+	}
 
 	/**
 	 * 设置：序号
@@ -294,8 +323,7 @@ public class Complaint extends ComplaintVo implements Serializable {
 	public Date getFinishTime() {
 		return finishTime;
 	}
-	
-	
+
 	public Date getResponseTime() {
 		return responseTime;
 	}
@@ -606,7 +634,6 @@ public class Complaint extends ComplaintVo implements Serializable {
 		return salesServicesStore;
 	}
 
-
 	public String getComplaintContent() {
 		return complaintContent;
 	}
@@ -736,6 +763,5 @@ public class Complaint extends ComplaintVo implements Serializable {
 	public void setDistributeStatus(String distributeStatus) {
 		this.distributeStatus = distributeStatus;
 	}
-
 
 }

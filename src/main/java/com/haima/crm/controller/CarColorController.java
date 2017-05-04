@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 import com.haima.crm.entity.CarColor;
 import com.haima.crm.service.CarColorService;
 import com.haima.crm.utils.PageUtils;
@@ -24,6 +26,7 @@ import com.haima.crm.utils.Result;
  * @email doujinxian@126.com
  * @date 2017-04-11 17:25:30
  */
+@ApiIgnore
 @Controller
 @RequestMapping("ccms/carcolor")
 public class CarColorController extends BaseController{

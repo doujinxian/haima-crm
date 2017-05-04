@@ -1,9 +1,10 @@
 package com.haima.crm.service;
 
-import com.haima.crm.entity.Complaint;
-
 import java.util.List;
 import java.util.Map;
+
+import com.haima.crm.dto.ComplaintDTO;
+import com.haima.crm.entity.Complaint;
 
 /**
  * 记录投诉信息
@@ -18,11 +19,11 @@ public interface ComplaintService {
 	
 	List<Complaint> queryList(Map<String, Object> map);
 	
-	List<Complaint> queryList(Complaint complaint);
+	List<Complaint> queryList(ComplaintDTO complaintDto);
 	
 	int queryTotal(Map<String, Object> map);
 	
-	int queryTotal(Complaint complaint);
+	int queryTotal(ComplaintDTO complaintDto);
 	
 	void save(Complaint complaint);
 	

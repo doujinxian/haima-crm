@@ -27,4 +27,8 @@ public interface CarSeriesService {
 	void delete(Integer carSeriesId);
 	
 	void deleteBatch(Integer[] carSeriesIds);
+
+	List<CarSeries> queryList(CarSeries carSeries);
+
+	int queryTotal(CarSeries carSeries);
 }
