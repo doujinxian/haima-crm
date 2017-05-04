@@ -28,7 +28,7 @@ import com.haima.crm.utils.Result;
  * @email doujinxian@126.com
  * @date 2017-04-11 17:25:30
  */
-@Api(description = "车身颜色相关接口")
+@Api(value = "车身颜色相关接口")
 @Controller
 @RequestMapping("ccms/color")
 public class ColorController extends BaseController {
@@ -39,7 +39,7 @@ public class ColorController extends BaseController {
 	 * 列表
 	 */
 	@ApiOperation(value = "获取车身颜色列表", notes = "根据传过来的color条件查询车身颜色列表")
-	@ApiImplicitParam(name = "color", value = "投诉单查询参数color", required = true, dataType = "Color")
+	@ApiImplicitParam(name = "color", value = "投诉单查询参数color", dataType = "Color")
 	@ResponseBody
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public Result list(Color color) {

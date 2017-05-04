@@ -6,7 +6,7 @@ public class PageVo implements Serializable {
 	private static final long serialVersionUID = -4056260441770908644L;
 	private Integer page;
 	private Integer limit;
-	private Integer offset;// 从第几条开始查询 offset = (page-1)*limit
+	private transient Integer offset;// 从第几条开始查询 offset = (page-1)*limit
 
 	public Integer getPage() {
 		if (page == null || page < 1) {

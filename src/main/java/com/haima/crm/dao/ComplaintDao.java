@@ -1,6 +1,6 @@
 package com.haima.crm.dao;
 
-import com.haima.crm.dto.ComplaintDTO;
+import com.haima.crm.dto.ComplaintDto;
 import com.haima.crm.entity.Complaint;
 
 /**
@@ -12,6 +12,6 @@ import com.haima.crm.entity.Complaint;
  */
 public interface ComplaintDao extends BaseDao<Complaint> {
 	
-	int queryTotal(ComplaintDTO t);
+	int queryTotal(ComplaintDto t);
 	
 }

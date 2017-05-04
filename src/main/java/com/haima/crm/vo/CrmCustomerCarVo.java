@@ -12,7 +12,8 @@ import java.util.Date;
  */
 public class CrmCustomerCarVo extends PageVo implements Serializable {
 
-    // vin码
+	private static final long serialVersionUID = 2436364159901408777L;
+	// vin码
     private String vin;
     // 车牌号
     private String plateNo;

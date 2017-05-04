@@ -7,7 +7,7 @@ import java.util.Date;
  * @version 1.0
  * @date 2017-04-15 22:11
  */
-public class CustomerCarDTO {
+public class CustomerCarDto {
 	// CustomerCar主键Id
 	private Long id;
 	// vin码

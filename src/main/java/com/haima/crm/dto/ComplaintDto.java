@@ -1,5 +1,8 @@
 package com.haima.crm.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,10 +17,12 @@ import com.haima.crm.vo.PageVo;
  * @email doujinxian@126.com
  * @date 2017-03-23 19:55:46
  */
-public class ComplaintDTO extends PageVo implements Serializable {
+@ApiModel(description="投诉单查询参数")
+public class ComplaintDto extends PageVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// 序号
+	@ApiModelProperty(name="主键")
 	private Long id;
 	// 投诉单号
 	private String complainCode;

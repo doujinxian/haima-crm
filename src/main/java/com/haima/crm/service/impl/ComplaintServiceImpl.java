@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.haima.crm.dao.ComplaintDao;
 import com.haima.crm.dao.ComplaintDelayDao;
 import com.haima.crm.dao.ComplaintFlowDao;
-import com.haima.crm.dto.ComplaintDTO;
+import com.haima.crm.dto.ComplaintDto;
 import com.haima.crm.entity.Complaint;
 import com.haima.crm.entity.ComplaintDelay;
 import com.haima.crm.entity.ComplaintFlow;
@@ -41,7 +41,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 	}
 	
 	@Override
-	public List<Complaint> queryList(ComplaintDTO complaintDto) {
+	public List<Complaint> queryList(ComplaintDto complaintDto) {
 		List<Complaint> complaints = complaintDao.queryList(complaintDto);
 		if(complaints.size()==0){
 			return complaints;
@@ -99,7 +99,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 	}
 	
 	@Override
-	public int queryTotal(ComplaintDTO complaintDto) {
+	public int queryTotal(ComplaintDto complaintDto) {
 		return complaintDao.queryTotal(complaintDto);
 	}
 	

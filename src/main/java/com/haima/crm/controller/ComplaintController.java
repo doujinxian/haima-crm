@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import com.haima.crm.constants.CommonConstants;
-import com.haima.crm.dto.ComplaintDTO;
+import com.haima.crm.dto.ComplaintDto;
 import com.haima.crm.entity.Complaint;
 import com.haima.crm.entity.ComplaintDelay;
 import com.haima.crm.entity.ComplaintFlow;
@@ -42,7 +42,7 @@ import com.haima.crm.utils.Result;
  * @email doujinxian@126.com
  * @date 2017-03-17 20:15:12
  */
-@Api(description = "投诉单相关接口")
+@Api(value =  "投诉单相关接口")
 @RestController
 @RequestMapping("ccms/complaint")
 public class ComplaintController extends BaseController {
@@ -59,10 +59,10 @@ public class ComplaintController extends BaseController {
 	 * 列表外部使用
 	 */
 	@ApiOperation(value = "获取投诉单列表", notes = "根据传过来的complaint条件查询投诉单列表")
-	@ApiImplicitParam(name = "complaintDto", value = "投诉单查询参数complaintDto", required = true, dataType = "ComplaintDTO")
+	@ApiImplicitParam(name = "complaintDto", value = "投诉单查询参数complaintDto", dataType = "ComplaintDTO")
 	@ResponseBody
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public Result list( ComplaintDTO complaintDto) {
+	public Result list( ComplaintDto complaintDto) {
 		// 查询列表数据
 		List<Complaint> complaintList = complaintService.queryList(complaintDto);
 		int total = complaintService.queryTotal(complaintDto);
@@ -78,7 +78,7 @@ public class ComplaintController extends BaseController {
 	@ApiIgnore
 	@ResponseBody
 	@RequestMapping(value = "/listcomplaint", method = RequestMethod.POST)
-	public Result listcomplaint(@RequestBody ComplaintDTO complaintDto) {
+	public Result listcomplaint(@RequestBody ComplaintDto complaintDto) {
 		// 查询列表数据
 		List<Complaint> complaintList = complaintService.queryList(complaintDto);
 		int total = complaintService.queryTotal(complaintDto);
@@ -161,7 +161,7 @@ public class ComplaintController extends BaseController {
 	@ApiOperation(value = "导出投诉单excel", notes = "根据complaint对象导出投诉单")
 	@ApiImplicitParam(name = "complaintDto", value = "投诉单查询参数complaintDto", required = true, dataType = "ComplaintDTO")
 	@RequestMapping(value = "/export", method = RequestMethod.POST)
-	public void exportExcel(ComplaintDTO complaintDto, HttpServletRequest request, HttpServletResponse response) {
+	public void exportExcel(ComplaintDto complaintDto, HttpServletRequest request, HttpServletResponse response) {
 		int maxExportSize = 100000;
 		/*
 		 * int total = complaintService.queryTotal(complaint);

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.haima.crm.dao.CrmCustomerCarQueryDao">
 	
-	<resultMap id="Crm_Customer_Car" type="com.haima.crm.dto.CustomerCarDTO">
+	<resultMap id="Crm_Customer_Car" type="com.haima.crm.dto.CustomerCarDto">
 		<result property="id" column="id"/>
 		<result property="vin" column="vin"/>
 		<result property="customerId" column="customer_id"/>
@@ -124,5 +124,96 @@
 				ON mc.car_model_id = mcm.car_model_id
 			<include refid="Complaint_condition"/>
 	</select>
-	 
+	
+	
+	<select id="queryCarInfoList" resultType="com.haima.crm.vo.CarInfoVo" parameterType="com.haima.crm.dto.CarQueryDto">
+		SELECT 
+		  mc.`car_id` as carId,
+		  mcs.`car_series_id` as carSeriesId,
+		  mcs.`car_series_code` as carSeriesCode,
+		  mcs.`car_series_name` as carSeriesName,
+		  mc.`car_setup_id` as carSetupId,
+		  mc.`car_setup_code` as carSetupCode,
+		  mc.`car_setup_name` as carSetupName,
+		  mcm.`car_model_id` as carModelId,
+		  mcm.car_model_code as carModelCode,
+		  mcm.car_model_name as carModelName,
+		  mcl.`color_id` as colorId,
+		  mcl.`color_code` as colorCode,
+		  mcl.color_name as colorName
+		FROM
+		  	m_car mc 
+		  INNER JOIN m_car_series mcs 
+		    ON mc.car_series_id = mcs.car_series_id 
+		    AND mcs.`del_flg`=0
+		  INNER JOIN m_car_model mcm 
+		    ON mc.car_model_id = mcm.car_model_id 
+		    AND mcm.`del_flg`=0
+		  INNER JOIN m_car_color mcc 
+		    ON mc.`car_id` = mcc.`car_id` 
+		    AND mcc.`del_flg`=0
+		  INNER JOIN m_color mcl 
+		    ON mcc.`color_id` = mcl.color_id 
+		    AND mcl.`del_flg` =0
+			<include refid="queryCarInfoList_condition"/>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+	<select id="queryCarInfoListTotal" resultType="java.lang.Integer">
+		  select
+			count(1)
+		  FROM
+		  	m_car mc 
+		  INNER JOIN m_car_series mcs 
+		    ON mc.car_series_id = mcs.car_series_id 
+		    AND mcs.`del_flg`=0
+		  INNER JOIN m_car_model mcm 
+		    ON mc.car_model_id = mcm.car_model_id 
+		    AND mcm.`del_flg`=0
+		  INNER JOIN m_car_color mcc 
+		    ON mc.`car_id` = mcc.`car_id` 
+		    AND mcc.`del_flg`=0
+		  INNER JOIN m_color mcl 
+		    ON mcc.`color_id` = mcl.color_id 
+		    AND mcl.`del_flg` =0
+			<include refid="queryCarInfoList_condition"/>
+	</select>
+	
+	<!-- 用于车辆信息关联查询 -->
+	<sql id="queryCarInfoList_condition">
+		<where>
+			<trim suffix="" suffixOverrides="and">
+				mc.del_flg = 0 and
+				<if test="carId != null">
+					mc.`car_id` = #{carId} and
+				</if>
+				<if test="carSeriesId != null">
+					mcs.`car_series_id` = #{carSeriesId} and
+				</if>
+				<if test="carSeriesCode != null and carSeriesCode != ''">
+					mcs.`car_series_code` = #{carSeriesCode} and
+				</if>
+				<if test="carModelId != null">
+					mcm.`car_model_id` #{carModelId} and
+				</if>
+				<if test="carModelCode != null and carModelCode != ''">
+					mcm.`car_model_code` = #{carModelCode} and
+				</if>
+				<if test="carSetupId != null">
+					mc.`car_setup_id` = #{carSetupId} and
+				</if>
+				<if test="carSetupCode != null and carSetupCode != ''">
+					mc.`car_setup_code` = #{carSetupCode} and
+				</if>
+				<if test="colorId != null">
+					mcl.`color_id` = #{colorId} and
+				</if>
+				<if test="colorCode != null and colorCode != ''">
+					mcl.`color_code` = #{colorCode} and
+				</if>
+			</trim>
+		</where>
+	</sql>
 </mapper>

@@ -13,9 +13,13 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 	
 	<!-- api的调用拦截器 -->
 	<mvc:interceptors>
-		<!-- 对所有请求做登录拦截 -->
 		<mvc:interceptor>
-			<mvc:mapping path="/ccms/**" />
+			<mvc:mapping path="/ccms/complaint/**" />
+			<mvc:mapping path="/ccms/complaintdeallog/**" />
+			<mvc:mapping path="/ccms/complaintdelay/**" />
+			<mvc:mapping path="/ccms/complaintdistribute/**" />
+			<mvc:mapping path="/ccms/complaintflow/**" />
+			<mvc:mapping path="/ccms/complaintforward/**" />
 			<mvc:exclude-mapping path="/ccms/complaint/export"/>
 			<bean class="com.haima.crm.interceptor.LoginInterceptor" />
 		</mvc:interceptor>

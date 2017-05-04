@@ -28,7 +28,7 @@ import com.haima.crm.utils.Result;
  * @email doujinxian@126.com
  * @date 2017-04-11 17:25:30
  */
-@Api(description = "车系相关接口")
+@Api(value = "车系相关接口")
 @Controller
 @RequestMapping("ccms/carseries")
 public class CarSeriesController extends BaseController {
@@ -39,7 +39,7 @@ public class CarSeriesController extends BaseController {
 	 * 列表
 	 */
 	@ApiOperation(value = "获取车系列表", notes = "根据传过来的carSeries条件查询车系列表")
-	@ApiImplicitParam(name = "carSeries", value = "投诉单查询参数carSeries", required = true, dataType = "CarSeries")
+	@ApiImplicitParam(name = "carSeries", value = "投诉单查询参数carSeries", dataType = "CarSeries")
 	@ResponseBody
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public Result list(CarSeries carSeries) {
@@ -56,7 +56,7 @@ public class CarSeriesController extends BaseController {
 	 * 信息
 	 */
 	@ApiOperation(value = "获取车系详情", notes = "根据传过来的id查询车系详细信息")
-	@ApiImplicitParam(name = "carModelId", value = "车系carModelId", required = true, dataType = "Integer")
+	@ApiImplicitParam(name = "carSeriesId", value = "车系carSeriesId", required = true, dataType = "Integer")
 	@ResponseBody
 	@RequestMapping(value = "/info/{carSeriesId}", method = RequestMethod.GET)
 	public Result info(@PathVariable("carSeriesId") Integer carSeriesId) {
