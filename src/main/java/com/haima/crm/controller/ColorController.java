@@ -39,7 +39,7 @@ public class ColorController extends BaseController {
 	 * 列表
 	 */
 	@ApiOperation(value = "获取车身颜色列表", notes = "根据传过来的color条件查询车身颜色列表")
-	@ApiImplicitParam(name = "color", value = "投诉单查询参数color", dataType = "Color")
+	@ApiImplicitParam(name = "color", value = "投诉单查询参数color", paramType = "query", dataType = "Color")
 	@ResponseBody
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public Result list(Color color) {

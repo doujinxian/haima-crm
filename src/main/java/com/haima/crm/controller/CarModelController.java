@@ -40,7 +40,7 @@ public class CarModelController extends BaseController{
 	 * 列表
 	 */
 	@ApiOperation(value = "获取车型列表", notes = "根据传过来的carModel条件查询车型列表")
-	@ApiImplicitParam(name = "carModel", value = "投诉单查询参数carModel", dataType = "CarModel")
+	@ApiImplicitParam(name = "carModel", value = "投诉单查询参数carModel", paramType = "query", dataType = "CarModel")
 	@ResponseBody
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public Result list(CarModel carModel){

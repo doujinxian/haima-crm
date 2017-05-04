@@ -1,8 +1,5 @@
 package com.haima.crm.dto;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.io.Serializable;
 
 import com.haima.crm.vo.PageVo;
@@ -14,11 +11,9 @@ import com.haima.crm.vo.PageVo;
  * @email doujinxian@126.com
  * @date 2017-03-23 19:55:46
  */
-@ApiModel(description="车辆信息查询参数")
 public class CarQueryDto extends PageVo implements Serializable {
 	private static final long serialVersionUID = -4083406074233019822L;
 	// 车id
-	@ApiModelProperty(name="车id")
 	private Integer carId;
 	// 车系id
 	private Integer carSeriesId;

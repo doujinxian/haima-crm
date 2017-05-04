@@ -2,6 +2,7 @@ package com.haima.crm.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 import java.util.List;
@@ -57,14 +58,21 @@ public class CrmQueryController extends BaseController{
     private CarSeriesService carSeriesService;
     
     @ApiOperation(value = "车辆信息关联查询", notes = "根据传过来的carQueryDTO条件查询车辆信息列表")
-	@ApiImplicitParam(name = "carQueryDTO", value = "投诉单查询参数carQueryDTO", dataType = "CarQueryDto")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "carSeriesCode", value = "车系代码",paramType = "query", dataType = "String"),
+        @ApiImplicitParam(name = "carModelCode", value = "车型代码",paramType = "query", dataType = "String"),
+        @ApiImplicitParam(name = "carSetupCode", value = "车装备代码",paramType = "query", dataType = "String"),
+        @ApiImplicitParam(name = "colorCode", value = "颜色代码",paramType = "query", dataType = "String"),
+        @ApiImplicitParam(name = "limit", value = "查询条数",paramType = "query", dataType = "int"),
+        @ApiImplicitParam(name = "page", value = "当前页",paramType = "query", dataType = "int")
+    })
     @ResponseBody
     @RequestMapping(value = "/car/list", method = RequestMethod.GET)
-    public Result carList(CarQueryDto carQueryDTO) {
+    public Result carList(@ApiIgnore CarQueryDto carQueryDto) {
         // 查询列表数据
-        List<CarInfoVo> customerCarList = crmQueryService.queryCarInfoList(carQueryDTO);
-        int total = crmQueryService.queryCarInfoListTotal(carQueryDTO);
-        PageUtils pageUtil = new PageUtils(customerCarList, total, carQueryDTO.getLimit(), carQueryDTO.getPage());
+        List<CarInfoVo> customerCarList = crmQueryService.queryCarInfoList(carQueryDto);
+        int total = crmQueryService.queryCarInfoListTotal(carQueryDto);
+        PageUtils pageUtil = new PageUtils(customerCarList, total, carQueryDto.getLimit(), carQueryDto.getPage());
 
         return Result.ok().put("page", pageUtil);
     }

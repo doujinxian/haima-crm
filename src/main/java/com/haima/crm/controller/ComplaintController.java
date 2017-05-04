@@ -59,7 +59,7 @@ public class ComplaintController extends BaseController {
 	 * 列表外部使用
 	 */
 	@ApiOperation(value = "获取投诉单列表", notes = "根据传过来的complaint条件查询投诉单列表")
-	@ApiImplicitParam(name = "complaintDto", value = "投诉单查询参数complaintDto", dataType = "ComplaintDTO")
+	@ApiImplicitParam(name = "complaintDto", value = "投诉单查询参数complaintDto", paramType = "query",dataType = "ComplaintDTO")
 	@ResponseBody
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public Result list( ComplaintDto complaintDto) {
