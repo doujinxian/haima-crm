@@ -223,6 +223,20 @@
 			<if test="updateBy != null and updateBy != ''">
 				`update_by` = #{updateBy} and 			
 			</if>
+			<!-- 投诉后5小时内转发 -->
+			<if test="forwardOnTime != null and forwardOnTime == 1">
+				`trans_time` is not null and `trans_time` &lt; DATE_SUB(`complain_time`,INTERVAL -5 HOUR) and
+			</if>
+			<if test="forwardOnTime != null and forwardOnTime == 2">
+				(`trans_time` is null or `trans_time` &gt; DATE_SUB(`complain_time`,INTERVAL -5 HOUR)) and
+			</if>
+			<!-- 转发后5小时内分配 -->
+			<if test="respondOnTime != null and respondOnTime == 1">
+				`trans_time` is not null and `response_time` is not null and `response_time` &lt; DATE_SUB(`trans_time`,INTERVAL -5 HOUR) and
+			</if>
+			<if test="respondOnTime != null and respondOnTime == 2">
+				(`trans_time` is null or `response_time` is null or `response_time` &gt; DATE_SUB(`trans_time`,INTERVAL -5 HOUR)) and
+			</if>
         </trim>
 		</where>
 	</sql>

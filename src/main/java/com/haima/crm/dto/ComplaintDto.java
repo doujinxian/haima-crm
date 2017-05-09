@@ -101,7 +101,11 @@ public class ComplaintDto extends PageVo implements Serializable {
 	private Boolean ifSelectDelayInfo;
 	// 是否查询申请关闭信息
 	private Boolean ifSelectFlowInfo;
-
+	//是否及时转发 1：是 2：否
+	private String forwardOnTime;
+	//是否及时响应 1：是 2：否
+	private String respondOnTime;
+	
 	public Long getId() {
 		return id;
 	}
@@ -406,4 +410,19 @@ public class ComplaintDto extends PageVo implements Serializable {
 		this.ifSelectFlowInfo = ifSelectFlowInfo;
 	}
 
+	public String getForwardOnTime() {
+		return forwardOnTime;
+	}
+
+	public void setForwardOnTime(String forwardOnTime) {
+		this.forwardOnTime = forwardOnTime;
+	}
+
+	public String getRespondOnTime() {
+		return respondOnTime;
+	}
+
+	public void setRespondOnTime(String respondOnTime) {
+		this.respondOnTime = respondOnTime;
+	}
 }
