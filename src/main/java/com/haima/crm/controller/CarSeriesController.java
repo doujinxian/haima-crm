@@ -68,6 +68,7 @@ public class CarSeriesController extends BaseController {
 	/**
 	 * 保存
 	 */
+	@ApiOperation(value = "新增车系", notes = "根据carSeries对象新增车系")
 	@ResponseBody
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Result save(@RequestBody CarSeries carSeries) {
@@ -79,6 +80,7 @@ public class CarSeriesController extends BaseController {
 	/**
 	 * 修改
 	 */
+	@ApiOperation(value = "修改车系", notes = "根据carSeries对象修改车系")
 	@ResponseBody
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public Result update(@RequestBody CarSeries carSeries) {

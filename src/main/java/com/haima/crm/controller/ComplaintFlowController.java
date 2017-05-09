@@ -1,5 +1,8 @@
 package com.haima.crm.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import springfox.documentation.annotations.ApiIgnore;
@@ -30,7 +34,7 @@ import com.haima.crm.utils.Result;
  * @email doujinxian@126.com
  * @date 2017-03-23 19:55:47
  */
-@ApiIgnore
+@Api(value =  "投诉单审核相关接口")
 @Controller
 @RequestMapping("ccms/complaintflow")
 public class ComplaintFlowController extends BaseController{
@@ -42,8 +46,9 @@ public class ComplaintFlowController extends BaseController{
 	/**
 	 * 列表
 	 */
+	@ApiOperation(value = "获取投诉单审核列表", notes = "根据传过来的id查询投诉单审核列表")
 	@ResponseBody
-	@RequestMapping("/list")
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public Result list(Integer page, Integer limit){
 		Map<String, Object> map = new HashMap<>();
 		map.put("offset", (page - 1) * limit);
@@ -62,8 +67,9 @@ public class ComplaintFlowController extends BaseController{
 	/**
 	 * 信息
 	 */
+	@ApiOperation(value = "根据传过来的id查询投诉单审核信息", notes = "根据传过来的id查询投诉单审核信息")
 	@ResponseBody
-	@RequestMapping("/info/{id}")
+	@RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
 	public Result info(@PathVariable("id") Integer id){
 		ComplaintFlow complaintFlow = complaintFlowService.queryObject(id);
 		
@@ -73,8 +79,9 @@ public class ComplaintFlowController extends BaseController{
 	/**
 	 * 保存
 	 */
+	@ApiOperation(value = "新增投诉单审核信息", notes = "根据complaintFlow对象新增投诉单审核信息")
 	@ResponseBody
-	@RequestMapping("/save")
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Result save(@RequestBody ComplaintFlow complaintFlow){
 		Long complainId = complaintFlow.getComplainId();
 		if(complainId==null){
@@ -98,8 +105,9 @@ public class ComplaintFlowController extends BaseController{
 	/**
 	 * 审核
 	 */
+	@ApiOperation(value = "审核投诉单审核信息", notes = "审核投诉单审核信息")
 	@ResponseBody
-	@RequestMapping("/audit")
+	@RequestMapping(value = "/audit", method = RequestMethod.POST)
 	public Result audit(@RequestBody ComplaintFlow complaintFlow){
 		String complaintStatus = null;
 		Complaint complaint = new Complaint();
@@ -132,8 +140,9 @@ public class ComplaintFlowController extends BaseController{
 	/**
 	 * 修改
 	 */
+	@ApiOperation(value = "修改投诉单审核信息", notes = "根据complaintFlow对象修改投诉单审核信息")
 	@ResponseBody
-	@RequestMapping("/update")
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public Result update(@RequestBody ComplaintFlow complaintFlow){
 		complaintFlow.setUpdateBy(getUsername());
 		complaintFlowService.update(complaintFlow);
@@ -144,6 +153,7 @@ public class ComplaintFlowController extends BaseController{
 	/**
 	 * 删除
 	 */
+	@ApiIgnore
 	@ResponseBody
 	@RequestMapping("/delete")
 	public Result delete(@RequestBody Integer[] ids){

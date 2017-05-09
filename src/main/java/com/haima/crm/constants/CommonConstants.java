@@ -1,5 +1,8 @@
 package com.haima.crm.constants;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author jinxian.dou
  *
@@ -51,5 +54,28 @@ public class CommonConstants {
 	public final static String CHECK_STATUS_DEFAULT = "0";
 	public final static String CHECK_STATUS_AGREE = "1";
 	public final static String CHECK_STATUS_DISAGREE = "2";
+	
+	
+	@SuppressWarnings("serial")
+	public final static Map<String,String> complainTypeMap = new HashMap<String,String>(){{
+		put("1", "咨询");
+		put("2", "投诉");
+		put("3", "建议");
+		put("4", "救援");
+		put("5", "其他");
+	}};
+	@SuppressWarnings("serial")
+	public final static Map<String,String> complainLevelMap = new HashMap<String,String>(){{
+		put("0", "一般");
+		put("1", "重大");
+	}};
+	@SuppressWarnings("serial")
+	public final static Map<String,String> complainStatusMap = new HashMap<String,String>(){{
+		put("0", "未处理");
+		put("1", "处理中");
+		put("2", "待回访");
+		put("3", "申请关闭");
+		put("4", "已关闭");
+	}};
 
 }

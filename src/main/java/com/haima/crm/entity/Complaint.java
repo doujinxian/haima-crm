@@ -1,10 +1,13 @@
 package com.haima.crm.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.haima.crm.utils.DateConvertUtils;
 
 /**
  * 记录投诉信息
@@ -117,7 +120,12 @@ public class Complaint implements Serializable {
 	private ComplaintDelay complaintDelay;
 	// 记录投诉审核信息
 	private ComplaintFlow complaintFlow;
-
+	private SimpleDateFormat sdf = new SimpleDateFormat(DateConvertUtils.FORMAT_DATE_19);
+	private String closeTimeString;
+	private String complainTimeString;
+	private String finishTimeString;
+	
+	
 	public List<ComplaintDealLog> getComplaintDealLogs() {
 		return complaintDealLogs;
 	}
@@ -140,6 +148,27 @@ public class Complaint implements Serializable {
 
 	public void setComplaintFlow(ComplaintFlow complaintFlow) {
 		this.complaintFlow = complaintFlow;
+	}
+
+	public String getCloseTimeString() {
+		if(closeTime == null){
+			return null;
+		}
+		return sdf.format(closeTime);
+	}
+
+	public String getComplainTimeString() {
+		if(complainTime == null){
+			return null;
+		}
+		return sdf.format(complainTime);
+	}
+	
+	public String getFinishTimeString(String finishTimeString) {
+		if(finishTime == null){
+			return null;
+		}
+		return sdf.format(finishTime);
 	}
 
 	/**

@@ -160,7 +160,7 @@ public class ComplaintController extends BaseController {
 	 */
 	@ApiOperation(value = "导出投诉单excel", notes = "根据complaint对象导出投诉单")
 	@ApiImplicitParam(name = "complaintDto", value = "投诉单查询参数complaintDto", required = true, dataType = "ComplaintDTO")
-	@RequestMapping(value = "/export", method = RequestMethod.POST)
+	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public void exportExcel(ComplaintDto complaintDto, HttpServletRequest request, HttpServletResponse response) {
 		int maxExportSize = 100000;
 		/*
@@ -174,6 +174,9 @@ public class ComplaintController extends BaseController {
 			List<Complaint> complaintList = complaintService.queryList(complaintDto);
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("complaintList", complaintList);
+			map.put("complainTypeMap", CommonConstants.complainTypeMap);
+			map.put("complainLevelMap", CommonConstants.complainLevelMap);
+			map.put("complainStatusMap", CommonConstants.complainStatusMap);
 			ExcelGenerator.exportExcelAuroWrap(request, response, "complaint_list.xls", "投诉单列表" + DateConvertUtils.formatDate(DateConvertUtils.DF_TO_DAY), map);
 		} catch (RuntimeException e) {
 			e.printStackTrace();

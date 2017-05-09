@@ -1,5 +1,8 @@
 package com.haima.crm.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import springfox.documentation.annotations.ApiIgnore;
@@ -30,7 +34,7 @@ import com.haima.crm.utils.Result;
  * @email doujinxian@126.com
  * @date 2017-03-30 19:39:58
  */
-@ApiIgnore
+@Api(value =  "投诉单分配相关接口")
 @Controller
 @RequestMapping("ccms/complaintdistribute")
 public class ComplaintDistributeController extends BaseController{
@@ -42,8 +46,9 @@ public class ComplaintDistributeController extends BaseController{
 	/**
 	 * 列表
 	 */
+	@ApiOperation(value = "获取投诉单分配列表", notes = "根据传过来的id查询投诉单分配列表")
 	@ResponseBody
-	@RequestMapping("/list")
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public Result list(Integer page, Integer limit){
 		Map<String, Object> map = new HashMap<>();
 		map.put("offset", (page - 1) * limit);
@@ -61,8 +66,9 @@ public class ComplaintDistributeController extends BaseController{
 	/**
 	 * 信息
 	 */
+	@ApiOperation(value = "根据传过来的id查询投诉单分配信息", notes = "根据传过来的id查询投诉单分配信息")
 	@ResponseBody
-	@RequestMapping("/info/{id}")
+	@RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
 	public Result info(@PathVariable("id") Integer id){
 		ComplaintDistribute complaintDistribute = complaintDistributeService.queryObject(id);
 		
@@ -73,8 +79,9 @@ public class ComplaintDistributeController extends BaseController{
 	/**
 	 * 信息
 	 */
+	@ApiOperation(value = "根据传过来的complaintId查询投诉单分配信息", notes = "根据传过来的complaintId查询投诉单分配信息")
 	@ResponseBody
-	@RequestMapping("/getByComplaintId/{complaintId}")
+	@RequestMapping(value = "/getByComplaintId/{complaintId}", method = RequestMethod.GET)
 	public List<ComplaintDistribute> getByComplaintId(@PathVariable("complaintId") Integer complaintId){
 		Map<String, Object> map = new HashMap<>();
 		map.put("complaintId", complaintId);
@@ -86,8 +93,9 @@ public class ComplaintDistributeController extends BaseController{
 	/**
 	 * 保存
 	 */
+	@ApiOperation(value = "新增投诉单分配信息", notes = "根据complaintDistribute对象新增投诉单分配信息")
 	@ResponseBody
-	@RequestMapping("/save")
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Result save(@RequestBody ComplaintDistribute complaintDistribute){
 		Long complainId = complaintDistribute.getComplainId();
 		if(complainId==null){
@@ -113,8 +121,9 @@ public class ComplaintDistributeController extends BaseController{
 	/**
 	 * 更换
 	 */
+	@ApiOperation(value = "更换投诉单分配信息", notes = "根据complaintDistribute对象更换投诉单分配信息")
 	@ResponseBody
-	@RequestMapping("/change")
+	@RequestMapping(value = "/change", method = RequestMethod.POST)
 	public Result change(@RequestBody ComplaintDistribute complaintDistribute){
 		Long complainId = complaintDistribute.getComplainId();
 		if(complainId==null){
@@ -144,8 +153,9 @@ public class ComplaintDistributeController extends BaseController{
 	/**
 	 * 修改
 	 */
+	@ApiOperation(value = "修改投诉单分配信息", notes = "根据complaintDistribute对象修改投诉单分配信息")
 	@ResponseBody
-	@RequestMapping("/update")
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public Result update(@RequestBody ComplaintDistribute complaintDistribute){
 		complaintDistribute.setUpdateBy(getUsername());
 		complaintDistributeService.update(complaintDistribute);
@@ -156,6 +166,7 @@ public class ComplaintDistributeController extends BaseController{
 	/**
 	 * 删除
 	 */
+	@ApiIgnore
 	@ResponseBody
 	@RequestMapping("/delete")
 	public Result delete(@RequestBody Integer[] ids){

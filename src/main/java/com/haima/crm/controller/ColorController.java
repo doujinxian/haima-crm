@@ -68,6 +68,7 @@ public class ColorController extends BaseController {
 	/**
 	 * 保存
 	 */
+	@ApiOperation(value = "新增车身颜色", notes = "根据color对象新增车身颜色")
 	@ResponseBody
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Result save(@RequestBody Color color) {
@@ -79,6 +80,7 @@ public class ColorController extends BaseController {
 	/**
 	 * 修改
 	 */
+	@ApiOperation(value = "修改车身颜色", notes = "根据color对象修改车身颜色")
 	@ResponseBody
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public Result update(@RequestBody Color color) {
