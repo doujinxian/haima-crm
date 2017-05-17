@@ -14,7 +14,7 @@
 		<result property="mileage" column="mileage"/>
 		<result property="phone" column="phone"/>
 		<result property="plateNo" column="plate_no"/>
-		<result property="salesServicesService" column="sales_services_service"/>
+		<result property="dealerId" column="dealer_id"/>
 		<result property="carSeriesName" column="car_series_name"/>
 		<result property="carModelCode" column="car_model_code"/>
 		<result property="carModelName" column="car_model_name"/>
@@ -54,6 +54,9 @@
 				<if test="purchaseDateEnd != null">
 					cc.purchase_date &lt; #{purchaseDateEnd} and
 				</if>
+				<if test="dealerId != null and dealerId != 0">
+					cc.dealer_id = #{dealerId} and
+				</if>
 				<if test="customerName != null and customerName != ''">
 					c.customer_name like CONCAT('%',#{customerName},'%') and
 				</if>
@@ -83,7 +86,7 @@
   			c.occupation,
 			cc.plate_no,
 			cc.mileage,
-			'' sales_services_service,
+			cc.dealer_id,
 			mcs.car_series_name,
 			mcm.car_model_code,
 			mcm.car_model_name,

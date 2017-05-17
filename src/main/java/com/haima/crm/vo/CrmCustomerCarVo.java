@@ -21,10 +21,8 @@ public class CrmCustomerCarVo extends PageVo implements Serializable {
     private String carSeriesName;
     //车型
     private String carModelName;
-    // 服务店代码
-    private String salesServicesCode;
-    // 销售服务店（服务）
-    private String salesServicesService;
+    // 经销商Id
+ 	private Long dealerId;
     //购车日期开始
     private Date purchaseDateStart;
     //购车日期截止
@@ -69,24 +67,15 @@ public class CrmCustomerCarVo extends PageVo implements Serializable {
     public void setCarModelName(String carModelName) {
         this.carModelName = carModelName;
     }
+    public Long getDealerId() {
+		return dealerId;
+	}
 
-    public String getSalesServicesCode() {
-        return salesServicesCode;
-    }
+	public void setDealerId(Long dealerId) {
+		this.dealerId = dealerId;
+	}
 
-    public void setSalesServicesCode(String salesServicesCode) {
-        this.salesServicesCode = salesServicesCode;
-    }
-
-    public String getSalesServicesService() {
-        return salesServicesService;
-    }
-
-    public void setSalesServicesService(String salesServicesService) {
-        this.salesServicesService = salesServicesService;
-    }
-
-    public Date getPurchaseDateStart() {
+	public Date getPurchaseDateStart() {
         return purchaseDateStart;
     }
 

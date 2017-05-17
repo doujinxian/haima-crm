@@ -120,7 +120,10 @@ public class ComplaintDealLogController extends BaseController{
 				}
 			}
 		}
-		return Result.ok();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("complainId", complaint.getId());
+		List<ComplaintDealLog> complaintDealLogs = complaintDealLogService.queryList(map);
+		return Result.ok().put("complaintDealLogs", complaintDealLogs);
 	}
 	
 	/**

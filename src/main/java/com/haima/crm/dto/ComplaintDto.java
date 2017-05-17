@@ -90,12 +90,9 @@ public class ComplaintDto extends PageVo implements Serializable {
 	private String createBy;
 	// 更新人
 	private String updateBy;
-
 	// 开始时间
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date complainTimeStart;
 	// 结束时间
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date complainTimeEnd;
 	// 是否查询延迟申请信息
 	private Boolean ifSelectDelayInfo;

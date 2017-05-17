@@ -28,8 +28,8 @@ public class CustomerCarDto {
 	private String plateNo;
 	// 行驶公里
 	private String mileage;
-	// 销售服务店（服务）
-	private String salesServicesService;
+	// 经销商Id
+	private Long dealerId;
 	// 车系
 	private String carSeriesName;
 	// 车型代码
@@ -101,12 +101,12 @@ public class CustomerCarDto {
 		this.mileage = mileage;
 	}
 
-	public String getSalesServicesService() {
-		return salesServicesService;
+	public Long getDealerId() {
+		return dealerId;
 	}
 
-	public void setSalesServicesService(String salesServicesService) {
-		this.salesServicesService = salesServicesService;
+	public void setDealerId(Long dealerId) {
+		this.dealerId = dealerId;
 	}
 
 	public String getCarSeriesName() {

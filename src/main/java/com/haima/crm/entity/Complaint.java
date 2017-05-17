@@ -16,6 +16,7 @@ import com.haima.crm.utils.DateConvertUtils;
  * @email doujinxian@126.com
  * @date 2017-03-23 19:55:46
  */
+@SuppressWarnings("unused")
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class Complaint implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -121,6 +122,7 @@ public class Complaint implements Serializable {
 	// 记录投诉审核信息
 	private ComplaintFlow complaintFlow;
 	private SimpleDateFormat sdf = new SimpleDateFormat(DateConvertUtils.FORMAT_DATE_19);
+	//导出excel使用
 	private String closeTimeString;
 	private String complainTimeString;
 	private String finishTimeString;

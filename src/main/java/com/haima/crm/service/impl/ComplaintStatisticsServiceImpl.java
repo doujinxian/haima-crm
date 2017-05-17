@@ -41,7 +41,7 @@ public class ComplaintStatisticsServiceImpl implements ComplaintStatisticsServic
 
     @Override
     public int querySatisfactionTotal(ComplaintStatisticsVo complaintStatisticsVo) {
-        return 0;
+    	return complaintStatisticsDao.querySatisfactionTotal(complaintStatisticsVo);
     }
 
 }
