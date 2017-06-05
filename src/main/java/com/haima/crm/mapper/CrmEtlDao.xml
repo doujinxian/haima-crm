@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haima.crm.dao.CrmEtlDao">
+	
+	<resultMap id="RM_CrmEtlParameter" type="com.haima.crm.entity.CrmEtlParameter">
+		<result property="minutes" column="minutes"/>
+		<result property="hour" column="hour"/>
+		<result property="intervalDays" column="interval_days"/>
+		<result property="intervalHours" column="interval_hours"/>
+		<result property="jobName" column="job_name"/>
+		<result property="schedulerType" column="scheduler_type"/>
+	</resultMap>
+
+	<select id="getEtlParameter" parameterType="string" resultMap="RM_CrmEtlParameter">
+		SELECT a.code key_, ROUND(a.value_num, 0) value_
+			  FROM crm_etl.r_jobentry_attribute a
+			 WHERE a.id_job = (SELECT a.id_job FROM crm_etl.r_job a WHERE a.name = #{jobName})
+			   AND a.code IN ('schedulerType', 'intervalMinutes', 'hour', 'minutes')
+	</select>
+	 
+</mapper>
