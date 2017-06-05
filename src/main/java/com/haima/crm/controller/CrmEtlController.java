@@ -97,7 +97,7 @@ public class CrmEtlController extends BaseController {
     }
 
     /**
-     * job停止
+     * job参数获取(暂时不用)
      */
     @ResponseBody
     @RequestMapping("/job/parameter/get")
