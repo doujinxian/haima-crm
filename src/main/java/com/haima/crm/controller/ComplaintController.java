@@ -131,8 +131,6 @@ public class ComplaintController extends BaseController {
 		complaint.setComplainCode("C" + System.currentTimeMillis());
 		complaint.setCreateBy(getUsername());
 		complaintService.save(complaint);
-		// 新增或修改处理记录
-		// complaintDealLogService.saveOrUpdateList(complaint,complaint.getComplaintDealLogs());
 		return Result.ok();
 	}
 
@@ -145,12 +143,6 @@ public class ComplaintController extends BaseController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public Result update(@RequestBody Complaint complaint, HttpServletRequest request) {
 		complaint.setUpdateBy(getUsername());
-		/*
-		 * List<ComplaintDealLog> dealLogs = complaint.getComplaintDealLogs();
-		 * if(dealLogs!=null && dealLogs.size()>0){ //新增或修改处理记录
-		 * complaintDealLogService
-		 * .saveOrUpdateList(complaint,complaint.getComplaintDealLogs()); }
-		 */
 		complaintService.update(complaint);
 		return Result.ok();
 	}
@@ -162,12 +154,7 @@ public class ComplaintController extends BaseController {
 	@ApiImplicitParam(name = "complaintDto", value = "投诉单查询参数complaintDto", required = true, dataType = "ComplaintDTO")
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public void exportExcel(ComplaintDto complaintDto, HttpServletRequest request, HttpServletResponse response) {
-		int maxExportSize = 100000;
-		/*
-		 * int total = complaintService.queryTotal(complaint);
-		 * if(total>maxExportSize){ return
-		 * Result.error("一次只能导出"+maxExportSize+"条数据"); }
-		 */
+		int maxExportSize = 10000;
 		try {
 			complaintDto.setPage(1);
 			complaintDto.setLimit(maxExportSize);
@@ -184,14 +171,13 @@ public class ComplaintController extends BaseController {
 	}
 
 	/**
-	 * 删除
+	 * 测试 500
 	 */
 	@ApiIgnore
 	@ResponseBody
-	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public Result delete(@RequestBody Long[] ids) {
-		complaintService.deleteBatch(ids);
-
+	@RequestMapping(value = "/test500")
+	public Result delete(String name) {
+		name.endsWith("");
 		return Result.ok();
 	}
 

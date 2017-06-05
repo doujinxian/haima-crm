@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import springfox.documentation.annotations.ApiIgnore;
 
+import com.haima.crm.constants.CommonConstants;
 import com.haima.crm.entity.Complaint;
 import com.haima.crm.entity.ComplaintDealLog;
 import com.haima.crm.service.ComplaintDealLogService;
@@ -129,11 +130,15 @@ public class ComplaintDealLogController extends BaseController{
 	/**
 	 * 删除
 	 */
-	@ApiIgnore
+	@ApiOperation(value = "删除处理记录", notes = "根据id删除处理记录")
 	@ResponseBody
-	@RequestMapping("/delete")
-	public Result delete(@RequestBody Integer[] ids){
-		complaintDealLogService.deleteBatch(ids);
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+	public Result delete(@PathVariable("id") Integer id){
+		ComplaintDealLog complaintDealLog = new ComplaintDealLog();
+		complaintDealLog.setDelFlag(CommonConstants.DEL_FLAG_TRUE);
+		complaintDealLog.setUpdateBy(getUsername());
+		complaintDealLog.setId(id);
+		complaintDealLogService.update(complaintDealLog);
 		
 		return Result.ok();
 	}

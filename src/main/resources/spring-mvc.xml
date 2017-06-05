@@ -24,6 +24,9 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 			<bean class="com.haima.crm.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	<!-- 系统异常全局处理 -->
+	<bean id="exceptionResolver" class="com.haima.crm.interceptor.GlobMappingExceptionResolver"/>
 
 	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
 	<bean id="mappingJackson2HttpMessageConverter"

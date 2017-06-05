@@ -118,7 +118,7 @@
 				`customer_id` = #{customerId} and 			
 			</if>
 			<if test="custormerName != null and custormerName != ''">
-				`custormer_name` = #{custormerName} and 			
+				`custormer_name` like CONCAT('%',#{custormerName},'%') and 
 			</if>
 			<if test="phoneNo != null and phoneNo != ''">
 				`phone_no` = #{phoneNo} and 			
